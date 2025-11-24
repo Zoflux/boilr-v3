@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Subtle pulsing for small info icons */
+@keyframes iconPulse {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+.icon-pulse { animation: iconPulse 1.6s ease-in-out infinite; }
+
+/* Performance optimizations */
+@layer base {
+  html {
+    font-display: swap;
+  }
+  
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Optimize animations for performance */
+  .animate-slide-up,
+  .animate-float,
+  .animate-scale-up {
+    will-change: transform, opacity;
+  }
+  
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-slide-up,
+    .animate-float,
+    .animate-scale-up,
+    .transition-all,
+    .transition-colors,
+    .transition-opacity,
+    .transition-shadow {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Custom gradient classes for sales and recruitment */
+@layer utilities {
+  /* Minimalistische Reveal Animationen */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms var(--ease-premium), transform 600ms var(--ease-premium);
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bg-gradient-sales {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-strong)));
+  }
+  
+  .bg-gradient-sales-hover {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-strong)));
+  }
+  
+  .bg-gradient-recruitment {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-strong)));
+  }
+  
+  .bg-gradient-recruitment-hover {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-strong)));
+  }
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Clean light base system (strict black/white) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    /* Primary / Accent unified to brand mint (#48ee8d) */
+    --primary: 145 83% 61%;
+    --primary-foreground: 0 0% 98%;
+    /* Stronger brand green (#2b8f55) */
+    --brand-strong: 145 54% 36%;
+    
+    /* Talent accent aligned to brand */
+    --primary-talent: 145 83% 61%;
+    --primary-talent-foreground: 0 0% 98%;
+
+    /* Subtle secondary system */
+    --secondary: 0 0% 98%;
+    --secondary-foreground: 0 0% 0% / 0.70;
+
+    /* Clean muted system */
+    --muted: 0 0% 98%;
+    --muted-foreground: 0 0% 0% / 0.70;
+
+    /* Accent aligned to brand */
+    --accent: 145 83% 61%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 0% / 0.10; /* black/10 */
+    --input: 0 0% 0% / 0.10;
+    --ring: 145 83% 61%;
+
+    --radius: 0.75rem;
+
+    /* Gentle gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(0 0% 98%));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(145 83% 56%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-strong)));
+    
+    /* Soft shadows */
+    --shadow-tactical: 0 8px 30px -8px hsl(var(--primary) / 0.12);
+    --shadow-intelligence: 0 4px 20px -4px hsl(0 0% 0% / 0.10);
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.10);
+    
+    /* Animation easing */
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-tactical: all 0.3s var(--ease-premium);
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 145 83% 61%;
+    --primary-foreground: 0 0% 100%;
+    
+    --primary-talent: 145 83% 61%;
+    --primary-talent-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 0% / 0.20;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 0% / 0.20;
+    --muted-foreground: 0 0% 100% / 0.70;
+
+    --accent: 0 0% 0% / 0.20;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 100% / 0.10;
+    --input: 0 0% 100% / 0.10;
+    --ring: 145 83% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* boilr AI specific styles */
+@layer utilities {
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-brand-strong { color: hsl(var(--brand-strong)); }
+  .bg-brand-weak { background-color: hsl(var(--primary) / 0.07); }
+  .border-brand-weak { border-color: hsl(var(--primary) / 0.13); }
+
+  /* Mobile-responsive media utilities */
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Touch device optimizations */
+  @media (pointer: coarse) {
+    button, a {
+      min-height: 44px; /* iOS touch target minimum */
+    }
+  }
+}
