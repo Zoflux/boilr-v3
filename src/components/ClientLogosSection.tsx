@@ -41,7 +41,7 @@ export default function ClientLogosSection() {
         {/* Heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
-            Chosen daily by 50+ small and large recruitment agencies worldwide.
+            Chosen daily by 100+ small and large recruitment agencies worldwide.
           </h2>
         </div>
 
