@@ -1,106 +1,125 @@
-export function ProblemSection() {
-  const cards = [
-    {
-      overline: "BD ADMIN OVERHEAD",
-      quote: "50% of time on unproductive prospecting.",
-      problem: "Manually scanning 5-10 boards daily for new hiring needs.",
-      consequence: "20 hrs/week on lead discovery instead of outreach.",
-      cost: "£52K–£67K/year per BD rep spent on admin instead of sales.",
-      source: "Social Talent Research",
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 5h18M3 12h13M3 19h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      overline: "TOO SLOW = ALWAYS SECOND",
-      quote: "Best candidates gone in 10 days. Best opportunities go even faster.",
-      problem: "You find roles 24–72h after posting — manually.",
-      consequence: "5 agencies already spoke to the hiring manager.",
-      cost: "1–2 placements/month lost = 13–27% revenue loss.",
-      source: "ERE Research, UK ONS",
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
-        </svg>
-      ),
-    },
-    {
-      overline: "PIPELINE FRAGMENTATION",
-      quote: "10,000+ sources. Manually you see 10%. Competitors see 10%. Who sees the other 80%? Nobody.",
-      problem: "Job boards + career pages are fragmented across 10,000+ sources.",
-      consequence: "90% of ICP opportunities remain invisible.",
-      cost: "Your pipeline is 10× smaller than it could be.",
-      source: "Industry Analysis",
-      icon: (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 12c2-4 6-6 9-6s7 2 9 6c-2 4-6 6-9 6s-7-2-9-6Z" stroke="currentColor" strokeWidth="1.6" />
-          <circle cx="12" cy="12" r="2.5" fill="currentColor" />
-        </svg>
-      ),
-    },
-  ];
+import { useEffect, useRef, useState } from "react";
 
-  return (
-    <section id="problem" className="relative isolate bg-gray-50 py-12 sm:py-14 md:py-16 lg:py-20 text-black">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-black/10 p-5 sm:p-6 md:p-10 overflow-hidden">
-        <header className="text-center">
-          <p className="inline-flex items-center rounded-full border border-black/10 bg-white px-3 py-1 text-xs text-brand-strong">THE PROBLEM</p>
-          <h2 className="mt-2 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">You already know this...</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-black/70">
-            The way most agencies find opportunities is broken. And it's costing you placements you should be making.
-          </p>
-        </header>
-
-        <div className="mt-8 sm:mt-10 md:mt-12 grid items-stretch gap-4 sm:gap-5 md:grid-cols-3">
-          {cards.map((c, i) => (
-            <article
-              key={i}
-              className="group flex h-full flex-col rounded-2xl sm:rounded-3xl border border-[#0d1117]/10 bg-white p-5 sm:p-6 md:p-8 shadow-sm transition hover:-translate-y-0.5 hover:shadow-xl"
-            >
-              <div className="flex items-center gap-2 sm:gap-3 text-black">
-                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-[#0d1117]/5">{c.icon}</span>
-                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-black/55">
-                  {c.overline}
-                </span>
-              </div>
-
-              <blockquote className="mt-4 sm:mt-5 border-l-2 border-black/10 pl-3 sm:pl-4 text-[15px] sm:text-[17px] md:text-lg leading-relaxed text-black font-medium md:min-h-[110px]">
-                "{c.quote}"
-              </blockquote>
-
-              <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 flex-1 border-t border-black/10">
-                <dl className="grid grid-cols-[auto,1fr] gap-x-2 sm:gap-x-3 gap-y-3 md:min-h-[220px]">
-                  <dt className="min-w-[6rem] sm:min-w-[7.5rem] text-[11px] sm:text-[13px] font-semibold uppercase tracking-wider sm:tracking-widest text-brand-strong">
-                    Problem
-                  </dt>
-                  <dd className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-black/75"><span className="block md:min-h-[96px]">{c.problem}</span></dd>
-
-                  <dt className="min-w-[6rem] sm:min-w-[7.5rem] text-[11px] sm:text-[13px] font-semibold uppercase tracking-wider sm:tracking-widest text-brand-strong">
-                    Consequence
-                  </dt>
-                  <dd className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-black/75"><span className="block md:min-h-[96px]">{c.consequence}</span></dd>
-
-                  <dt className="min-w-[6rem] sm:min-w-[7.5rem] text-[11px] sm:text-[13px] font-semibold uppercase tracking-wider sm:tracking-widest text-brand-strong">
-                    Cost
-                  </dt>
-                  <dd className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-black/75"><span className="block md:min-h-[44px]">{c.cost}</span></dd>
-                </dl>
-              </div>
-
-              <footer className="mt-5 sm:mt-6 border-t border-black/10 pt-3 sm:pt-4 text-[10px] sm:text-xs text-black/45">
-                Source: {c.source}
-              </footer>
-            </article>
-          ))}
-        </div>
-        </div>
-      </div>
-      {/* removed divider to avoid any visual break between sections */}
-    </section>
-  );
+interface ProblemCard {
+    number: string;
+    problem: string;
+    consequence: string;
+    cost: string;
 }
 
+const problems: ProblemCard[] = [
+    {
+        number: "01",
+        problem: "Manual research eats your day.",
+        consequence: "Hours lost in tabs, spreadsheets, and copy-paste.",
+        cost: "Less time for actual selling or recruiting."
+    },
+    {
+        number: "02",
+        problem: "You're always one step behind.",
+        consequence: "Signals surface too late, opportunities vanish.",
+        cost: "Competitors reach the lead first."
+    },
+    {
+        number: "03",
+        problem: "Good leads slip through the cracks.",
+        consequence: "No system to prioritize or follow up.",
+        cost: "Wasted pipeline, missed quota."
+    }
+];
+
+export function ProblemSection() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.15 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <section ref={sectionRef} className="py-16 sm:py-20 md:py-24 bg-white">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
+
+                {/* Header with fade-in animation */}
+                <header
+                    className={`text-center mb-12 sm:mb-16 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                        }`}
+                >
+                    <p className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium text-gray-600">
+                        Sound familiar?
+                    </p>
+                    <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                        The daily grind nobody talks about
+                    </h2>
+                    <p className="mt-4 text-lg text-gray-500">
+                        Three problems that silently kill your pipeline.
+                    </p>
+                </header>
+
+                {/* Problem Cards Grid with staggered animation */}
+                <div className="grid md:grid-cols-3 gap-6">
+                    {problems.map((card, index) => (
+                        <div
+                            key={index}
+                            className={`group relative rounded-2xl border border-gray-200 bg-gray-50/50 p-6 sm:p-8 
+                hover:border-[#5fff9e]/50 hover:shadow-lg hover:shadow-[#5fff9e]/5
+                transition-all duration-500 ease-out ${isVisible
+                                    ? "opacity-100 translate-y-0"
+                                    : "opacity-0 translate-y-8"
+                                }`}
+                            style={{
+                                transitionDelay: isVisible ? `${150 + index * 100}ms` : "0ms"
+                            }}
+                        >
+                            {/* Number Badge - replaces icon */}
+                            <div className="mb-5">
+                                <span className="text-3xl sm:text-4xl font-bold text-[#5fff9e]">
+                                    {card.number}
+                                </span>
+                            </div>
+
+                            {/* Main Problem Statement */}
+                            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug mb-4 group-hover:text-gray-800 transition-colors">
+                                {card.problem}
+                            </h3>
+
+                            {/* Consequence & Cost - aligned, smaller */}
+                            <div className="space-y-3 pt-4 border-t border-gray-200/70">
+                                <div className="flex items-start gap-2">
+                                    <span className="text-gray-400 text-xs mt-0.5">→</span>
+                                    <p className="text-sm text-gray-500 leading-relaxed">
+                                        {card.consequence}
+                                    </p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <span className="text-[#10b981] text-xs mt-0.5">✕</span>
+                                    <p className="text-sm text-[#10b981]/80 leading-relaxed">
+                                        {card.cost}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Subtle hover accent bar at top */}
+                            <div className="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-transparent via-[#5fff9e]/0 to-transparent group-hover:via-[#5fff9e]/60 transition-all duration-300 rounded-full" />
+                        </div>
+                    ))}
+                </div>
+
+            </div>
+        </section>
+    );
+}

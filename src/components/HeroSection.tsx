@@ -40,16 +40,7 @@ export function HeroSection({ mode }: HeroSectionProps) {
   }, []);
 
   return (
-    <section className="relative isolate overflow-hidden bg-black pt-28 sm:pt-32 md:pt-36 text-white">
-      {/* Subtle grid */}
-      <svg className="pointer-events-none absolute inset-0 z-0" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" shape-rendering="crispEdges" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
+    <section data-dark-section="true" className="relative isolate overflow-hidden bg-gradient-to-br from-[#0a0a0c] via-[#0d0d10] to-[#0f1012] pt-28 sm:pt-32 md:pt-36 text-white">
 
       {/* Content - Mobile Optimized */}
       <div className="mx-auto flex min-h-[calc(100vh-12rem)] max-w-7xl items-center px-4 sm:px-6">
@@ -57,9 +48,11 @@ export function HeroSection({ mode }: HeroSectionProps) {
           {/* Left: Copy - Mobile Optimized */}
           <div className="col-span-12 lg:col-span-7">
             <h1 className="text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-              What If Your Recruiters Could See What's Coming Before Everyone Else?
+              What If Your Recruiters Could See{" "}
+              <span className="text-[#5fff9e]">What's Coming</span>{" "}
+              Before Everyone Else?
             </h1>
-            <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-lg text-white/70">
+            <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-lg text-gray-400 leading-relaxed">
               boilr AI tracks 10,000+ sources around the clock — so when your competitors are still checking for job openings on LinkedIn,
               you're already talking to the hiring manager.
             </p>
@@ -67,31 +60,45 @@ export function HeroSection({ mode }: HeroSectionProps) {
             <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
               <a
                 href="#solution"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 sm:py-2.5 text-sm font-medium text-[#0d1117] shadow-sm transition hover:shadow-lg w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5fff9e] px-6 py-3 sm:py-3 text-sm font-semibold text-black shadow-lg shadow-[#5fff9e]/25 transition-all duration-200 hover:bg-[#4de88a] hover:shadow-xl hover:shadow-[#5fff9e]/30 w-full sm:w-auto"
               >
                 See How It Works
               </a>
               <a
                 href="https://calendly.com/felix-boilr/demo"
                 target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 sm:py-2.5 text-sm font-medium text-white/90 backdrop-blur transition hover:bg-white/10 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 sm:py-3 text-sm font-medium text-white/90 backdrop-blur transition hover:bg-white/10 w-full sm:w-auto"
               >
                 Watch 5-Min Demo
               </a>
             </div>
           </div>
 
-          {/* Right: Illustration (intel cards cycle) - Mobile Optimized */}
-          <div className="relative col-span-12 lg:col-span-5">
-            <div className="relative mx-auto w-full max-w-md scale-[0.85] sm:scale-[0.9] opacity-65 blur-[0.3px] lg:max-w-lg lg:translate-x-4">
-              <div className="relative rounded-[20px] sm:rounded-[24px] border border-white/10 bg-white/5 p-3 sm:p-4 shadow-2xl backdrop-blur">
-                <div className="space-y-2 sm:space-y-3">
+          {/* Right: Illustration (intel cards cycle) - Mobile Optimized with 3D perspective */}
+          <div className="relative col-span-12 lg:col-span-5" style={{ perspective: '1500px' }}>
+            <div
+              className="relative mx-auto w-full max-w-md lg:max-w-lg lg:translate-x-4"
+              style={{
+                transform: 'perspective(1500px) rotateY(-8deg) rotateX(4deg)',
+                transformStyle: 'preserve-3d'
+              }}
+            >
+              <div className="relative rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#1a1a1f] p-4 sm:p-5 shadow-2xl shadow-black/40">
+                {/* Window chrome dots */}
+                <div className="flex gap-1.5 mb-4">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></div>
+                </div>
+                <div className="space-y-2.5 sm:space-y-3">
                   {intelCards.map((card, i) => (
                     <IntelCard key={card.title} card={card} active={i === cardIndex} />
                   ))}
                 </div>
               </div>
             </div>
+            {/* Subtle glow effect */}
+            <div className="absolute inset-0 bg-[#5fff9e]/[0.03] blur-3xl -z-10 rounded-full scale-150"></div>
           </div>
         </div>
       </div>
@@ -102,15 +109,18 @@ export function HeroSection({ mode }: HeroSectionProps) {
 function IntelCard({ card, active }: { card: IntelCardT; active: boolean }) {
   return (
     <div
-      className="rounded-xl sm:rounded-2xl border border-white/10 bg-[#0f141b] p-3 sm:p-4 transition-all duration-300 ease-[var(--ease-premium)]"
+      className={`rounded-xl sm:rounded-2xl border p-3 sm:p-4 transition-all duration-300 ${active
+        ? 'border-[#5fff9e]/30 bg-[#0f0f12] shadow-sm'
+        : 'border-white/[0.06] bg-[#0f0f12]/50'
+        }`}
       style={{
-        opacity: active ? 1 : 0.25,
-        transform: active ? 'scale(1) translateY(0px)' : 'scale(0.96) translateY(0px)'
+        opacity: active ? 1 : 0.35,
+        transform: active ? 'scale(1) translateY(0px)' : 'scale(0.98) translateY(0px)'
       }}
     >
-      <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.12em] text-white/50">{card.kicker}</div>
+      <div className={`text-[9px] sm:text-[10px] uppercase tracking-[0.12em] ${active ? 'text-[#5fff9e]' : 'text-white/40'}`}>{card.kicker}</div>
       <div className="mt-1 text-base sm:text-lg font-semibold text-white">{card.title}</div>
-      <div className="mt-1 text-xs sm:text-sm text-white/70">{card.meta}</div>
+      <div className="mt-1 text-xs sm:text-sm text-white/60">{card.meta}</div>
     </div>
   );
 }

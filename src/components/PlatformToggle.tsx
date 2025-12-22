@@ -1,45 +1,47 @@
 import { cn } from "@/lib/utils";
 
+type SolutionMode = "discovery" | "signals";
+
 interface PlatformToggleProps {
-  activeMode: "sales" | "recruitment";
-  onModeChange: (mode: "sales" | "recruitment") => void;
+  activeMode: SolutionMode;
+  onModeChange: (mode: SolutionMode) => void;
 }
 
 export function PlatformToggle({ activeMode, onModeChange }: PlatformToggleProps) {
+  const tabs: { id: SolutionMode; label: string }[] = [
+    { id: "discovery", label: "Discovery" },
+    { id: "signals", label: "Signals" }
+  ];
+
+  const activeIndex = tabs.findIndex((tab) => tab.id === activeMode);
+
   return (
     <div className="flex items-center justify-center mb-12">
-      <div className="relative bg-white border border-black/10 rounded-2xl p-1.5 shadow-lg">
-        <div
-          className={cn(
-            "absolute top-1.5 h-12 w-52 bg-gradient-to-r rounded-xl transition-all duration-500 ease-out shadow-md",
-            activeMode === "sales" 
-              ? "from-blue-500 to-purple-600 left-1.5" 
-              : "from-emerald-500 to-teal-600 left-52"
-          )}
-        />
-        <div className="relative flex">
-          <button
-            onClick={() => onModeChange("sales")}
-            className={cn(
-              "px-8 py-3 text-sm font-semibold transition-all duration-500 rounded-xl w-52 z-10 relative",
-              activeMode === "sales"
-                ? "text-white"
-                : "text-gray-600 hover:text-gray-900"
-            )}
-          >
-            Sales Intelligence
-          </button>
-          <button
-            onClick={() => onModeChange("recruitment")}
-            className={cn(
-              "px-8 py-3 text-sm font-semibold transition-all duration-500 rounded-xl w-52 z-10 relative",
-              activeMode === "recruitment"
-                ? "text-white"
-                : "text-gray-600 hover:text-gray-900"
-            )}
-          >
-            Talent Acquisition
-          </button>
+      <div className="relative w-full max-w-3xl">
+        <div className="relative bg-white border border-black/10 rounded-2xl p-1.5 shadow-lg overflow-hidden">
+          <div
+            className="absolute inset-y-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 transition-transform duration-500 ease-out shadow-md"
+            style={{
+              width: "50%",
+              transform: `translateX(${activeIndex * 100}%)`
+            }}
+          />
+          <div className="relative flex">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => onModeChange(tab.id)}
+                className={cn(
+                  "flex-1 px-6 py-3 text-sm font-semibold transition-colors duration-300 rounded-xl z-10 relative",
+                  activeMode === tab.id
+                    ? "text-white"
+                    : "text-gray-600 hover:text-gray-900"
+                )}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

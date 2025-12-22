@@ -4,6 +4,15 @@ import greenRoundLogo from "@/assets/green-round-logo.svg";
 export function Footer() {
   const navigation = {
     company: [{
+      name: "About Us",
+      href: "/about-us"
+    }, {
+      name: "Discovery",
+      href: "/solutions/discovery"
+    }, {
+      name: "Signals",
+      href: "/solutions/signals"
+    }, {
       name: "Hire boilr",
       href: "https://calendly.com/felix-boilr/demo"
     }],
@@ -13,6 +22,38 @@ export function Footer() {
     }, {
       name: "Privacy Policy",
       href: "/privacy-policy"
+    }],
+    other: [{
+      name: "Boilr vs Vente.ai",
+      href: "/comparison-boilr-vs-vente-ai"
+    }, {
+      name: "Boilr vs Sourcebreaker",
+      href: "/comparison-boilr-vs-sourcebreaker"
+    }, {
+      name: "Boilr vs Paiger",
+      href: "/comparison-boilr-vs-paiger"
+    }],
+    moreForYou: [{
+      name: "A-Z Toolkit for Recruiters",
+      href: "/toolkit"
+    }, {
+      name: "Recruitment Playbook",
+      href: "/playbook"
+    }, {
+      name: "Our Customers",
+      href: "/customers"
+    }, {
+      name: "ROI Calculator",
+      href: "/roi-calculator"
+    }, {
+      name: "Hiring Signals for Recruiters",
+      href: "/hiring-signals"
+    }, {
+      name: "Business Development in Recruiting",
+      href: "/business-development"
+    }, {
+      name: "Prompts for Recruiters",
+      href: "/prompts-for-recruiters"
     }]
   };
   const social = [{
@@ -20,11 +61,11 @@ export function Footer() {
     icon: Linkedin,
     href: "https://www.linkedin.com/company/boilr-ai"
   }];
-  
+
   return (
-    <footer className="bg-black border-t border-white/10 text-white">
+    <footer data-dark-section="true" className="bg-black border-t border-white/10 text-white">
       <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8">
           {/* Brand - Mobile Optimized */}
           <div className="col-span-1 sm:col-span-2 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-3 sm:mb-4">
@@ -34,13 +75,13 @@ export function Footer() {
             <p className="text-white/70 max-w-xs leading-relaxed text-sm sm:text-base mx-auto sm:mx-0 mb-4 sm:mb-6">
               Transform your prospecting and outreach with high-precision signals.
             </p>
-            
+
             {/* Social Links - Mobile Optimized */}
             <div className="flex justify-center sm:justify-start gap-3 sm:gap-4">
               {social.map(item => (
-                <a 
-                  key={item.name} 
-                  href={item.href} 
+                <a
+                  key={item.name}
+                  href={item.href}
                   className="text-white/70 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-white/5 min-w-[40px] min-h-[40px] flex items-center justify-center"
                   aria-label={item.name}
                 >
@@ -53,12 +94,12 @@ export function Footer() {
           {/* Navigation - Mobile Optimized */}
           <div className="text-center sm:text-left">
             <h3 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Company</h3>
-            <ul className="space-y-2 sm:space-y-3">
+            <ul className="space-y-2">
               {navigation.company.map(item => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href} 
-                    className="text-white/70 hover:text-white transition-colors duration-200 text-sm sm:text-base py-1 px-2 rounded hover:bg-white/5 inline-block min-h-[32px] flex items-center"
+                  <a
+                    href={item.href}
+                    className="text-white/70 hover:text-white transition-colors duration-200 text-sm block py-0.5"
                   >
                     {item.name}
                   </a>
@@ -69,12 +110,44 @@ export function Footer() {
 
           <div className="text-center sm:text-left">
             <h3 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Legal</h3>
-            <ul className="space-y-2 sm:space-y-3">
+            <ul className="space-y-2">
               {navigation.legal.map(item => (
                 <li key={item.name}>
-                  <a 
-                    href={item.href} 
-                    className="text-white/70 hover:text-white transition-colors duration-200 text-sm sm:text-base py-1 px-2 rounded hover:bg-white/5 inline-block min-h-[32px] flex items-center"
+                  <a
+                    href={item.href}
+                    className="text-white/70 hover:text-white transition-colors duration-200 text-sm block py-0.5"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="text-center sm:text-left">
+            <h3 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">More for you</h3>
+            <ul className="space-y-2">
+              {navigation.moreForYou.map(item => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    className="text-white/70 hover:text-white transition-colors duration-200 text-sm block py-0.5"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="text-center sm:text-left">
+            <h3 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Other</h3>
+            <ul className="space-y-2">
+              {navigation.other.map(item => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    className="text-white/70 hover:text-white transition-colors duration-200 text-sm block py-0.5"
                   >
                     {item.name}
                   </a>

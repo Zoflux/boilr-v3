@@ -11,6 +11,94 @@
 }
 .icon-pulse { animation: iconPulse 1.6s ease-in-out infinite; }
 
+/* =====================================================
+   iOS 18 LIQUID GLASS EFFECT - Premium Navigation
+   =====================================================
+   Multi-layered glass effect with:
+   - Real backdrop-blur for background adaptation
+   - Static light reflections (no animated borders)
+   - Subtle edge highlights simulating light refraction
+   - Clean, minimal approach like actual iOS
+   ===================================================== */
+
+/* Liquid glass container base styles */
+.liquid-glass-nav {
+  /* Hardware acceleration for smooth blur */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  
+  /* Smooth transitions */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover state - very subtle lift */
+.liquid-glass-nav:hover {
+  transform: translateY(-1px) translateZ(0);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+/* Focus-within for accessibility */
+.liquid-glass-nav:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(72, 238, 141, 0.3);
+}
+
+/* Legacy animation classes (kept for compatibility) */
+@keyframes liquid-breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.6; }
+}
+.animate-liquid-breathe {
+  animation: liquid-breathe 3s ease-in-out infinite;
+}
+
+/* Slide in from top animation for signals feed */
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-slideInFromTop {
+  animation: slideInFromTop 0.5s ease-out forwards;
+}
+
+/* Smooth signal slide in animation - elegant entrance */
+@keyframes signalSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-signalSlideIn {
+  animation: signalSlideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slide in from right for notifications */
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+.animate-slideInRight {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Performance optimizations */
 @layer base {
   html {

@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { NavigationHeader } from "@/components/NavigationHeader";
 import { HeroSection } from "@/components/HeroSection";
-import { ConsolidationSection } from "@/components/ConsolidationSection";
 import LogoOutcomeSection from "@/components/LogoOutcomeSection";
 import ClientLogosSection from "@/components/ClientLogosSection";
 import { ProblemSection } from "@/components/ProblemSection";
 import { SolutionSection } from "@/components/SolutionSection";
+import { ConsolidationSection } from "@/components/ConsolidationSection";
 import { Footer } from "@/components/Footer";
-import TransitionSection from "@/components/TransitionSection";
 import ClosingSection from "@/components/ClosingSection";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
+import { FAQSection, shortFAQs } from "@/components/FAQSection";
 
 /**
  * Main Index page component
@@ -56,7 +56,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <CursorSpotlight size={450} />
+      <CursorSpotlight size={180} />
 
       <NavigationHeader mode={activeMode} onModeChange={handleModeChange} />
 
@@ -73,20 +73,20 @@ const Index = () => {
           <LogoOutcomeSection />
         </section>
 
-        <section id="problem" aria-label="Problem" className="py-5 sm:py-6 md:py-8">
-          <ProblemSection mode={activeMode} />
+        <section id="problem" aria-label="Problem" className="py-0">
+          <ProblemSection />
         </section>
 
         <section id="solution" aria-label="Solution" className="py-6 sm:py-8 md:py-12">
           <SolutionSection mode={activeMode} />
         </section>
 
-        <section aria-label="Transition" className="py-5 sm:py-6 md:py-10">
-          <TransitionSection />
+        <section id="consolidation" aria-label="Consolidation" className="py-0">
+          <ConsolidationSection mode={activeMode} />
         </section>
 
-        <section id="consolidation" aria-label="Tool consolidation" className="py-8 sm:py-10 md:py-12">
-          <ConsolidationSection mode={activeMode} />
+        <section aria-label="FAQ">
+          <FAQSection faqs={shortFAQs} />
         </section>
 
         <section aria-label="Closing" className="pt-0">

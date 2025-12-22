@@ -75,6 +75,16 @@ This project is built with:
   - Fixed z-index of 30 to stay above content
 - **Usage**: Integrated globally in `src/pages/Index.tsx`
 
+#### Glass Navigation Header (December 5, 2025)
+- **Components**: `src/components/NavigationHeader.tsx`, `src/index.css`
+- **Description**: Updated to "Authentic iOS Liquid Glass" style - purely physical/optical effect without distracting animations.
+- **Implementation**:
+  - **Removed**: Rotating holographic borders and shimmer animations (`animate-liquid-rotate`, etc.).
+  - **Added**: High-quality static light reflections (specular highlights) and edge lighting.
+  - **Material**: Adaptive `backdrop-blur-3xl` with neutral tint (`bg-black/40`) that works on both dark (Hero) and light (Social Proof) backgrounds.
+  - **Behavior**: Acts like real smoked glass - transparent enough to show background colors, dark enough to keep white text readable everywhere.
+  - **Visuals**: Multi-layered CSS composition with noise texture, inner shadows, and top-light bevels.
+
 #### Glass Navigation Header (October 20, 2025)
 - **Components**: `src/components/NavigationHeader.tsx`, `src/pages/Index.tsx`, `src/components/HeroSection.tsx`
 - **Description**: Navigation bar now mirrors pressmaster-style pill layout with a translucent glass effect and persistent sticky behavior.
@@ -140,6 +150,155 @@ This project is built with:
   - Kept only a top fade mask for polish; bottom is fully visible.
   - Grid scroll animation runs from `-25%` to `-75%` for seamless looping.
 - **Result**: The radar grid fills the entire card container edge-to-edge with continuous content at the bottom
+
+#### FAQ Section Component (December 9, 2025 - Unified Design)
+- **Component**: `src/components/FAQSection.tsx`
+- **Description**: Unified FAQ layout matching the SolutionDiscovery page design across all pages
+- **Design**:
+  - Grid layout: `lg:grid-cols-3` with heading (1 col) and accordion (2 cols)
+  - Left side: "Frequently Asked Questions" heading with "Any questions? We'd love to help" subtitle
+  - Right side: Simple border-bottom accordion with ChevronDown icons that rotate on open
+  - Questions have green hover effect (`text-[#10b981]`)
+  - Background: `bg-gray-50` with `border-t border-gray-200`
+- **Usage**:
+  - **Landing page** (`/`): Short FAQ list (4 questions) before Closing CTA section
+  - **Solution pages**: Discovery and Signals use the same FAQ design
+  - **Reviews page** (`/reviews`): Short FAQ list at bottom
+  - **Dedicated FAQ page** (`/faq`): All FAQs grouped by category, same visual style but with category headings
+- **Exports**:
+  - `FAQSection` - Main component accepting title, subtitle, and faqs props
+  - `FAQItem` - TypeScript interface for FAQ items
+  - `shortFAQs` - 4 most common questions for embedding
+  - `defaultFAQs` - 6 standard questions
+- **Files**: 
+  - `src/components/FAQSection.tsx` - Reusable FAQ section component
+  - `src/pages/FAQ.tsx` - Dedicated FAQ page with category grouping, matching visual style
+- **Page Order** (Landing page sections):
+  1. Hero
+  2. Client Logos
+  3. Logo/Outcome Section
+  4. Problem Section ("You already know this...")
+  5. Solution Section (with RadarGridPreviewV2 animation)
+  6. Consolidation Section ("Remember When You Had 15 Tabs")
+  7. FAQ Section
+  8. Closing Section (Book Demo CTA)
+  9. Footer
+
+#### Solutions Pages & Navigation Dropdown (December 8, 2025)
+- **Files**: 
+  - `src/components/NavigationHeader.tsx` — White transparent nav with Solutions dropdown
+  - `src/pages/SolutionDiscovery.tsx` — `/solutions/discovery` (brand green accent)
+  - `src/pages/SolutionSignals.tsx` — `/solutions/signals` (brand green accent theme for consistency)
+  - `src/App.tsx` — Updated routing with redirect from `/solutions` → `/solutions/discovery`
+- **What**: Solutions are **separate pages** (Discovery, Signals) accessible from a dropdown in the nav header.
+- **Navigation**:
+  - White transparent pill nav (`bg-white/90 backdrop-blur-2xl`) with black text/logo for contrast.
+  - Solutions dropdown shows 2 options with icons and descriptions (Radar, Bell icons).
+  - Each solution icon uses hover state in the brand green family.
+  - Dropdown opens on hover and closes when mouse leaves.
+  - Mobile hamburger menu includes collapsible Solutions accordion (Discovery, Signals).
+- **Page Structure** (each solution page):
+  - Hero section with gradient accent, title, subtitle, 3 bullet benefits, CTA
+  - "How it works" 3-card grid with icons
+  - Testimonial blockquote section
+  - "Why recruiters love X" value props section
+  - Colored CTA footer section
+  - No product screenshots — content-only design
+- **Color Palette** (December 9, 2025):
+  - **Discovery** (Brand Green `#5fff9e`): Main brand color. Accents use `#10b981` (darker green), backgrounds `#d1ffe6`/`#e8fff2`. Buttons have black text on green.
+  - **Signals**: Uses the brand green family for consistency with Discovery.
+- **Discovery Hero Section Enhancement** (December 9, 2025):
+  - **Background**: Dark gradient from black → `#050d08` → `#0a1a0f` (subtle greenish-black)
+  - **Mock UI Cards**: 3D floating perspective with `rotateY(-8deg) rotateX(4deg)` tilt effect
+  - **Main Card Content**: Lead Discovered notification, Intent Score (92) with circular indicator, Next step action
+  - **Secondary Card**: Smaller floating "Signals Today: +24" card positioned behind/below the main card
+  - **Glow Effects**: Green (`#5fff9e`) blur glows around the floating cards for depth
+- **Discovery "Leads from Everywhere" Scroll Animation** (December 9, 2025):
+  - **File**: `src/pages/SolutionDiscovery.tsx`
+  - **Description**: Scroll-based animation that transitions between two phases when user scrolls through the section
+  - **Phase 0 (Sources View)**:
+    - Shows grid of lead sources: LinkedIn, Career Pages, News & PR, Crunchbase, Websites, X/Twitter
+    - Heading: "Leads from Everywhere"
+    - Subtitle: "Not just LinkedIn. We aggregate signals from across the entire internet..."
+  - **Phase 1 (Hiring Managers View)**:
+    - Shows 3 hiring managers with full contact details:
+      - Sarah Miller - VP Engineering @ TechCorp Inc. (phone + email)
+      - James Chen - Head of Talent @ ScaleUp Ltd. (phone + email)
+      - Emma Rodriguez - CTO @ InnovateTech (phone + email)
+    - Animated heading transition to: "Now Call Them Directly"
+    - Animated subtitle transition to: "We find the hiring managers with verified contact details..."
+    - "Find the hiring manager" feature box gets highlighted (green bg + scale)
+  - **Implementation**:
+    - Uses `useRef` and `useEffect` scroll listener with scroll progress calculation
+    - Right side content uses `lg:sticky lg:top-32` to stay fixed while scrolling
+    - Both phases rendered with absolute positioning; opacity/translate transitions on phase change
+    - Section height increased (`min-h-[120vh]`) to allow scroll room for animation trigger
+    - Phone/email links are clickable (`tel:` and `mailto:` hrefs)
+    - "Ready to contact" green button appears in Phase 1
+
+#### Signals Page Full Redesign v2 (December 9, 2025)
+- **File**: `src/pages/SolutionSignals.tsx`
+- **Description**: Unique "popping signals" design focused on real-time notifications and alerts
+- **Design Philosophy**: Unlike Discovery (which shows leads/sources), Signals emphasizes real-time alerts that "pop up" and find you
+- **Hero Section - Signal Radar with Popping Notifications**:
+  - Dark gradient background: `from-[#0a0c0d] via-[#0c1015] to-[#0d1218]`
+  - **Radar/Scanner visualization**:
+    - Central pulsing dot (`#22d3ee`) representing the "scanner"
+    - 3 expanding pulse rings (`animate-ping`) with staggered delays
+    - Creates "scanning the internet" visual effect
+  - **5 Popping Signal Notifications**:
+    - Positioned around the radar (top-right, right, bottom-right, bottom, left)
+    - Each notification animates in with scale + translate + opacity transition
+    - Color-coded by signal type:
+      - Funding (`#22d3ee` cyan) - TechCorp raised $45M
+      - Hiring (`#a78bfa` purple) - ScaleUp posted 12 roles
+      - Leadership (`#fbbf24` amber) - New CTO at InnovateTech
+      - News (`#34d399` green) - DataFlow EU expansion
+      - Competitor (`#f472b6` pink) - Rival Agency lost client
+    - Each has a bouncing "new" dot indicator
+    - Notifications reset and loop every 8 seconds
+  - Headline: "Signals that find you first"
+  - Email input + CTA button
+- **Timeline Section** ("Your Morning Signal Feed"):
+  - **Vertical timeline** with scroll-based reveal (not phase switching like Discovery)
+  - Uses `useRef` + `useEffect` scroll listener with `timelineProgress` state
+  - **Left side - Timeline**:
+    - Vertical line with cyan gradient fill that grows as user scrolls
+    - 6 timeline items with timestamps (09:15, 10:32, 11:47, etc.)
+    - Each item slides in from left with staggered delay
+    - Color-coded dots and left borders matching signal type
+    - Shows company name, signal description, and score
+  - **Right side - Live Stats (sticky)**:
+    - "Today's Summary" card
+    - Numbers animate based on scroll progress (0 → 127 signals found)
+    - Breakdown by signal type (Funding, Job postings, Leadership, Competitor)
+    - CTA: "Get your signal feed →"
+  - Section heading updates: "boilr found X new opportunities" (X changes with scroll)
+- **Testimonial Section**:
+  - **Left side - Stacked Notifications visual**:
+    - 3 notification cards slightly rotated/offset (like a fresh stack of alerts)
+    - Funding Alert (2 min ago), New Roles Posted (15 min ago), Leadership Change (1 hour ago)
+    - Replaces the generic photo placeholder
+  - **Right side - Quote**:
+    - Quote: "I check my signals before my coffee."
+    - Story about reaching out to CTO day after funding announcement
+    - Marcus Chen, Founder @ Apex Talent Partners
+- **Alerts Configuration Section** ("Alerts, Your Way"):
+  - Features: Competitor watchlists, Smart scoring
+  - **Mock UI - Alert Rules**:
+    - 3 rule types with color-coded backgrounds and borders:
+      - Funding Rounds → Instant (cyan)
+      - Engineering Roles → Daily (purple)
+      - Competitor Activity → Instant (pink)
+  - **Mock UI - Delivery Settings**:
+    - Slack: #high-intent channel (enabled)
+    - Email: 8am digest (enabled)
+- **4-Column Features**: Real-time monitoring, Custom pipelines, Smart alerts, Instant action
+- **FAQ Section**: 4 Signals-specific FAQs
+- **Final CTA**: "Stop checking. Start receiving." on cyan background
+- **Use cases**:
+  - **Discovery**: Always-on sourcing with continuous scanning, context filtering, outreach-ready handoff.
+  - **Signals**: Market signals aggregation, recruiter-ready scoring, actionable alerts.
 
 ### Build Configuration
 
@@ -255,5 +414,3 @@ Mobile-specific optimizations have been applied across all components to ensure 
 
 - **`src/pages/Index.tsx`**
   - Section spacing tuned for mobile: `py-5 sm:py-6 md:py-8`, `pb-8 sm:pb-10 md:pb-12`, etc.
-
-- **`
