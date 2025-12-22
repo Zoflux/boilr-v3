@@ -1,8 +1,7 @@
 import { NavigationHeader } from "@/components/NavigationHeader";
 import { Footer } from "@/components/Footer";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
-import { ArrowRight, Quote, Star, Users, Volume2, VolumeX } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { ArrowRight, Quote, Star, Users } from "lucide-react";
 
 // Client logos (same as landing page)
 const CLIENT_LOGOS = [
@@ -19,17 +18,12 @@ const CLIENT_LOGOS = [
     { name: "Switch", src: "/client-logos/Switch.png" },
 ];
 
-// Import customer video thumbnails / videos
-// Videos should be placed in /src/assets/customer-videos/
-const customerVideos = Object.values(
-    import.meta.glob<string>(
-        "/src/assets/customer-videos/*.{mp4,webm,mov}",
-        { eager: true, import: "default" }
-    )
-) as string[];
-
-// Explicit video imports for specific testimonials
-import datascopeVideo from "@/assets/customer-videos/datascope x boilr.mp4";
+// YouTube video URLs for customer testimonials
+// Replace these placeholder URLs with actual YouTube video IDs when available
+const YOUTUBE_VIDEOS = {
+    "923jobs": "", // Placeholder - add YouTube video ID here (e.g., "dQw4w9WgXcQ")
+    "datascope": "", // Placeholder - add YouTube video ID here
+};
 
 // G2 Badges - placeholder data
 const g2Badges = [
@@ -43,8 +37,7 @@ const g2Badges = [
 const featuredTestimonials = [
     {
         id: 1,
-        videoPlaceholder: true, // Will be replaced with actual video when uploaded
-        videoSrc: customerVideos[0] || null,
+        youtubeId: YOUTUBE_VIDEOS["923jobs"], // Add YouTube video ID when available
         quote: "We went from no structured business development to signing a new client in month one. boilr lets us focus on the human side, not the research.",
         author: "Helen Wright",
         role: "Managing Director",
@@ -55,8 +48,7 @@ const featuredTestimonials = [
     },
     {
         id: 2,
-        videoPlaceholder: true,
-        videoSrc: datascopeVideo,
+        youtubeId: YOUTUBE_VIDEOS["datascope"], // Add YouTube video ID when available
         quote: "We have the contacts, but we had no idea who was actually recruiting. boilr tips us off, allowing us to leverage our network to crack open new clients immediately.",
         author: "Julien Hofer",
         role: "Founder & Managing Director",
@@ -112,100 +104,50 @@ const customerQuotes = [
     },
 ];
 
-// Video Testimonial Card with Intersection Observer for autoplay
+// Video Testimonial Card with YouTube embed support
 function VideoTestimonialCard({ testimonial, isReversed }: { testimonial: typeof featuredTestimonials[0], isReversed: boolean }) {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [isMuted, setIsMuted] = useState(true);
-    const [isPlaying, setIsPlaying] = useState(false);
-
-    // Intersection Observer for autoplay when visible
-    useEffect(() => {
-        const video = videoRef.current;
-        const container = containerRef.current;
-        if (!video || !container) return;
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                        // Video is 50%+ visible - play it
-                        video.play().catch(() => {
-                            // Autoplay blocked - that's ok
-                        });
-                        setIsPlaying(true);
-                    } else {
-                        // Video not visible enough - pause
-                        video.pause();
-                        setIsPlaying(false);
-                    }
-                });
-            },
-            { threshold: [0.5] }
-        );
-
-        observer.observe(container);
-        return () => observer.disconnect();
-    }, [testimonial.videoSrc]);
-
-    const toggleMute = () => {
-        if (videoRef.current) {
-            videoRef.current.muted = !isMuted;
-            setIsMuted(!isMuted);
-        }
-    };
-
     return (
         <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
             <div className={`grid md:grid-cols-2 gap-0 ${isReversed ? 'md:grid-flow-dense' : ''}`}>
                 {/* Video Side */}
                 <div
-                    ref={containerRef}
                     className={`relative bg-gray-900 min-h-[250px] md:min-h-[320px] overflow-hidden ${isReversed ? 'md:col-start-2' : ''}`}
                 >
-                    {testimonial.videoSrc ? (
-                        <>
-                            <video
-                                ref={videoRef}
-                                src={testimonial.videoSrc}
-                                muted={isMuted}
-                                loop
-                                playsInline
-                                className="absolute inset-0 w-full h-full object-cover scale-105"
-                            />
-                            {/* Mute/Unmute button */}
-                            <button
-                                onClick={toggleMute}
-                                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
-                            >
-                                {isMuted ? (
-                                    <VolumeX className="w-5 h-5 text-white" />
-                                ) : (
-                                    <Volume2 className="w-5 h-5 text-white" />
-                                )}
-                            </button>
-                        </>
+                    {testimonial.youtubeId ? (
+                        // YouTube embed
+                        <iframe
+                            className="absolute inset-0 w-full h-full"
+                            src={`https://www.youtube.com/embed/${testimonial.youtubeId}?rel=0&modestbranding=1`}
+                            title={`${testimonial.company} testimonial`}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        />
                     ) : (
-                        // Video placeholder
+                        // Video placeholder when no YouTube ID is set
                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900">
                             <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
                                 <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-                                    <span className="text-white/50 text-sm">Video</span>
+                                    <svg className="w-6 h-6 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
                                 </div>
                             </div>
                             <p className="mt-4 text-gray-400 text-sm">Video coming soon</p>
                         </div>
                     )}
 
-                    {/* Quote overlay at bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pointer-events-none">
-                        <blockquote className="text-white text-lg sm:text-xl font-medium leading-relaxed mb-3">
-                            "{testimonial.quote}"
-                        </blockquote>
-                        <div className="text-white/70 text-sm">
-                            {testimonial.author}, {testimonial.role} at {testimonial.company}
+                    {/* Quote overlay at bottom - only show when no video */}
+                    {!testimonial.youtubeId && (
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pointer-events-none">
+                            <blockquote className="text-white text-lg sm:text-xl font-medium leading-relaxed mb-3">
+                                "{testimonial.quote}"
+                            </blockquote>
+                            <div className="text-white/70 text-sm">
+                                {testimonial.author}, {testimonial.role} at {testimonial.company}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Problem / Goal / Solution Side */}
