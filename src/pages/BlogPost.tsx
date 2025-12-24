@@ -456,7 +456,7 @@ const BlogPost = () => {
                             </aside>
 
                             {/* Main Content */}
-                            <div className="max-w-2xl">
+                            <div className="max-w-3xl">
                                 {/* Meta - Date & Reading Time */}
                                 <div className="flex items-center gap-3 text-sm text-gray-400 mb-4">
                                     <span>{formatDateShort(post.publishedAt)}</span>
