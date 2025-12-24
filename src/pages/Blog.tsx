@@ -189,11 +189,19 @@ const Blog = () => {
                                         {/* Author */}
                                         {featuredPost.author?.name && (
                                             <div className="flex items-center gap-3 mt-6">
-                                                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                                                    <span className="text-gray-500 font-medium text-sm">
-                                                        {featuredPost.author.name.split(" ").map(n => n[0]).join("")}
-                                                    </span>
-                                                </div>
+                                                {featuredPost.author.image?.asset?.url ? (
+                                                    <img
+                                                        src={featuredPost.author.image.asset.url}
+                                                        alt={featuredPost.author.name}
+                                                        className="w-10 h-10 rounded-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                                        <span className="text-gray-500 font-medium text-sm">
+                                                            {featuredPost.author.name.split(" ").map(n => n[0]).join("")}
+                                                        </span>
+                                                    </div>
+                                                )}
                                                 <div>
                                                     <p className="text-sm font-medium text-gray-900">By {featuredPost.author.name}</p>
                                                     <p className="text-xs text-gray-400">Content Team</p>
@@ -216,8 +224,8 @@ const Blog = () => {
                                 <button
                                     onClick={() => setSelectedCategory(null)}
                                     className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${!selectedCategory
-                                            ? "bg-gray-900 text-white"
-                                            : "text-gray-500 hover:text-gray-900"
+                                        ? "bg-gray-900 text-white"
+                                        : "text-gray-500 hover:text-gray-900"
                                         }`}
                                 >
                                     All
@@ -227,8 +235,8 @@ const Blog = () => {
                                         key={category}
                                         onClick={() => setSelectedCategory(category)}
                                         className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === category
-                                                ? "bg-gray-900 text-white"
-                                                : "text-gray-500 hover:text-gray-900"
+                                            ? "bg-gray-900 text-white"
+                                            : "text-gray-500 hover:text-gray-900"
                                             }`}
                                     >
                                         {category}

@@ -128,6 +128,13 @@ const portableTextComponents = {
                 </figure>
             );
         },
+        code: ({ value }: any) => {
+            return (
+                <pre className="my-6 p-4 bg-gray-900 text-gray-100 rounded-xl overflow-x-auto text-sm font-mono">
+                    <code>{value.code}</code>
+                </pre>
+            );
+        },
     },
     block: {
         h1: ({ children, value }: any) => (
@@ -371,11 +378,19 @@ const BlogPost = () => {
                                 {/* Author */}
                                 {post.author?.name && (
                                     <div className="flex items-center gap-3 mb-10">
-                                        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                                            <span className="text-gray-500 font-medium text-sm">
-                                                {post.author.name.split(" ").map(n => n[0]).join("")}
-                                            </span>
-                                        </div>
+                                        {post.author.image?.asset?.url ? (
+                                            <img
+                                                src={post.author.image.asset.url}
+                                                alt={post.author.name}
+                                                className="w-10 h-10 rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                                <span className="text-gray-500 font-medium text-sm">
+                                                    {post.author.name.split(" ").map(n => n[0]).join("")}
+                                                </span>
+                                            </div>
+                                        )}
                                         <div>
                                             <p className="text-sm font-medium text-gray-900">By {post.author.name}</p>
                                             <p className="text-xs text-gray-400">Growth Content Editor</p>

@@ -58,5 +58,22 @@ export default defineType({
                 },
             ],
         }),
+        defineArrayMember({
+            type: 'code',
+            title: 'Code Block',
+            options: {
+                language: 'javascript',
+                languageAlternatives: [
+                    { title: 'JavaScript', value: 'javascript' },
+                    { title: 'TypeScript', value: 'typescript' },
+                    { title: 'HTML', value: 'html' },
+                    { title: 'CSS', value: 'css' },
+                    { title: 'JSON', value: 'json' },
+                    { title: 'Bash', value: 'bash' },
+                    { title: 'Plain Text', value: 'text' },
+                ],
+                withFilename: true,
+            },
+        }),
     ],
 })
