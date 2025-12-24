@@ -159,17 +159,19 @@ const portableTextComponents = {
                 <div className="my-8 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 bg-[#dcfce7]">
                     {/* Boilr Logo */}
                     <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-xl bg-black flex items-center justify-center">
-                            <span className="text-[#48ee8d] font-bold text-lg">b.</span>
-                        </div>
+                        <img
+                            src="/boilr-logo-black.png"
+                            alt="Boilr"
+                            className="h-8 w-auto"
+                        />
                     </div>
 
                     {/* Content */}
                     <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900 mb-1">
+                        <h4 className="font-semibold text-gray-900 mb-1 text-sm">
                             {template.title}
                         </h4>
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-gray-500 text-xs leading-relaxed">
                             {template.body}
                         </p>
                     </div>
@@ -178,7 +180,7 @@ const portableTextComponents = {
                     <div className="flex items-center gap-4 flex-shrink-0">
                         <a
                             href={calendlyUrl}
-                            className="text-gray-600 text-sm hover:text-gray-900 flex items-center gap-1 transition-colors"
+                            className="text-gray-500 text-xs hover:text-gray-900 flex items-center gap-1 transition-colors"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -187,7 +189,7 @@ const portableTextComponents = {
                         </a>
                         <a
                             href={calendlyUrl}
-                            className="px-5 py-2.5 rounded-full bg-[#48ee8d] text-black text-sm font-medium hover:bg-[#3dd97a] transition-colors"
+                            className="px-4 py-2 rounded-lg bg-[#48ee8d] text-black text-xs font-medium hover:bg-[#3dd97a] transition-colors"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
