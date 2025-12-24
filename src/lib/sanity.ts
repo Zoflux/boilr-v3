@@ -84,7 +84,16 @@ export const blogQueries = {
       slug
     },
     publishedAt,
-    body,
+    body[] {
+      ...,
+      _type == "image" => {
+        ...,
+        asset-> {
+          _id,
+          url
+        }
+      }
+    },
     "readingTime": round(length(pt::text(body)) / 5 / 200)
   }`,
 

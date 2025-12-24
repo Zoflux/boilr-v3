@@ -110,6 +110,25 @@ const extractHeadings = (body: any[]) => {
 
 // Portable Text components - Clean, minimal styling
 const portableTextComponents = {
+    types: {
+        image: ({ value }: any) => {
+            if (!value?.asset?.url) return null;
+            return (
+                <figure className="my-8">
+                    <img
+                        src={value.asset.url}
+                        alt={value.alt || ""}
+                        className="w-full rounded-xl"
+                    />
+                    {value.caption && (
+                        <figcaption className="text-center text-sm text-gray-500 mt-3">
+                            {value.caption}
+                        </figcaption>
+                    )}
+                </figure>
+            );
+        },
+    },
     block: {
         h1: ({ children, value }: any) => (
             <h1 id={value._key} className="text-3xl font-bold mt-12 mb-6 text-gray-900 scroll-mt-24">
@@ -148,6 +167,7 @@ const portableTextComponents = {
     marks: {
         strong: ({ children }: any) => <strong className="font-semibold text-gray-900">{children}</strong>,
         em: ({ children }: any) => <em className="italic">{children}</em>,
+        code: ({ children }: any) => <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>,
         link: ({ children, value }: any) => (
             <a href={value.href} className="text-gray-900 underline underline-offset-2 hover:text-gray-600" target="_blank" rel="noopener noreferrer">
                 {children}
