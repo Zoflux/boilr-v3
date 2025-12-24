@@ -75,5 +75,9 @@ export default defineType({
                 withFilename: true,
             },
         }),
+        defineArrayMember({
+            type: 'ctaCard',
+            title: 'CTA Card',
+        }),
     ],
 })

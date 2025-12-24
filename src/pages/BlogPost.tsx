@@ -135,6 +135,62 @@ const portableTextComponents = {
                 </pre>
             );
         },
+        ctaCard: ({ value }: any) => {
+            return (
+                <div
+                    className="my-8 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
+                    style={{ backgroundColor: value.backgroundColor || '#f3e8ff' }}
+                >
+                    {/* Icon/Logo */}
+                    {value.icon?.asset?.url && (
+                        <div className="flex-shrink-0">
+                            <img
+                                src={value.icon.asset.url}
+                                alt=""
+                                className="w-12 h-12 object-contain"
+                            />
+                        </div>
+                    )}
+
+                    {/* Content */}
+                    <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900 mb-1">
+                            {value.title}
+                        </h4>
+                        {value.description && (
+                            <p className="text-gray-600 text-sm">
+                                {value.description}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-4 flex-shrink-0">
+                        {value.learnMoreUrl && (
+                            <a
+                                href={value.learnMoreUrl}
+                                className="text-gray-600 text-sm hover:text-gray-900 flex items-center gap-1 transition-colors"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Learn more
+                                <span>→</span>
+                            </a>
+                        )}
+                        {value.buttonUrl && (
+                            <a
+                                href={value.buttonUrl}
+                                className="px-5 py-2.5 rounded-full bg-[#48ee8d] text-black text-sm font-medium hover:bg-[#3dd97a] transition-colors"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {value.buttonText || 'Start Now'}
+                            </a>
+                        )}
+                    </div>
+                </div>
+            );
+        },
     },
     block: {
         h1: ({ children, value }: any) => (

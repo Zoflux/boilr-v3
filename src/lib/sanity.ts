@@ -92,6 +92,15 @@ export const blogQueries = {
           _id,
           url
         }
+      },
+      _type == "ctaCard" => {
+        ...,
+        icon {
+          asset-> {
+            _id,
+            url
+          }
+        }
       }
     },
     "readingTime": round(length(pt::text(body)) / 5 / 200)
