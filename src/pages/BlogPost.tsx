@@ -136,57 +136,63 @@ const portableTextComponents = {
             );
         },
         ctaCard: ({ value }: any) => {
+            // Fixed templates
+            const templates: Record<string, { title: string; body: string }> = {
+                template1: {
+                    title: "Spot your next client before competitors",
+                    body: "Boilr uses AI to find companies that are actively hiring – so you can reach out with the right offer at the right time. No manual research needed.",
+                },
+                template2: {
+                    title: "Find hiring signals in seconds",
+                    body: "Boilr scans thousands of job postings daily and alerts you when target companies start hiring. Be the first recruiter they hear from.",
+                },
+                template3: {
+                    title: "Automate your lead generation",
+                    body: "Stop scrolling LinkedIn. Boilr automatically finds companies with open roles matching your expertise – delivered fresh to your inbox.",
+                },
+            };
+
+            const template = templates[value.template] || templates.template1;
+            const calendlyUrl = "https://calendly.com/felix-boilr/demo";
+
             return (
-                <div
-                    className="my-8 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
-                    style={{ backgroundColor: value.backgroundColor || '#f3e8ff' }}
-                >
-                    {/* Icon/Logo */}
-                    {value.icon?.asset?.url && (
-                        <div className="flex-shrink-0">
-                            <img
-                                src={value.icon.asset.url}
-                                alt=""
-                                className="w-12 h-12 object-contain"
-                            />
+                <div className="my-8 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 bg-[#dcfce7]">
+                    {/* Boilr Logo */}
+                    <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-black flex items-center justify-center">
+                            <span className="text-[#48ee8d] font-bold text-lg">b.</span>
                         </div>
-                    )}
+                    </div>
 
                     {/* Content */}
                     <div className="flex-1">
                         <h4 className="font-semibold text-gray-900 mb-1">
-                            {value.title}
+                            {template.title}
                         </h4>
-                        {value.description && (
-                            <p className="text-gray-600 text-sm">
-                                {value.description}
-                            </p>
-                        )}
+                        <p className="text-gray-600 text-sm">
+                            {template.body}
+                        </p>
                     </div>
 
                     {/* Actions */}
                     <div className="flex items-center gap-4 flex-shrink-0">
-                        {value.learnMoreUrl && (
-                            <a
-                                href={value.learnMoreUrl}
-                                className="text-gray-600 text-sm hover:text-gray-900 flex items-center gap-1 transition-colors"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Learn more
-                                <span>→</span>
-                            </a>
-                        )}
-                        {value.buttonUrl && (
-                            <a
-                                href={value.buttonUrl}
-                                className="px-5 py-2.5 rounded-full bg-[#48ee8d] text-black text-sm font-medium hover:bg-[#3dd97a] transition-colors"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {value.buttonText || 'Start Now'}
-                            </a>
-                        )}
+                        <a
+                            href={calendlyUrl}
+                            className="text-gray-600 text-sm hover:text-gray-900 flex items-center gap-1 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Learn more
+                            <span>→</span>
+                        </a>
+                        <a
+                            href={calendlyUrl}
+                            className="px-5 py-2.5 rounded-full bg-[#48ee8d] text-black text-sm font-medium hover:bg-[#3dd97a] transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Start Boilr
+                        </a>
                     </div>
                 </div>
             );
