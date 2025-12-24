@@ -79,5 +79,9 @@ export default defineType({
             type: 'ctaCard',
             title: 'CTA Card',
         }),
+        defineArrayMember({
+            type: 'table',
+            title: 'Table',
+        }),
     ],
 })

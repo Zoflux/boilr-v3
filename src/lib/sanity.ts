@@ -23,6 +23,7 @@ export interface BlogPost {
   };
   author?: {
     name: string;
+    role?: string;
     image?: { asset: { url: string } };
   };
   categories?: { title: string; slug: { current: string } }[];
@@ -48,6 +49,7 @@ export const blogQueries = {
     },
     author-> {
       name,
+      role,
       image {
         asset-> { url }
       }
@@ -75,6 +77,7 @@ export const blogQueries = {
     },
     author-> {
       name,
+      role,
       image {
         asset-> { url }
       }
@@ -134,6 +137,34 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   }
 }
 
+export async function getRelatedPosts(currentSlug: string, limit: number = 2): Promise<BlogPost[]> {
+  try {
+    const query = `*[_type == "post" && defined(slug.current) && slug.current != $currentSlug] | order(publishedAt desc)[0...$limit] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      mainImage {
+        asset-> {
+          _id,
+          url
+        },
+        alt
+      },
+      categories[]-> {
+        title,
+        slug
+      },
+      publishedAt,
+      "readingTime": round(length(pt::text(body)) / 5 / 200)
+    }`;
+    return await sanityClient.fetch(query, { currentSlug, limit: limit - 1 });
+  } catch (error) {
+    console.error("Error fetching related posts:", error);
+    return [];
+  }
+}
+
 // Helper to generate Sanity image URLs
 export function urlFor(source: any): string {
   if (!source?.asset?.url) return "";
@@ -148,3 +179,4 @@ export function formatDate(dateString: string): string {
     day: "numeric",
   });
 }
+

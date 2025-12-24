@@ -4,5 +4,6 @@ import category from './category'
 import post from './post'
 import author from './author'
 import ctaCard from './ctaCard'
+import table from './table'
 
-export const schemaTypes = [post, author, category, blockContent, ctaCard]
+export const schemaTypes = [post, author, category, blockContent, ctaCard, table]

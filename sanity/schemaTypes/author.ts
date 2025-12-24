@@ -13,6 +13,12 @@ export default defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
+            name: 'role',
+            title: 'Role / Title',
+            type: 'string',
+            description: 'e.g. "Growth Content Editor", "Co-Founder"',
+        }),
+        defineField({
             name: 'slug',
             title: 'Slug',
             type: 'slug',

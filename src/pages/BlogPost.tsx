@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Footer } from "@/components/Footer";
 import { NavigationHeader } from "@/components/NavigationHeader";
-import { getPostBySlug, BlogPost as BlogPostType, urlFor } from "@/lib/sanity";
+import { getPostBySlug, getRelatedPosts, BlogPost as BlogPostType, urlFor } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import { ArrowLeft, Linkedin, Twitter, Link2, BookOpen } from "lucide-react";
 
@@ -191,6 +191,37 @@ const portableTextComponents = {
                 </div>
             );
         },
+        table: ({ value }: any) => {
+            if (!value?.rows || value.rows.length === 0) return null;
+            return (
+                <div className="my-8 overflow-x-auto">
+                    <table className="w-full border-collapse">
+                        {value.rows.map((row: any, rowIndex: number) => {
+                            const isHeader = value.hasHeaderRow && rowIndex === 0;
+                            const Tag = isHeader ? 'th' : 'td';
+                            return (
+                                <tr
+                                    key={rowIndex}
+                                    className={isHeader ? 'bg-gray-100' : 'border-b border-gray-100'}
+                                >
+                                    {row.cells?.map((cell: string, cellIndex: number) => (
+                                        <Tag
+                                            key={cellIndex}
+                                            className={`px-4 py-3 text-left text-sm ${isHeader
+                                                ? 'font-semibold text-gray-900'
+                                                : 'text-gray-600'
+                                                }`}
+                                        >
+                                            {cell}
+                                        </Tag>
+                                    ))}
+                                </tr>
+                            );
+                        })}
+                    </table>
+                </div>
+            );
+        },
     },
     block: {
         h1: ({ children, value }: any) => (
@@ -243,6 +274,7 @@ const BlogPost = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const [post, setPost] = useState<BlogPostType | null>(null);
+    const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
     const [loading, setLoading] = useState(true);
     const [copied, setCopied] = useState(false);
     const [activeHeading, setActiveHeading] = useState<string | null>(null);
@@ -253,6 +285,8 @@ const BlogPost = () => {
             if (!slug) return;
             setLoading(true);
             const fetchedPost = await getPostBySlug(slug);
+            const related = await getRelatedPosts(slug, 2);
+            setRelatedPosts(related);
             if (!fetchedPost) {
                 setPost({
                     _id: "demo",
@@ -449,7 +483,7 @@ const BlogPost = () => {
                                         )}
                                         <div>
                                             <p className="text-sm font-medium text-gray-900">By {post.author.name}</p>
-                                            <p className="text-xs text-gray-400">Growth Content Editor</p>
+                                            <p className="text-xs text-gray-400">{post.author.role || 'Content Team'}</p>
                                         </div>
                                     </div>
                                 )}
@@ -529,6 +563,69 @@ const BlogPost = () => {
                         </div>
                     </div>
                 </section>
+
+                {/* Read More Section */}
+                {relatedPosts.length > 0 && (
+                    <section className="py-16 bg-[#fafafa]">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                            <h2 className="text-2xl font-bold text-gray-900 mb-8">Read more</h2>
+                            <div className="grid md:grid-cols-2 gap-8">
+                                {relatedPosts.map((relatedPost) => (
+                                    <article
+                                        key={relatedPost._id}
+                                        onClick={() => navigate(`/blog/${relatedPost.slug.current}`)}
+                                        className="group cursor-pointer"
+                                    >
+                                        {/* Image */}
+                                        <div className="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gray-100 to-gray-50">
+                                            {relatedPost.mainImage?.asset?.url ? (
+                                                <img
+                                                    src={urlFor(relatedPost.mainImage)}
+                                                    alt={relatedPost.mainImage.alt || relatedPost.title}
+                                                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full flex items-center justify-center">
+                                                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                                        <BookOpen className="w-6 h-6 text-gray-300" />
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Category */}
+                                        {relatedPost.categories?.[0] && (
+                                            <p className="text-xs text-gray-400 mb-2">
+                                                {relatedPost.categories[0].title}
+                                            </p>
+                                        )}
+
+                                        {/* Title */}
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-gray-600 transition-colors line-clamp-2">
+                                            {relatedPost.title}
+                                        </h3>
+
+                                        {/* Excerpt */}
+                                        <p className="text-gray-500 text-sm line-clamp-2 mb-3">
+                                            {relatedPost.excerpt}
+                                        </p>
+
+                                        {/* Meta */}
+                                        <div className="flex items-center gap-2 text-xs text-gray-400">
+                                            <span>{formatDateShort(relatedPost.publishedAt)}</span>
+                                            {relatedPost.readingTime && (
+                                                <>
+                                                    <span>•</span>
+                                                    <span>{relatedPost.readingTime} min</span>
+                                                </>
+                                            )}
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                )}
 
                 {/* Bottom CTA */}
                 <section className="py-20 bg-white border-t border-gray-100">
