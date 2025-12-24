@@ -139,16 +139,16 @@ const portableTextComponents = {
             // Fixed templates
             const templates: Record<string, { title: string; body: string }> = {
                 template1: {
-                    title: "Spot your next client before competitors",
-                    body: "Boilr uses AI to find companies that are actively hiring – so you can reach out with the right offer at the right time. No manual research needed.",
+                    title: "Find hiring signals in seconds",
+                    body: "Boilr scans thousands of job postings daily and alerts you when target companies start hiring.",
                 },
                 template2: {
-                    title: "Find hiring signals in seconds",
-                    body: "Boilr scans thousands of job postings daily and alerts you when target companies start hiring. Be the first recruiter they hear from.",
+                    title: "Spot your next client before competitors",
+                    body: "Boilr uses AI to find companies that are actively hiring so you can reach out at the right time.",
                 },
                 template3: {
                     title: "Automate your lead generation",
-                    body: "Stop scrolling LinkedIn. Boilr automatically finds companies with open roles matching your expertise – delivered fresh to your inbox.",
+                    body: "Boilr automatically finds companies with open roles matching your expertise. Delivered fresh to your inbox.",
                 },
             };
 
@@ -160,9 +160,9 @@ const portableTextComponents = {
                     {/* Boilr Logo */}
                     <div className="flex-shrink-0">
                         <img
-                            src="/boilr-logo-black.png"
+                            src="/boilr-icon.png"
                             alt="Boilr"
-                            className="h-8 w-auto"
+                            className="w-10 h-10"
                         />
                     </div>
 

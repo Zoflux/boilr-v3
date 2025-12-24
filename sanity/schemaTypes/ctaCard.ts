@@ -11,8 +11,8 @@ export default defineType({
             type: 'string',
             options: {
                 list: [
-                    { title: '🎯 Spot your next client before competitors', value: 'template1' },
-                    { title: '⚡ Find hiring signals in seconds', value: 'template2' },
+                    { title: '⚡ Find hiring signals in seconds', value: 'template1' },
+                    { title: '🎯 Spot your next client before competitors', value: 'template2' },
                     { title: '🤖 Automate your lead generation', value: 'template3' },
                 ],
                 layout: 'radio',
@@ -27,8 +27,8 @@ export default defineType({
         },
         prepare({ template }) {
             const titles: Record<string, string> = {
-                template1: '🎯 Spot your next client before competitors',
-                template2: '⚡ Find hiring signals in seconds',
+                template1: '⚡ Find hiring signals in seconds',
+                template2: '🎯 Spot your next client before competitors',
                 template3: '🤖 Automate your lead generation',
             }
             return {
