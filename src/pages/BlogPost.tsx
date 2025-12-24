@@ -577,7 +577,7 @@ const BlogPost = () => {
                                         className="group cursor-pointer"
                                     >
                                         {/* Image */}
-                                        <div className="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gray-100 to-gray-50">
+                                        <div className="relative aspect-[16/9] max-h-44 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gray-100 to-gray-50">
                                             {relatedPost.mainImage?.asset?.url ? (
                                                 <img
                                                     src={urlFor(relatedPost.mainImage)}
