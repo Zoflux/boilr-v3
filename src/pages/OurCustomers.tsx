@@ -14,6 +14,7 @@ const CLIENT_LOGOS = [
     { name: "Gecko", src: "/client-logos/gecko.png" },
     { name: "IT", src: "/client-logos/IT.png" },
     { name: "KRG", src: "/client-logos/krg.png" },
+    { name: "Palm Outsourcing", src: "/client-logos/palm-outsourcing.png" },
     { name: "Parity", src: "/client-logos/parity_logo 1.png" },
     { name: "Switch", src: "/client-logos/Switch.png" },
 ];
@@ -24,14 +25,6 @@ const YOUTUBE_VIDEOS = {
     "923jobs": "", // Placeholder - add YouTube video ID here (e.g., "dQw4w9WgXcQ")
     "datascope": "", // Placeholder - add YouTube video ID here
 };
-
-// G2 Badges - placeholder data
-const g2Badges = [
-    { label: "High Performer", season: "Fall 2024" },
-    { label: "Users Love Us", season: "" },
-    { label: "Best Results", season: "Fall 2024" },
-    { label: "Easiest Setup", season: "Fall 2024" },
-];
 
 // Featured video testimonials with Problem/Goal/Solution format
 const featuredTestimonials = [
@@ -214,7 +207,7 @@ export default function OurCustomers() {
 
                         {/* Main Heading */}
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
-                            boilr<span className="text-[#5fff9e]">.</span> Customer Success Stories
+                            <span className="text-[#5fff9e]"></span> Customer Success Stories
                         </h1>
 
                         {/* Subtitle */}
@@ -243,30 +236,51 @@ export default function OurCustomers() {
                             </a>
                         </div>
 
-                        {/* "See on" badges - placeholder */}
-                        <div className="flex items-center justify-center gap-4 text-sm text-gray-400 mb-10">
-                            <span>See on:</span>
-                            <span className="font-serif font-semibold text-gray-500">G2</span>
-                            <span className="font-semibold text-gray-500">Capterra</span>
-                        </div>
-
-                        {/* G2 Badges Row */}
-                        <div className="flex items-center justify-center gap-4 sm:gap-6 mb-12">
-                            <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-gray-100 shadow-sm">
-                                <Star className="w-5 h-5 text-orange-400 fill-orange-400" />
-                                <span className="font-bold text-gray-900">4.8</span>
-                            </div>
-                            {g2Badges.map((badge, i) => (
-                                <div
-                                    key={i}
-                                    className="flex flex-col items-center bg-white rounded-lg px-4 py-2 border border-gray-100 shadow-sm"
-                                >
-                                    {badge.season && (
-                                        <span className="text-[10px] text-gray-400 uppercase tracking-wider">{badge.season}</span>
-                                    )}
-                                    <span className="text-xs font-semibold text-gray-700">{badge.label}</span>
+                        {/* Review Platform Badges with Backlinks */}
+                        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 mb-12">
+                            {/* G2 Badge */}
+                            <a
+                                href="https://www.g2.com/products/boilr-ai/reviews"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300"
+                            >
+                                <img src="/g2-logo.png" alt="G2" className="h-7 w-auto" />
+                                <div className="flex items-center gap-1">
+                                    <span className="text-lg font-bold text-gray-700">5.0</span>
+                                    <div className="flex">
+                                        {[...Array(5)].map((_, i) => (
+                                            <Star key={i} className="w-3 h-3 text-orange-400 fill-orange-400" />
+                                        ))}
+                                    </div>
                                 </div>
-                            ))}
+                            </a>
+
+                            {/* Capterra Badge */}
+                            <a
+                                href="https://www.capterra.co.uk/software/1082714/boilr-AI"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center hover:opacity-80 transition-opacity duration-300"
+                            >
+                                <img src="/capterra-logo.png" alt="Capterra" className="h-7 w-auto" />
+                            </a>
+
+                            {/* Product Hunt Badge */}
+                            <a
+                                href="https://www.producthunt.com/products/boilr/launches/boilr?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-boilr"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:opacity-80 transition-opacity duration-300"
+                            >
+                                <img
+                                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1038496&theme=light&t=1766417810289"
+                                    alt="boilr. - The first autonomous AI agent for recruiter lead generation | Product Hunt"
+                                    width="200"
+                                    height="43"
+                                    className="h-9 w-auto"
+                                />
+                            </a>
                         </div>
 
                         {/* Animated Logo Marquee */}
@@ -433,7 +447,7 @@ export default function OurCustomers() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <h3 className="font-semibold text-white mb-2">3+ hours saved daily</h3>
+                                <h3 className="font-semibold text-white mb-2">2+ hours saved daily</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed">
                                     Recruiters report saving over 3 hours per day on research and lead generation.
                                 </p>
@@ -445,7 +459,7 @@ export default function OurCustomers() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <h3 className="font-semibold text-white mb-2">40% more qualified leads</h3>
+                                <h3 className="font-semibold text-white mb-2">More qualified leads</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed">
                                     Teams see a significant increase in lead quality and conversion rates.
                                 </p>
@@ -457,7 +471,7 @@ export default function OurCustomers() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                                     </svg>
                                 </div>
-                                <h3 className="font-semibold text-white mb-2">4.8 on G2</h3>
+                                <h3 className="font-semibold text-white mb-2">Rated 5.0 on G2</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed">
                                     Rated as a top performer with excellent reviews from verified users.
                                 </p>

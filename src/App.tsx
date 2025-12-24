@@ -23,6 +23,8 @@ import ROICalculator from "./pages/ROICalculator";
 import HiringSignals from "./pages/HiringSignals";
 import BusinessDevelopment from "./pages/BusinessDevelopment";
 import PromptsForRecruiters from "./pages/PromptsForRecruiters";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +69,9 @@ const App = () => (
           <Route path="/hiring-signals" element={<HiringSignals />} />
           <Route path="/business-development" element={<BusinessDevelopment />} />
           <Route path="/prompts-for-recruiters" element={<PromptsForRecruiters />} />
+          {/* Blog pages */}
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Star } from "lucide-react";
 
 /**
  * ClientLogosSection - Displays a scrolling marquee of client logos
@@ -8,6 +9,7 @@ import React from "react";
  * - All logos are displayed in grayscale
  * - Smooth infinite animation
  * - Responsive sizing
+ * - Review platform badges with backlinks (G2, Capterra, Product Hunt)
  * 
  * Placement: Between HeroSection and LogoOutcomeSection
  */
@@ -26,6 +28,7 @@ const CLIENT_LOGOS = [
   { name: "Gecko", src: "/client-logos/gecko.png" },
   { name: "IT", src: "/client-logos/IT.png" },
   { name: "KRG", src: "/client-logos/krg.png" },
+  { name: "Palm Outsourcing", src: "/client-logos/palm-outsourcing.png" },
   { name: "Parity", src: "/client-logos/parity_logo 1.png" },
   { name: "Switch", src: "/client-logos/Switch.png" },
 ];
@@ -70,6 +73,53 @@ export default function ClientLogosSection() {
             </div>
           </div>
         </div>
+
+        {/* Review Platform Badges with Backlinks */}
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 mt-10">
+          {/* G2 Badge */}
+          <a
+            href="https://www.g2.com/products/boilr-ai/reviews"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300"
+          >
+            <img src="/g2-logo.png" alt="G2" className="h-7 w-auto" />
+            <div className="flex items-center gap-1">
+              <span className="text-lg font-bold text-gray-700">5.0</span>
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3 h-3 text-orange-400 fill-orange-400" />
+                ))}
+              </div>
+            </div>
+          </a>
+
+          {/* Capterra Badge */}
+          <a
+            href="https://www.capterra.co.uk/software/1082714/boilr-AI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center hover:opacity-80 transition-opacity duration-300"
+          >
+            <img src="/capterra-logo.png" alt="Capterra" className="h-7 w-auto" />
+          </a>
+
+          {/* Product Hunt Badge */}
+          <a
+            href="https://www.producthunt.com/products/boilr/launches/boilr?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-boilr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 transition-opacity duration-300"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1038496&theme=light&t=1766417810289"
+              alt="boilr. - The first autonomous AI agent for recruiter lead generation | Product Hunt"
+              width="200"
+              height="43"
+              className="h-9 w-auto"
+            />
+          </a>
+        </div>
       </div>
 
       {/* Animation styles - NO pause on hover */}
@@ -92,5 +142,3 @@ export default function ClientLogosSection() {
     </section>
   );
 }
-
-

@@ -26,9 +26,9 @@ const solutionItems = [
     description: "Market signals from across the web.",
     icon: Bell,
     path: "/solutions/signals",
-    color: "#06b6d4", // Cyan
-    hoverBg: "group-hover:bg-[#06b6d4]/15",
-    hoverText: "group-hover:text-[#0891b2]",
+    color: "#5fff9e", // Brand green (same as Discovery)
+    hoverBg: "group-hover:bg-[#5fff9e]/15",
+    hoverText: "group-hover:text-[#10b981]",
   },
 ];
 
@@ -50,6 +50,7 @@ export function NavigationHeader({ mode = "recruitment", onModeChange }: Navigat
 
   const navItems = [
     { label: "Reviews", path: "/reviews" },
+    { label: "Blog", path: "/blog" },
     { label: "FAQ", path: "/faq" },
   ];
 
@@ -122,8 +123,8 @@ export function NavigationHeader({ mode = "recruitment", onModeChange }: Navigat
                     {/* Dropdown Panel - Top to Bottom Animation */}
                     <div
                       className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 z-50 transition-all duration-200 origin-top ${solutionsOpen
-                          ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
-                          : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
+                        ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
                         }`}
                     >
                       <div className="bg-white rounded-2xl shadow-xl border border-black/[0.06] overflow-hidden">

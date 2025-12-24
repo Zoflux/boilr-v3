@@ -483,7 +483,7 @@ const SolutionDiscovery = () => {
             <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
               <div className="grid md:grid-cols-2">
                 {/* Photo with circular frame */}
-                <div className="aspect-square md:aspect-auto bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center p-12">
+                <div className="aspect-square md:aspect-auto bg-gradient-to-br from-[#5fff9e]/20 to-[#10b981]/20 flex items-center justify-center p-12">
                   <div className="relative">
                     {/* Outer circle container */}
                     <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full bg-gradient-to-br from-[#5fff9e]/20 to-[#10b981]/20 p-4 flex items-center justify-center">

@@ -441,8 +441,8 @@ const SolutionSignals = () => {
                     <div
                       key={idx}
                       className={`absolute ${positions[signal.position]} transition-all duration-500 ${isVisible
-                          ? 'opacity-100 scale-100 translate-y-0'
-                          : 'opacity-0 scale-75 translate-y-4'
+                        ? 'opacity-100 scale-100 translate-y-0'
+                        : 'opacity-0 scale-75 translate-y-4'
                         }`}
                     >
                       <div className={`bg-[#1a1a1f] rounded-xl p-3 sm:p-4 border ${colors.border} border-opacity-50 shadow-lg max-w-[200px] sm:max-w-[240px]`}>
@@ -516,8 +516,8 @@ const SolutionSignals = () => {
 
                               {/* Signal Card */}
                               <div className={`rounded-lg p-3.5 transition-all duration-300 ${isNewest
-                                  ? 'bg-[#f0fdf4] border border-[#5fff9e]/40 shadow-sm'
-                                  : 'bg-gray-50 border border-gray-100'
+                                ? 'bg-[#f0fdf4] border border-[#5fff9e]/40 shadow-sm'
+                                : 'bg-gray-50 border border-gray-100'
                                 }`}>
                                 <div className="flex items-center justify-between gap-3">
                                   <div className="flex-1 min-w-0">
@@ -540,8 +540,8 @@ const SolutionSignals = () => {
 
                                   {/* Score circle */}
                                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${isNewest
-                                      ? 'bg-[#5fff9e] text-black'
-                                      : 'bg-gray-200 text-gray-400'
+                                    ? 'bg-[#5fff9e] text-black'
+                                    : 'bg-gray-200 text-gray-400'
                                     }`}>
                                     {signal.score}
                                   </div>
@@ -617,14 +617,14 @@ const SolutionSignals = () => {
                         </div>
 
                         <div className={`bg-white rounded-xl p-4 border-2 transition-all duration-500 ${visibleSignalIndices.length > 1
-                            ? 'border-[#5fff9e] shadow-lg shadow-[#5fff9e]/20'
-                            : 'border-gray-100'
+                          ? 'border-[#5fff9e] shadow-lg shadow-[#5fff9e]/20'
+                          : 'border-gray-100'
                           }`}>
                           <div className="flex items-center gap-3">
                             <div className={`relative transition-all duration-500 ${visibleSignalIndices.length > 2 ? 'scale-110' : ''}`}>
                               <div className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 ${visibleSignalIndices.length > 1
-                                  ? 'bg-[#5fff9e] ring-4 ring-[#5fff9e]/30'
-                                  : 'bg-gray-100'
+                                ? 'bg-[#5fff9e] ring-4 ring-[#5fff9e]/30'
+                                : 'bg-gray-100'
                                 }`}>
                                 <span className={`text-2xl font-bold transition-colors duration-500 ${visibleSignalIndices.length > 1 ? 'text-black' : 'text-gray-400'
                                   }`}>
@@ -728,7 +728,7 @@ const SolutionSignals = () => {
                 <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
                   <div className="text-[#10b981] font-medium text-sm mb-6">boilr.</div>
                   <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-6">
-                    "I check my signals before my coffee."
+                    I check my signals before my coffee.
                   </blockquote>
                   <p className="text-gray-600 leading-relaxed mb-8">
                     "Every morning I wake up to a curated list of hiring signals. Last week I reached out to a CTO the day after their funding announcement — they hadn't even posted the role yet. That's the timing advantage boilr gives us."
@@ -827,8 +827,8 @@ const SolutionSignals = () => {
                     <div
                       key={notification.id}
                       className={`px-4 py-2 rounded-lg shadow-lg text-sm font-medium animate-slideInRight ${notification.type === 'success'
-                          ? 'bg-[#5fff9e] text-black'
-                          : 'bg-gray-800 text-white'
+                        ? 'bg-[#5fff9e] text-black'
+                        : 'bg-gray-800 text-white'
                         }`}
                     >
                       {notification.text}
@@ -860,8 +860,8 @@ const SolutionSignals = () => {
                             <div
                               key={rule.id}
                               className={`flex items-center justify-between p-3 rounded-lg border transition-all duration-500 cursor-pointer group ${alertSectionVisible
-                                  ? 'opacity-100 translate-x-0'
-                                  : 'opacity-0 -translate-x-4'
+                                ? 'opacity-100 translate-x-0'
+                                : 'opacity-0 -translate-x-4'
                                 } ${rule.enabled
                                   ? `bg-[${rule.color}]/10 border-[${rule.color}]/30 hover:border-[${rule.color}]/60`
                                   : 'bg-gray-50 border-gray-200 hover:border-gray-300'
@@ -892,8 +892,8 @@ const SolutionSignals = () => {
                                   cycleFrequency(rule.id);
                                 }}
                                 className={`text-sm font-semibold px-2 py-1 rounded transition-all duration-300 ${rule.enabled
-                                    ? 'text-[#10b981] hover:bg-[#10b981]/10'
-                                    : 'text-gray-400'
+                                  ? 'text-[#10b981] hover:bg-[#10b981]/10'
+                                  : 'text-gray-400'
                                   }`}
                               >
                                 {rule.frequency}
@@ -912,8 +912,8 @@ const SolutionSignals = () => {
                           <div
                             key={channel.id}
                             className={`flex items-center justify-between p-2 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-all duration-500 ${alertSectionVisible
-                                ? 'opacity-100 translate-x-0'
-                                : 'opacity-0 -translate-x-4'
+                              ? 'opacity-100 translate-x-0'
+                              : 'opacity-0 -translate-x-4'
                               }`}
                             style={{
                               transitionDelay: alertSectionVisible ? `${(idx + 3) * 150}ms` : '0ms',
@@ -922,8 +922,8 @@ const SolutionSignals = () => {
                           >
                             <div className="flex items-center gap-2">
                               <div className={`w-6 h-6 rounded flex items-center justify-center transition-all duration-300 ${channel.id === 'slack'
-                                  ? channel.enabled ? 'bg-[#4A154B]' : 'bg-gray-300'
-                                  : channel.enabled ? 'bg-[#10b981]' : 'bg-gray-300'
+                                ? channel.enabled ? 'bg-[#4A154B]' : 'bg-gray-300'
+                                : channel.enabled ? 'bg-[#10b981]' : 'bg-gray-300'
                                 }`}>
                                 {channel.id === 'slack' ? (
                                   <span className={`text-xs font-bold ${channel.enabled ? 'text-white' : 'text-gray-500'}`}>#</span>
