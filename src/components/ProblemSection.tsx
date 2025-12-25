@@ -54,7 +54,7 @@ export function ProblemSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="py-16 sm:py-24 bg-white">
+        <section ref={sectionRef} className="py-16 sm:py-24 bg-[#f8f9fa]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
                 {/* Two column layout: Text left, Slider right */}
