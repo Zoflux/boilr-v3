@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 export default function StatsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [highlightIndex, setHighlightIndex] = useState(0);
+  const [activeLine, setActiveLine] = useState(0);
+  const [charOffset, setCharOffset] = useState(0);
 
   // Intersection observer for when section comes into view
   useEffect(() => {
@@ -23,84 +24,95 @@ export default function StatsSection() {
     return () => observer.disconnect();
   }, []);
 
-  // Animated word highlighting - cycles through key words
+  // Animated line + character highlighting
   useEffect(() => {
     if (!isVisible) return;
 
-    const totalHighlights = 4;
-    let current = 0;
+    const totalLines = 4;
 
-    const interval = setInterval(() => {
-      current = (current + 1) % totalHighlights;
-      setHighlightIndex(current);
-    }, 1800);
+    // Character sweep animation
+    const charInterval = setInterval(() => {
+      setCharOffset(prev => (prev + 1) % 30);
+    }, 80);
 
-    return () => clearInterval(interval);
+    // Line change animation
+    const lineInterval = setInterval(() => {
+      setActiveLine(prev => (prev + 1) % totalLines);
+      setCharOffset(0);
+    }, 2500);
+
+    return () => {
+      clearInterval(charInterval);
+      clearInterval(lineInterval);
+    };
   }, [isVisible]);
 
-  // Highlight specific words in each line
-  const renderLine = (text: string, highlightWord: string, lineIndex: number) => {
-    const parts = text.split(highlightWord);
-    const isActive = highlightIndex === lineIndex;
+  const statements = [
+    "Finding opportunities before anyone else.",
+    "Enriching leads with verified contact data.",
+    "Scoring every prospect by intent and fit.",
+    "Automatically."
+  ];
 
-    return (
-      <span>
-        {parts[0]}
-        <span className={`relative inline-block transition-all duration-500 ${isActive ? "text-[#5fff9e]" : "text-gray-900"}`}>
-          {highlightWord}
-          {isActive && (
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#5fff9e] animate-pulse" />
-          )}
+  // Render text with gradient sweep effect
+  const renderWithGradient = (text: string, isActive: boolean) => {
+    if (!isActive) return text;
+
+    return text.split('').map((char, i) => {
+      const distance = Math.abs(i - charOffset);
+      const isHighlighted = distance < 4;
+      const opacity = isHighlighted ? 1 - (distance * 0.25) : 0;
+
+      return (
+        <span
+          key={i}
+          style={{
+            color: isHighlighted ? `rgba(95, 255, 158, ${opacity})` : 'inherit',
+            transition: 'color 0.15s ease'
+          }}
+        >
+          {char}
         </span>
-        {parts[1]}
-      </span>
-    );
+      );
+    });
   };
 
   return (
     <section ref={sectionRef} className="py-16 sm:py-20 bg-[#f8f9fa]">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-        {/* Left-aligned content */}
-        <div className="max-w-2xl">
+        {/* Centered container with left-aligned text */}
+        <div className="max-w-3xl mx-auto">
 
           {/* Subtitle */}
-          <p className={`text-gray-600 text-sm font-medium mb-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <p className={`text-gray-800 text-base sm:text-lg font-medium mb-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             Turn your recruitment process into a machine that never stops working.
           </p>
 
-          {/* Animated Statements - smaller, left aligned */}
+          {/* Animated Statements */}
           <div className="space-y-1 mb-8">
-            <p
-              className={`text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 leading-snug transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-              style={{ transitionDelay: "100ms" }}
-            >
-              {renderLine("Finding opportunities before anyone else.", "opportunities", 0)}
-            </p>
-            <p
-              className={`text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 leading-snug transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-              style={{ transitionDelay: "200ms" }}
-            >
-              {renderLine("Enriching leads with verified contact data.", "verified", 1)}
-            </p>
-            <p
-              className={`text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 leading-snug transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-              style={{ transitionDelay: "300ms" }}
-            >
-              {renderLine("Scoring every prospect by intent and fit.", "intent", 2)}
-            </p>
-            <p
-              className={`text-xl sm:text-2xl md:text-3xl font-semibold leading-snug transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-              style={{ transitionDelay: "400ms" }}
-            >
-              <span className={`transition-colors duration-500 ${highlightIndex === 3 ? "text-[#5fff9e]" : "text-gray-900"}`}>
-                Automatically.
-              </span>
-            </p>
+            {statements.map((statement, index) => {
+              const isActive = activeLine === index;
+              const hasAppeared = isVisible;
+
+              return (
+                <p
+                  key={index}
+                  className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-700 ${hasAppeared ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                    } ${isActive ? "text-gray-900" : "text-gray-300"
+                    }`}
+                  style={{
+                    transitionDelay: hasAppeared ? `${index * 150}ms` : "0ms"
+                  }}
+                >
+                  {renderWithGradient(statement, isActive)}
+                </p>
+              );
+            })}
           </div>
 
-          {/* CTA Button - smaller, more angular, left aligned */}
-          <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "500ms" }}>
+          {/* CTA Button */}
+          <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "600ms" }}>
             <a
               href="/roi-calculator"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm text-black bg-[#5fff9e] hover:bg-[#4de88a] transition-all duration-200"
