@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Check } from "lucide-react";
+
+// Tool logos for the "before" side
+const toolLogos = [
+    { name: "LinkedIn", src: "/assets/company-logos/linkeidn logo.svg" },
+    { name: "Indeed", src: "/assets/company-logos/Indeed_logo (1).svg" },
+    { name: "Apollo", src: "/assets/company-logos/Apollo.io_idY1K1QZB-_1.svg" },
+    { name: "Hunter", src: "/assets/company-logos/Lusha_idDCG_-t5d_0.svg" },
+    { name: "Greenhouse", src: "/assets/company-logos/greenhouse logo.svg" },
+    { name: "HubSpot", src: "/assets/company-logos/HubSpot_Logo.svg" },
+];
 
 export function ProblemSection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -22,26 +31,6 @@ export function ProblemSection() {
 
         return () => observer.disconnect();
     }, []);
-
-    const beforeItems = [
-        "12+ tabs open at once",
-        "Manual copy-paste between tools",
-        "Outdated contact information",
-        "Signals discovered too late",
-        "No way to prioritize leads"
-    ];
-
-    const afterItems = [
-        "One dashboard, everything automated",
-        "Leads enriched and ready to contact",
-        "Verified emails and phone numbers",
-        "Signals before they hit job boards",
-        "AI-scored by fit and intent"
-    ];
-
-    const toolLogos = [
-        "LinkedIn", "Indeed", "Crunchbase", "Hunter.io", "Apollo", "ZoomInfo"
-    ];
 
     return (
         <section ref={sectionRef} className="py-20 sm:py-28 bg-white">
@@ -67,7 +56,7 @@ export function ProblemSection() {
                         </div>
                     </div>
 
-                    {/* Before Card */}
+                    {/* Before Card - Logos */}
                     <div
                         className={`p-8 rounded-2xl border border-gray-200 bg-[#fafafa] transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                             }`}
@@ -77,37 +66,32 @@ export function ProblemSection() {
                             Before boilr
                         </span>
 
-                        <h3 className="text-xl font-bold text-gray-900 mb-6">The manual grind</h3>
+                        <h3 className="text-xl font-bold text-gray-900 mb-8">Juggling between tools</h3>
 
-                        <ul className="space-y-3 mb-8">
-                            {beforeItems.map((item, i) => (
-                                <li key={i} className="flex items-start gap-3 text-gray-600">
-                                    <X className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                                    <span className="text-sm">{item}</span>
-                                </li>
+                        {/* Logo Grid */}
+                        <div className="grid grid-cols-3 gap-4 mb-8">
+                            {toolLogos.map((tool, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-center justify-center p-4 bg-white rounded-xl border border-gray-100 h-16"
+                                >
+                                    <img
+                                        src={tool.src}
+                                        alt={tool.name}
+                                        className="max-h-6 max-w-full object-contain grayscale opacity-60"
+                                    />
+                                </div>
                             ))}
-                        </ul>
-
-                        {/* Tool logos */}
-                        <div className="pt-6 border-t border-gray-200">
-                            <p className="text-xs text-gray-400 mb-3">Juggling between:</p>
-                            <div className="flex flex-wrap gap-2">
-                                {toolLogos.map((tool, i) => (
-                                    <span key={i} className="text-xs text-gray-500 bg-white border border-gray-200 px-2.5 py-1 rounded-lg">
-                                        {tool}
-                                    </span>
-                                ))}
-                            </div>
                         </div>
 
                         {/* Stats */}
-                        <div className="mt-8">
+                        <div className="pt-6 border-t border-gray-200">
                             <div className="text-3xl font-bold text-gray-900">13+ hours</div>
                             <div className="text-sm text-gray-500">spent on research every week</div>
                         </div>
                     </div>
 
-                    {/* After Card */}
+                    {/* After Card - boilr */}
                     <div
                         className={`p-8 rounded-2xl border border-[#5fff9e]/30 bg-gradient-to-br from-[#f0fdf9] to-white transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                             }`}
@@ -117,28 +101,19 @@ export function ProblemSection() {
                             With boilr
                         </span>
 
-                        <h3 className="text-xl font-bold text-gray-900 mb-6">Automated pipeline</h3>
+                        <h3 className="text-xl font-bold text-gray-900 mb-8">Everything in one place</h3>
 
-                        <ul className="space-y-3 mb-8">
-                            {afterItems.map((item, i) => (
-                                <li key={i} className="flex items-start gap-3 text-gray-700">
-                                    <Check className="w-4 h-4 text-[#10b981] mt-0.5 flex-shrink-0" />
-                                    <span className="text-sm">{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-
-                        {/* boilr badge */}
-                        <div className="pt-6 border-t border-[#5fff9e]/20">
-                            <p className="text-xs text-gray-400 mb-3">Everything in one place:</p>
-                            <span className="inline-flex items-center gap-2 text-sm font-medium text-[#10b981] bg-[#5fff9e]/10 px-3 py-1.5 rounded-lg">
-                                <span className="w-2 h-2 rounded-full bg-[#5fff9e]" />
-                                boilr Dashboard
-                            </span>
+                        {/* boilr Logo centered */}
+                        <div className="flex items-center justify-center p-8 bg-white rounded-xl border border-[#5fff9e]/20 mb-8">
+                            <img
+                                src="/boilr-logo-black.png"
+                                alt="boilr"
+                                className="h-10 object-contain"
+                            />
                         </div>
 
                         {/* Stats */}
-                        <div className="mt-8">
+                        <div className="pt-6 border-t border-[#5fff9e]/20">
                             <div className="text-3xl font-bold text-[#10b981]">1 hour</div>
                             <div className="text-sm text-gray-500">reviewing qualified leads — that's it</div>
                         </div>
