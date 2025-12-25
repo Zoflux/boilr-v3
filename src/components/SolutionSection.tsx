@@ -21,14 +21,36 @@ interface SolutionSectionProps {
 
 export function SolutionSection({ mode }: SolutionSectionProps) {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setActiveFeature(0);
   }, [mode]);
 
-  // Scroll-based feature activation
+  // Intersection observer for entrance animation
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Smooth scroll-based feature activation with lerp
+  useEffect(() => {
+    let animationFrame: number;
+    let currentProgress = 0;
+
     const handleScroll = () => {
       if (!sectionRef.current) return;
 
@@ -39,23 +61,26 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
 
       const scrollableDistance = sectionHeight - viewportHeight;
       const scrolledIntoSection = Math.max(0, -sectionTop);
-      const progress = Math.max(0, Math.min(1, scrolledIntoSection / scrollableDistance));
+      const targetProgress = Math.max(0, Math.min(1, scrolledIntoSection / scrollableDistance));
+
+      // Smooth lerp towards target
+      currentProgress += (targetProgress - currentProgress) * 0.15;
 
       let newActiveFeature = 0;
-      if (progress < 0.33) {
+      if (currentProgress < 0.33) {
         newActiveFeature = 0;
-      } else if (progress < 0.66) {
+      } else if (currentProgress < 0.66) {
         newActiveFeature = 1;
       } else {
         newActiveFeature = 2;
       }
 
       setActiveFeature(newActiveFeature);
+      animationFrame = requestAnimationFrame(handleScroll);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    animationFrame = requestAnimationFrame(handleScroll);
+    return () => cancelAnimationFrame(animationFrame);
   }, []);
 
   const content: Record<
@@ -142,7 +167,7 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
   const demoLink = "https://calendly.com/felix-boilr/demo";
 
   return (
-    <section ref={sectionRef} data-dark-section="true" className="bg-black relative">
+    <section ref={sectionRef} className="bg-[#f8f9fa] relative">
       {/* Scroll container */}
       <div className="relative" style={{ height: '250vh' }}>
         {/* Sticky centered container */}
@@ -151,22 +176,22 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
             <div className="max-w-6xl mx-auto">
 
               {/* Section Header */}
-              <div className="text-center mb-10 sm:mb-14">
-                <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-[0.12em] text-white/70 mb-4">
+              <div className={`text-center mb-10 sm:mb-14 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+                <div className="inline-flex items-center px-3 py-1 rounded-full border border-gray-300 bg-white text-xs font-semibold uppercase tracking-[0.12em] text-gray-600 mb-4">
                   {current.pill}
                 </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
                   {current.title}
                 </h2>
-                <p className="text-base sm:text-lg text-white/60 mt-3 max-w-2xl mx-auto">
+                <p className="text-base sm:text-lg text-gray-500 mt-3 max-w-2xl mx-auto">
                   {current.subtitle}
                 </p>
               </div>
 
               <div className="lg:grid lg:grid-cols-2 lg:gap-16 xl:gap-20 items-center">
                 {/* Left: Radar Preview */}
-                <div className="mb-8 lg:mb-0">
-                  <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#0b0f14] border border-white/10">
+                <div className={`mb-8 lg:mb-0 transition-all duration-700 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"}`} style={{ transitionDelay: "200ms" }}>
+                  <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white border border-gray-200">
                     <div className="w-full h-[18rem] sm:h-[22rem] lg:h-[24rem]">
                       <RadarGridPreviewV2 />
                     </div>
@@ -174,17 +199,17 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                 </div>
 
                 {/* Right: All features visible, one expanded at a time */}
-                <div className="flex gap-4">
+                <div className={`flex gap-4 transition-all duration-700 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}`} style={{ transitionDelay: "200ms" }}>
                   {/* Vertical progress dots on the left */}
                   <div className="flex flex-col items-center justify-center gap-4">
                     {[0, 1, 2].map((i) => (
                       <div
                         key={i}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${i === activeFeature
+                        className={`w-2 h-2 rounded-full transition-all duration-500 ${i === activeFeature
                           ? 'bg-[#5fff9e] scale-125'
                           : i < activeFeature
                             ? 'bg-[#5fff9e]/50'
-                            : 'bg-white/20'
+                            : 'bg-gray-300'
                           }`}
                       />
                     ))}
@@ -200,27 +225,27 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                         <div
                           key={feature.number}
                           className={`rounded-xl border transition-all duration-500 overflow-hidden ${isActive
-                            ? 'bg-white/5 border-[#5fff9e]/30'
-                            : 'bg-transparent border-white/10 hover:border-white/20'
+                            ? 'bg-white border-[#5fff9e]/30 shadow-lg'
+                            : 'bg-white/50 border-gray-200 hover:border-gray-300'
                             }`}
                         >
                           {/* Header - always visible */}
-                          <div className={`flex items-center gap-4 p-4 sm:p-5 transition-colors duration-300 ${isActive ? '' : 'opacity-50'
+                          <div className={`flex items-center gap-4 p-4 sm:p-5 transition-colors duration-500 ${isActive ? '' : 'opacity-50'
                             }`}>
                             {/* Number */}
-                            <span className={`text-sm font-bold transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
+                            <span className={`text-sm font-bold transition-colors duration-500 ${isActive ? 'text-[#10b981]' : 'text-gray-400'
                               }`}>
                               {feature.number}
                             </span>
 
                             {/* Title */}
-                            <h3 className={`text-lg sm:text-xl font-semibold transition-colors duration-300 flex-1 ${isActive ? 'text-white' : 'text-white/50'
+                            <h3 className={`text-lg sm:text-xl font-semibold transition-colors duration-500 flex-1 ${isActive ? 'text-gray-900' : 'text-gray-500'
                               }`}>
                               {feature.title}
                             </h3>
 
                             {/* Icon */}
-                            <Icon className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
+                            <Icon className={`w-5 h-5 transition-colors duration-500 ${isActive ? 'text-[#10b981]' : 'text-gray-400'
                               }`} />
                           </div>
 
@@ -228,7 +253,7 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                           <div className={`overflow-hidden transition-all duration-500 ease-out ${isActive ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                             }`}>
                             <div className="px-4 sm:px-5 pb-5">
-                              <p className="text-white/70 text-sm sm:text-base leading-relaxed pl-8">
+                              <p className="text-gray-600 text-sm sm:text-base leading-relaxed pl-8">
                                 {feature.description}
                               </p>
                             </div>
@@ -243,7 +268,7 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                         href={demoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-black bg-[#48ee8d] hover:bg-[#5fff9e] shadow-[0_4px_20px_rgba(72,238,141,0.35)] transition-all duration-200"
+                        className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-black bg-[#5fff9e] hover:bg-[#4de88a] transition-all duration-200"
                       >
                         Book Demo →
                       </a>
