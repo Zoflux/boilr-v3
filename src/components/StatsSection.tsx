@@ -1,119 +1,109 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function StatsSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeLine, setActiveLine] = useState(0);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const [activeLine, setActiveLine] = useState(0);
 
-  // Intersection observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
         }
-      },
-      { threshold: 0.3 }
-    );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+        return () => observer.disconnect();
+    }, []);
 
-    return () => observer.disconnect();
-  }, []);
+    const statements = [
+        "Finding opportunities before anyone else.",
+        "Enriching leads with verified contact data.",
+        "Scoring every prospect by intent and fit.",
+        "Automatically."
+    ];
 
-  const statements = [
-    "Finding opportunities before anyone else.",
-    "Enriching leads with verified contact data.",
-    "Scoring every prospect by intent and fit.",
-    "Automatically."
-  ];
+    // Very slow, relaxed line rotation
+    useEffect(() => {
+        if (!isVisible) return;
 
-  // Very slow, relaxed line rotation
-  useEffect(() => {
-    if (!isVisible) return;
+        const interval = setInterval(() => {
+            setActiveLine((prev) => (prev + 1) % statements.length);
+        }, 5000); // 5 seconds per line - very relaxed
 
-    const interval = setInterval(() => {
-      setActiveLine((prev) => (prev + 1) % statements.length);
-    }, 4000); // Slower: 4 seconds per line
+        return () => clearInterval(interval);
+    }, [isVisible]);
 
-    return () => clearInterval(interval);
-  }, [isVisible]);
+    return (
+        <section ref={sectionRef} className="py-16 sm:py-20 bg-[#f8f9fa]">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-  return (
-    <section ref={sectionRef} className="py-16 sm:py-20 bg-[#f8f9fa]">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+                <div className="max-w-3xl mx-auto">
+                    {/* Subtitle */}
+                    <p className={`text-gray-800 text-base sm:text-lg font-medium mb-6 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+                        Turn your recruitment process into a machine that never stops working.
+                    </p>
 
-        <div className="max-w-3xl mx-auto">
-          {/* Subtitle */}
-          <p className={`text-gray-800 text-base sm:text-lg font-medium mb-6 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            Turn your recruitment process into a machine that never stops working.
-          </p>
+                    {/* Statements - very subtle transitions */}
+                    <div className="space-y-2 mb-10">
+                        {statements.map((statement, index) => {
+                            const isActive = activeLine === index;
 
-          {/* Statements with smooth transitions */}
-          <div className="space-y-2 mb-10">
-            {statements.map((statement, index) => {
-              const isActive = activeLine === index;
+                            return (
+                                <p
+                                    key={index}
+                                    className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-[1500ms] ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                                        }`}
+                                    style={{
+                                        transitionDelay: isVisible ? `${index * 200}ms` : "0ms",
+                                        color: isActive ? "#1a1a1a" : "#d1d5db"
+                                    }}
+                                >
+                                    {/* Subtle shimmer on active line */}
+                                    {isActive ? (
+                                        <span className="relative">
+                                            <span className="relative z-10">{statement}</span>
+                                            <span
+                                                className="absolute inset-0 bg-gradient-to-r from-transparent via-[#5fff9e]/20 to-transparent bg-[length:200%_100%] animate-shimmer"
+                                                style={{ WebkitBackgroundClip: 'text' }}
+                                            />
+                                        </span>
+                                    ) : (
+                                        statement
+                                    )}
+                                </p>
+                            );
+                        })}
+                    </div>
 
-              return (
-                <p
-                  key={index}
-                  className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                    }`}
-                  style={{
-                    transitionDelay: isVisible ? `${index * 200}ms` : "0ms",
-                    color: isActive ? '#111827' : '#d1d5db'
-                  }}
-                >
-                  {isActive ? (
-                    <span className="shimmer-text">{statement}</span>
-                  ) : (
-                    statement
-                  )}
-                </p>
-              );
-            })}
-          </div>
+                    {/* CTA Button */}
+                    <div className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "800ms" }}>
+                        <a
+                            href="/roi-calculator"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm text-black bg-[#5fff9e] hover:bg-[#4de88a] transition-all duration-300"
+                        >
+                            Calculate Your ROI
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-          {/* CTA Button */}
-          <div className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "800ms" }}>
-            <a
-              href="/roi-calculator"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm text-black bg-[#5fff9e] hover:bg-[#4de88a] transition-all duration-300"
-            >
-              Calculate Your ROI
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        .shimmer-text {
-          background: linear-gradient(
-            90deg, 
-            #111827 0%, 
-            #111827 40%, 
-            #5fff9e 50%, 
-            #111827 60%, 
-            #111827 100%
-          );
-          background-size: 200% 100%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: shimmer 3s ease-in-out infinite;
-        }
-        
+            {/* Very slow, subtle shimmer */}
+            <style>{`
         @keyframes shimmer {
-          0% {
-            background-position: 100% 0;
-          }
-          100% {
-            background-position: -100% 0;
-          }
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+        .animate-shimmer {
+          animation: shimmer 8s ease-in-out infinite;
         }
       `}</style>
-    </section>
-  );
+        </section>
+    );
 }
