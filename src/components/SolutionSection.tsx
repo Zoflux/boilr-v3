@@ -176,15 +176,15 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                 {/* Right: All features visible, one expanded at a time */}
                 <div className="flex gap-4">
                   {/* Vertical progress dots on the left */}
-                  <div className="flex flex-col items-center py-6 gap-4">
+                  <div className="flex flex-col items-center justify-center gap-4">
                     {[0, 1, 2].map((i) => (
                       <div
                         key={i}
                         className={`w-2 h-2 rounded-full transition-all duration-300 ${i === activeFeature
-                            ? 'bg-[#5fff9e] scale-125'
-                            : i < activeFeature
-                              ? 'bg-[#5fff9e]/50'
-                              : 'bg-white/20'
+                          ? 'bg-[#5fff9e] scale-125'
+                          : i < activeFeature
+                            ? 'bg-[#5fff9e]/50'
+                            : 'bg-white/20'
                           }`}
                       />
                     ))}
