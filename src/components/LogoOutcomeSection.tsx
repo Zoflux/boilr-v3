@@ -44,11 +44,11 @@ export default function LogoOutcomeSection() {
           {/* Top Row - 2 Large Cards */}
           <div className="grid md:grid-cols-2 gap-4">
 
-            {/* Card 1: Signal Detection */}
+            {/* Card 1: Signal Detection - Slides from LEFT */}
             <div
               className={`bg-white rounded-2xl border border-gray-100 p-6 overflow-hidden
                 hover:shadow-lg hover:border-[#5fff9e]/20 hover:scale-[1.02]
-                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}`}
+                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-16"}`}
               style={{ transitionDelay: "150ms" }}
             >
               <h3 className="text-lg font-semibold text-gray-900 mb-1">Signal Detection</h3>
@@ -74,12 +74,12 @@ export default function LogoOutcomeSection() {
               </div>
             </div>
 
-            {/* Card 2: Lead Enrichment */}
+            {/* Card 2: Lead Enrichment - Slides from RIGHT */}
             <div
               className={`bg-white rounded-2xl border border-gray-100 p-6 overflow-hidden
                 hover:shadow-lg hover:border-[#5fff9e]/20 hover:scale-[1.02]
-                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}`}
-              style={{ transitionDelay: "300ms" }}
+                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"}`}
+              style={{ transitionDelay: "150ms" }}
             >
               <h3 className="text-lg font-semibold text-gray-900 mb-1">Lead Enrichment</h3>
               <p className="text-gray-500 text-sm mb-5">
@@ -117,12 +117,12 @@ export default function LogoOutcomeSection() {
           {/* Bottom Row - 3 Cards */}
           <div className="grid sm:grid-cols-3 gap-4">
 
-            {/* Card 3: Intent Scoring */}
+            {/* Card 3: Intent Scoring - Slides from BOTTOM */}
             <div
               className={`bg-white rounded-2xl border border-gray-100 p-5 overflow-hidden
                 hover:shadow-lg hover:border-[#5fff9e]/20 hover:scale-[1.02]
-                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}`}
-              style={{ transitionDelay: "450ms" }}
+                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+              style={{ transitionDelay: "350ms" }}
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-9 h-9 rounded-xl bg-[#5fff9e]/20 flex items-center justify-center">
@@ -154,12 +154,12 @@ export default function LogoOutcomeSection() {
               </div>
             </div>
 
-            {/* Card 4: Smart Alerts */}
+            {/* Card 4: Smart Alerts - Slides from BOTTOM */}
             <div
               className={`bg-white rounded-2xl border border-gray-100 p-5 overflow-hidden
                 hover:shadow-lg hover:border-[#5fff9e]/20 hover:scale-[1.02]
-                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}`}
-              style={{ transitionDelay: "550ms" }}
+                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+              style={{ transitionDelay: "450ms" }}
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-9 h-9 rounded-xl bg-[#5fff9e]/20 flex items-center justify-center">
@@ -189,12 +189,12 @@ export default function LogoOutcomeSection() {
               </div>
             </div>
 
-            {/* Card 5: CRM Integration */}
+            {/* Card 5: CRM Integration - Slides from BOTTOM */}
             <div
               className={`bg-white rounded-2xl border border-gray-100 p-5 overflow-hidden
                 hover:shadow-lg hover:border-[#5fff9e]/20 hover:scale-[1.02]
-                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}`}
-              style={{ transitionDelay: "650ms" }}
+                transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+              style={{ transitionDelay: "550ms" }}
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-9 h-9 rounded-xl bg-[#5fff9e]/20 flex items-center justify-center">
