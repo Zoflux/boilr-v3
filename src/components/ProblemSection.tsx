@@ -130,7 +130,7 @@ export function ProblemSection() {
                             <img
                                 src="/boilr-logo-black.png"
                                 alt="boilr"
-                                className="h-20 object-contain relative z-10"
+                                className="h-32 object-contain relative z-10"
                             />
                         </div>
 
