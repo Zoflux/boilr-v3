@@ -110,16 +110,12 @@ export function ProblemSection() {
                             style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                         >
                             <div className="p-6 h-full flex flex-col">
-                                <span className="inline-block w-fit px-2.5 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-medium mb-4">
-                                    Before
-                                </span>
-
                                 {/* Logo Grid */}
-                                <div className="grid grid-cols-3 gap-2 flex-1">
+                                <div className="grid grid-cols-2 gap-3 flex-1 mt-10">
                                     {toolLogos.map((tool, i) => (
                                         <div
                                             key={i}
-                                            className="flex items-center justify-center p-2 bg-white rounded-lg border border-gray-100"
+                                            className="flex items-center justify-center p-3 bg-white rounded-lg border border-gray-100"
                                             style={{
                                                 animation: `floatSubtle ${2.5 + (i * 0.3)}s ease-in-out infinite`,
                                                 animationDelay: `${i * 0.15}s`
@@ -128,15 +124,10 @@ export function ProblemSection() {
                                             <img
                                                 src={tool.src}
                                                 alt={tool.name}
-                                                className="max-h-5 max-w-full object-contain grayscale opacity-50"
+                                                className="max-h-6 max-w-full object-contain grayscale opacity-50"
                                             />
                                         </div>
                                     ))}
-                                </div>
-
-                                <div className="pt-4 border-t border-gray-200 mt-4">
-                                    <div className="text-xl font-bold text-gray-900">13+ hours</div>
-                                    <div className="text-xs text-gray-500">weekly</div>
                                 </div>
                             </div>
                         </div>
@@ -146,28 +137,44 @@ export function ProblemSection() {
                             className="absolute inset-0 bg-gradient-to-br from-[#0a1a0f] to-[#0d2818]"
                             style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
                         >
-                            <div className="p-6 h-full flex flex-col text-white">
-                                <span className="inline-block w-fit px-2.5 py-1 rounded-full bg-[#5fff9e]/20 text-[#5fff9e] text-xs font-medium mb-4">
-                                    With boilr
-                                </span>
-
-                                {/* boilr Logo */}
-                                <div className="flex items-center justify-center flex-1">
-                                    <div className="relative">
-                                        <div className="absolute w-32 h-32 bg-[#5fff9e]/15 rounded-full blur-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                                        <img
-                                            src="/boilr-logo-black.png"
-                                            alt="boilr"
-                                            className="h-16 object-contain relative z-10 brightness-0 invert"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="pt-4 border-t border-white/20 mt-4">
-                                    <div className="text-xl font-bold text-[#5fff9e]">1 hour</div>
-                                    <div className="text-xs text-gray-400">weekly</div>
+                            <div className="p-6 h-full flex flex-col items-center justify-center text-white">
+                                {/* boilr Logo centered */}
+                                <div className="relative">
+                                    <div className="absolute w-40 h-40 bg-[#5fff9e]/15 rounded-full blur-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                                    <img
+                                        src="/boilr-logo-black.png"
+                                        alt="boilr"
+                                        className="h-20 object-contain relative z-10 brightness-0 invert"
+                                    />
                                 </div>
                             </div>
+                        </div>
+
+                        {/* Static Labels - Always visible on top */}
+                        {/* Before badge - Top Left */}
+                        <div className="absolute top-4 left-4 z-30">
+                            <span className="px-2.5 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-medium">
+                                Before
+                            </span>
+                        </div>
+
+                        {/* With boilr badge - Top Right */}
+                        <div className="absolute top-4 right-4 z-30">
+                            <span className="px-2.5 py-1 rounded-full bg-[#5fff9e]/20 text-[#5fff9e] text-xs font-medium">
+                                With boilr
+                            </span>
+                        </div>
+
+                        {/* 13+ hours - Bottom Left */}
+                        <div className="absolute bottom-4 left-4 z-30">
+                            <div className="text-xl font-bold text-gray-900">13+ hours</div>
+                            <div className="text-xs text-gray-500">weekly</div>
+                        </div>
+
+                        {/* 1 hour - Bottom Right */}
+                        <div className="absolute bottom-4 right-4 z-30 text-right">
+                            <div className="text-xl font-bold text-[#5fff9e]">1 hour</div>
+                            <div className="text-xs text-gray-400">weekly</div>
                         </div>
 
                         {/* Slider Handle */}
@@ -181,7 +188,7 @@ export function ProblemSection() {
                         </div>
 
                         {/* Set height */}
-                        <div className="h-[300px]"></div>
+                        <div className="h-[320px]"></div>
 
                         {/* Animation keyframes */}
                         <style>{`
