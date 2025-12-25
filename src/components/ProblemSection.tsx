@@ -18,6 +18,7 @@ export function ProblemSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
     const [sliderPosition, setSliderPosition] = useState(50);
+    const [hasInteracted, setHasInteracted] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -37,8 +38,25 @@ export function ProblemSection() {
         return () => observer.disconnect();
     }, []);
 
+    // Hint animation: nudge slider left-right when visible
+    useEffect(() => {
+        if (!isVisible || hasInteracted) return;
+
+        const hintAnimation = async () => {
+            await new Promise(resolve => setTimeout(resolve, 800)); // Wait for entrance animation
+            setSliderPosition(40);
+            await new Promise(resolve => setTimeout(resolve, 400));
+            setSliderPosition(60);
+            await new Promise(resolve => setTimeout(resolve, 400));
+            setSliderPosition(50);
+        };
+
+        hintAnimation();
+    }, [isVisible, hasInteracted]);
+
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         if (!containerRef.current) return;
+        setHasInteracted(true);
         const rect = containerRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const percentage = Math.max(15, Math.min(85, (x / rect.width) * 100));
@@ -47,6 +65,7 @@ export function ProblemSection() {
 
     const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
         if (!containerRef.current) return;
+        setHasInteracted(true);
         const rect = containerRef.current.getBoundingClientRect();
         const x = e.touches[0].clientX - rect.left;
         const percentage = Math.max(15, Math.min(85, (x / rect.width) * 100));
