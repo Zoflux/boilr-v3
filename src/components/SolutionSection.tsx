@@ -177,9 +177,6 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
 
               {/* Section Header */}
               <div className={`text-center mb-10 sm:mb-14 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-                <div className="inline-flex items-center px-3 py-1 rounded-full border border-gray-300 bg-white text-xs font-semibold uppercase tracking-[0.12em] text-gray-600 mb-4">
-                  {current.pill}
-                </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
                   {current.title}
                 </h2>
