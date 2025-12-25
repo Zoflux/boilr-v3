@@ -54,14 +54,11 @@ export function ProblemSection() {
 
                     {/* Left: Header & Stats */}
                     <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-                        <p className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs font-medium text-gray-600 mb-6">
-                            Sound familiar?
-                        </p>
 
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
                             The recruiting grind
                             <br />
-                            <span className="text-gray-400">nobody warns you about</span>
+                            nobody warns you about
                         </h2>
 
                         <p className="mt-6 text-lg text-gray-500 leading-relaxed">
@@ -69,17 +66,26 @@ export function ProblemSection() {
                             actually talking to candidates and clients.
                         </p>
 
-                        {/* Stats highlight */}
-                        <div className="mt-10 flex items-center gap-8">
-                            <div>
-                                <div className="text-4xl font-bold text-gray-900">13h</div>
-                                <div className="text-sm text-gray-500">wasted weekly</div>
+                        {/* Stats highlight - More prominent */}
+                        <div className="mt-10 p-6 rounded-2xl bg-gray-50 border border-gray-100">
+                            <div className="flex items-center gap-6">
+                                <div className="text-center">
+                                    <div className="text-5xl font-bold text-gray-900">13h</div>
+                                    <div className="text-sm text-gray-500 mt-1">wasted weekly</div>
+                                </div>
+                                <div className="flex-shrink-0">
+                                    <div className="w-12 h-12 rounded-full bg-[#5fff9e] flex items-center justify-center">
+                                        <span className="text-black font-bold text-lg">→</span>
+                                    </div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-5xl font-bold text-[#10b981]">1h</div>
+                                    <div className="text-sm text-gray-500 mt-1">with boilr</div>
+                                </div>
                             </div>
-                            <div className="h-12 w-px bg-gray-200" />
-                            <div>
-                                <div className="text-4xl font-bold text-[#5fff9e]">→ 1h</div>
-                                <div className="text-sm text-gray-500">with boilr</div>
-                            </div>
+                            <p className="mt-4 text-sm text-gray-500 text-center">
+                                That's <span className="font-semibold text-gray-900">12+ hours back</span> every single week.
+                            </p>
                         </div>
                     </div>
 
@@ -95,8 +101,8 @@ export function ProblemSection() {
                                         <button
                                             onClick={() => setActiveTab(index)}
                                             className={`w-full flex items-center justify-between p-5 text-left transition-all duration-300 ${isActive
-                                                    ? "bg-gray-900 text-white"
-                                                    : "bg-white text-gray-900 hover:bg-gray-50"
+                                                ? "bg-gray-900 text-white"
+                                                : "bg-white text-gray-900 hover:bg-gray-50"
                                                 } ${index !== 0 ? "border-t border-gray-200" : ""}`}
                                         >
                                             <div className="flex items-center gap-4">
