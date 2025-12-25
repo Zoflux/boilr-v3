@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
-// Tool logos for the "before" side (6 logos for compact view)
+// Tool logos
 const toolLogos = [
     { name: "LinkedIn", src: "/assets/company-logos/linkeidn logo.svg" },
     { name: "Indeed", src: "/assets/company-logos/Indeed_logo (1).svg" },
@@ -52,45 +52,74 @@ export function ProblemSection() {
 
     return (
         <section ref={sectionRef} className="py-16 sm:py-24 bg-white">
-            <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-                {/* Header */}
-                <div className={`text-center mb-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
-                        From chaos to clarity
-                    </h2>
-                    <p className="mt-3 text-base text-gray-500 max-w-xl mx-auto">
-                        Move your mouse to see the difference.
-                    </p>
-                </div>
+                {/* Two column layout: Text left, Slider right */}
+                <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-                {/* Interactive Slider - Single Card */}
-                <div
-                    ref={containerRef}
-                    className={`relative rounded-2xl overflow-hidden cursor-ew-resize shadow-xl border border-gray-200 transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                    onMouseMove={handleMouseMove}
-                    onTouchMove={handleTouchMove}
-                    style={{ transitionDelay: "100ms" }}
-                >
-                    {/* Before Side (Left) */}
+                    {/* Left Column - Text and bullet points */}
+                    <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+                            From chaos to clarity
+                        </h2>
+
+                        {/* Bullet points */}
+                        <ul className="space-y-4 mb-8">
+                            <li className="flex items-start gap-3">
+                                <span className="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span className="text-gray-500 text-xs">✕</span>
+                                </span>
+                                <span className="text-gray-600">12+ tabs open, copy-pasting between tools</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span className="text-gray-500 text-xs">✕</span>
+                                </span>
+                                <span className="text-gray-600">Outdated contact data and missed signals</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="w-5 h-5 rounded-full bg-[#5fff9e]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span className="text-[#10b981] text-xs">✓</span>
+                                </span>
+                                <span className="text-gray-700 font-medium">One platform, real-time signals, verified data</span>
+                            </li>
+                        </ul>
+
+                        {/* CTA */}
+                        <a
+                            href="https://calendly.com/felix-boilr/demo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-black bg-[#5fff9e] hover:bg-[#4de88a] transition-all duration-200"
+                        >
+                            See boilr in action →
+                        </a>
+                    </div>
+
+                    {/* Right Column - Interactive Slider */}
                     <div
-                        className="absolute inset-0 bg-[#fafafa]"
-                        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                        ref={containerRef}
+                        className={`relative rounded-2xl overflow-hidden cursor-ew-resize shadow-xl border border-gray-200 transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                        onMouseMove={handleMouseMove}
+                        onTouchMove={handleTouchMove}
+                        style={{ transitionDelay: "200ms" }}
                     >
-                        <div className="flex h-full">
-                            {/* Left Content */}
-                            <div className="w-1/2 p-6 flex flex-col">
+                        {/* Before Side (Left half) */}
+                        <div
+                            className="absolute inset-0 bg-[#fafafa]"
+                            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                        >
+                            <div className="p-6 h-full flex flex-col">
                                 <span className="inline-block w-fit px-2.5 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-medium mb-4">
                                     Before
                                 </span>
-                                <h3 className="text-lg font-bold text-gray-900 mb-4">Juggling tools</h3>
 
-                                {/* Logo Grid - 3x2 */}
-                                <div className="grid grid-cols-3 gap-2 mb-auto">
+                                {/* Logo Grid */}
+                                <div className="grid grid-cols-3 gap-2 flex-1">
                                     {toolLogos.map((tool, i) => (
                                         <div
                                             key={i}
-                                            className="flex items-center justify-center p-2 bg-white rounded-lg border border-gray-100 h-10"
+                                            className="flex items-center justify-center p-2 bg-white rounded-lg border border-gray-100"
                                             style={{
                                                 animation: `floatSubtle ${2.5 + (i * 0.3)}s ease-in-out infinite`,
                                                 animationDelay: `${i * 0.15}s`
@@ -99,98 +128,70 @@ export function ProblemSection() {
                                             <img
                                                 src={tool.src}
                                                 alt={tool.name}
-                                                className="max-h-4 max-w-full object-contain grayscale opacity-50"
+                                                className="max-h-5 max-w-full object-contain grayscale opacity-50"
                                             />
                                         </div>
                                     ))}
                                 </div>
 
-                                {/* Stats */}
                                 <div className="pt-4 border-t border-gray-200 mt-4">
-                                    <div className="text-2xl font-bold text-gray-900">13+ hours</div>
-                                    <div className="text-xs text-gray-500">weekly research</div>
+                                    <div className="text-xl font-bold text-gray-900">13+ hours</div>
+                                    <div className="text-xs text-gray-500">weekly</div>
                                 </div>
                             </div>
-
-                            {/* Right placeholder to maintain layout */}
-                            <div className="w-1/2 bg-[#fafafa]"></div>
                         </div>
-                    </div>
 
-                    {/* After Side (Right) */}
-                    <div
-                        className="absolute inset-0 bg-gradient-to-br from-[#0a1a0f] to-[#0d2818]"
-                        style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
-                    >
-                        <div className="flex h-full">
-                            {/* Left placeholder */}
-                            <div className="w-1/2"></div>
-
-                            {/* Right Content */}
-                            <div className="w-1/2 p-6 flex flex-col text-white">
+                        {/* After Side (Right half) */}
+                        <div
+                            className="absolute inset-0 bg-gradient-to-br from-[#0a1a0f] to-[#0d2818]"
+                            style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
+                        >
+                            <div className="p-6 h-full flex flex-col text-white">
                                 <span className="inline-block w-fit px-2.5 py-1 rounded-full bg-[#5fff9e]/20 text-[#5fff9e] text-xs font-medium mb-4">
                                     With boilr
                                 </span>
-                                <h3 className="text-lg font-bold text-white mb-4">One platform</h3>
 
                                 {/* boilr Logo */}
-                                <div className="flex items-center justify-center flex-1 mb-4">
+                                <div className="flex items-center justify-center flex-1">
                                     <div className="relative">
-                                        <div className="absolute inset-0 w-24 h-24 bg-[#5fff9e]/10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"></div>
+                                        <div className="absolute w-32 h-32 bg-[#5fff9e]/15 rounded-full blur-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
                                         <img
-                                            src="/boilr-logo-white.png"
+                                            src="/boilr-logo-black.png"
                                             alt="boilr"
-                                            className="h-14 object-contain relative z-10"
-                                            onError={(e) => {
-                                                // Fallback to black logo with filter
-                                                (e.target as HTMLImageElement).src = "/boilr-logo-black.png";
-                                                (e.target as HTMLImageElement).style.filter = "brightness(0) invert(1)";
-                                            }}
+                                            className="h-16 object-contain relative z-10 brightness-0 invert"
                                         />
                                     </div>
                                 </div>
 
-                                {/* Stats */}
                                 <div className="pt-4 border-t border-white/20 mt-4">
-                                    <div className="text-2xl font-bold text-[#5fff9e]">1 hour</div>
-                                    <div className="text-xs text-gray-400">reviewing leads</div>
+                                    <div className="text-xl font-bold text-[#5fff9e]">1 hour</div>
+                                    <div className="text-xs text-gray-400">weekly</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Slider Handle */}
-                    <div
-                        className="absolute top-0 bottom-0 w-0.5 bg-white/80 z-20 pointer-events-none"
-                        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
-                    >
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
-                            <span className="text-gray-500 text-sm">⟷</span>
+                        {/* Slider Handle */}
+                        <div
+                            className="absolute top-0 bottom-0 w-0.5 bg-white/80 z-20 pointer-events-none"
+                            style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+                        >
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center">
+                                <span className="text-gray-500 text-xs">⟷</span>
+                            </div>
                         </div>
+
+                        {/* Set height */}
+                        <div className="h-[300px]"></div>
+
+                        {/* Animation keyframes */}
+                        <style>{`
+              @keyframes floatSubtle {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-3px); }
+              }
+            `}</style>
                     </div>
 
-                    {/* Set height */}
-                    <div className="h-[320px]"></div>
-
-                    {/* Animation keyframes */}
-                    <style>{`
-            @keyframes floatSubtle {
-              0%, 100% { transform: translateY(0px); }
-              50% { transform: translateY(-3px); }
-            }
-          `}</style>
-                </div>
-
-                {/* CTA */}
-                <div className={`mt-10 text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "400ms" }}>
-                    <a
-                        href="https://calendly.com/felix-boilr/demo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-black bg-[#5fff9e] hover:bg-[#4de88a] transition-all duration-200"
-                    >
-                        See boilr in action →
-                    </a>
                 </div>
 
             </div>
