@@ -65,14 +65,10 @@ export default function StatsSection() {
                                         color: isActive ? "#1a1a1a" : "#d1d5db"
                                     }}
                                 >
-                                    {/* Subtle shimmer on active line */}
+                                    {/* Green gradient text for active line */}
                                     {isActive ? (
-                                        <span className="relative">
-                                            <span className="relative z-10">{statement}</span>
-                                            <span
-                                                className="absolute inset-0 bg-gradient-to-r from-transparent via-[#5fff9e]/20 to-transparent bg-[length:200%_100%] animate-shimmer"
-                                                style={{ WebkitBackgroundClip: 'text' }}
-                                            />
+                                        <span className="bg-gradient-to-r from-gray-900 via-[#10b981] to-gray-900 bg-clip-text text-transparent bg-[length:300%_100%] animate-shimmer">
+                                            {statement}
                                         </span>
                                     ) : (
                                         statement
