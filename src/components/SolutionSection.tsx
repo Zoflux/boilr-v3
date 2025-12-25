@@ -174,89 +174,80 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                 </div>
 
                 {/* Right: All features visible, one expanded at a time */}
-                <div className="space-y-4">
-                  {current.features.map((feature, index) => {
-                    const isActive = index === activeFeature;
-                    const Icon = feature.icon;
-
-                    return (
+                <div className="flex gap-4">
+                  {/* Vertical progress dots on the left */}
+                  <div className="flex flex-col items-center py-6 gap-4">
+                    {[0, 1, 2].map((i) => (
                       <div
-                        key={feature.number}
-                        className={`rounded-xl border transition-all duration-500 overflow-hidden ${isActive
-                          ? 'bg-white/5 border-[#5fff9e]/30'
-                          : 'bg-transparent border-white/10 hover:border-white/20'
+                        key={i}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${i === activeFeature
+                            ? 'bg-[#5fff9e] scale-125'
+                            : i < activeFeature
+                              ? 'bg-[#5fff9e]/50'
+                              : 'bg-white/20'
                           }`}
-                      >
-                        {/* Header - always visible */}
-                        <div className={`flex items-center gap-4 p-4 sm:p-5 transition-colors duration-300 ${isActive ? '' : 'opacity-50'
-                          }`}>
-                          {/* Number */}
-                          <span className={`text-sm font-bold transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
+                      />
+                    ))}
+                  </div>
+
+                  {/* Feature cards */}
+                  <div className="flex-1 space-y-4">
+                    {current.features.map((feature, index) => {
+                      const isActive = index === activeFeature;
+                      const Icon = feature.icon;
+
+                      return (
+                        <div
+                          key={feature.number}
+                          className={`rounded-xl border transition-all duration-500 overflow-hidden ${isActive
+                            ? 'bg-white/5 border-[#5fff9e]/30'
+                            : 'bg-transparent border-white/10 hover:border-white/20'
+                            }`}
+                        >
+                          {/* Header - always visible */}
+                          <div className={`flex items-center gap-4 p-4 sm:p-5 transition-colors duration-300 ${isActive ? '' : 'opacity-50'
                             }`}>
-                            {feature.number}
-                          </span>
+                            {/* Number */}
+                            <span className={`text-sm font-bold transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
+                              }`}>
+                              {feature.number}
+                            </span>
 
-                          {/* Title */}
-                          <h3 className={`text-lg sm:text-xl font-semibold transition-colors duration-300 flex-1 ${isActive ? 'text-white' : 'text-white/50'
+                            {/* Title */}
+                            <h3 className={`text-lg sm:text-xl font-semibold transition-colors duration-300 flex-1 ${isActive ? 'text-white' : 'text-white/50'
+                              }`}>
+                              {feature.title}
+                            </h3>
+
+                            {/* Icon */}
+                            <Icon className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
+                              }`} />
+                          </div>
+
+                          {/* Expandable content */}
+                          <div className={`overflow-hidden transition-all duration-500 ease-out ${isActive ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                             }`}>
-                            {feature.title}
-                          </h3>
-
-                          {/* Icon */}
-                          <Icon className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
-                            }`} />
-                        </div>
-
-                        {/* Expandable content */}
-                        <div className={`overflow-hidden transition-all duration-500 ease-out ${isActive ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                          }`}>
-                          <div className="px-4 sm:px-5 pb-5">
-                            <p className="text-white/70 text-sm sm:text-base leading-relaxed pl-8">
-                              {feature.description}
-                            </p>
+                            <div className="px-4 sm:px-5 pb-5">
+                              <p className="text-white/70 text-sm sm:text-base leading-relaxed pl-8">
+                                {feature.description}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
 
-                  {/* CTA Button */}
-                  <div className="pt-4">
-                    <a
-                      href={demoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-black bg-[#48ee8d] hover:bg-[#5fff9e] shadow-[0_4px_20px_rgba(72,238,141,0.35)] transition-all duration-200"
-                    >
-                      Book Demo →
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Scroll Progress Indicator - fixed at bottom center */}
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-                {/* Progress dots */}
-                <div className="flex items-center gap-2">
-                  {[0, 1, 2].map((i) => (
-                    <div
-                      key={i}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${i === activeFeature
-                          ? 'bg-[#5fff9e] scale-125'
-                          : i < activeFeature
-                            ? 'bg-[#5fff9e]/50'
-                            : 'bg-white/20'
-                        }`}
-                    />
-                  ))}
-                </div>
-
-                {/* Scroll hint - only visible on first item */}
-                <div className={`flex flex-col items-center gap-1 transition-opacity duration-500 ${activeFeature === 0 ? 'opacity-100' : 'opacity-0'
-                  }`}>
-                  <span className="text-white/40 text-xs">Scroll</span>
-                  <div className="w-5 h-8 rounded-full border-2 border-white/20 flex justify-center pt-1">
-                    <div className="w-1 h-2 bg-[#5fff9e] rounded-full animate-bounce" />
+                    {/* CTA Button */}
+                    <div className="pt-4">
+                      <a
+                        href={demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-black bg-[#48ee8d] hover:bg-[#5fff9e] shadow-[0_4px_20px_rgba(72,238,141,0.35)] transition-all duration-200"
+                      >
+                        Book Demo →
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
