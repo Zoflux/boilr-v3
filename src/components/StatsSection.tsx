@@ -5,6 +5,7 @@ export default function StatsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeLine, setActiveLine] = useState(0);
   const [sparkles, setSparkles] = useState<number[]>([]);
+  const [isFading, setIsFading] = useState(false);
 
   // Intersection observer
   useEffect(() => {
@@ -35,48 +36,43 @@ export default function StatsSection() {
   useEffect(() => {
     if (!isVisible) return;
 
-    const lineDuration = 2000; // How long each line is active
-    const sparkleInterval = 150; // How often sparkles appear
-    const sparkleCount = 5; // How many sparkles visible at once
+    const lineDuration = 2500;
+    const fadeDuration = 400;
+    const sparkleInterval = 120;
+    const sparkleCount = 6;
 
     let sparkleTimer: NodeJS.Timeout;
-    let lineTimer: NodeJS.Timeout;
     let currentSparkles: number[] = [];
 
-    const animateLine = () => {
-      // Clear sparkles from previous line
-      setSparkles([]);
+    const startSparkles = (lineIndex: number) => {
+      const textLength = statements[lineIndex]?.length || 30;
       currentSparkles = [];
 
-      // Generate random sparkle positions for this line
-      const textLength = statements[activeLine]?.length || 30;
-
       sparkleTimer = setInterval(() => {
-        // Add new random sparkle position
         const newSparkle = Math.floor(Math.random() * textLength);
         currentSparkles = [...currentSparkles.slice(-sparkleCount + 1), newSparkle];
         setSparkles([...currentSparkles]);
       }, sparkleInterval);
     };
 
-    animateLine();
+    startSparkles(activeLine);
 
-    // Move to next line
-    lineTimer = setInterval(() => {
-      setActiveLine(prev => (prev + 1) % statements.length);
+    const lineTimer = setInterval(() => {
+      // Start fade out
+      setIsFading(true);
       clearInterval(sparkleTimer);
-      setSparkles([]);
-      currentSparkles = [];
 
-      // Start sparkles for new line after small delay
+      // After fade, switch line
       setTimeout(() => {
-        const textLength = statements[(activeLine + 1) % statements.length]?.length || 30;
-        sparkleTimer = setInterval(() => {
-          const newSparkle = Math.floor(Math.random() * textLength);
-          currentSparkles = [...currentSparkles.slice(-sparkleCount + 1), newSparkle];
-          setSparkles([...currentSparkles]);
-        }, sparkleInterval);
-      }, 100);
+        setSparkles([]);
+        setActiveLine(prev => (prev + 1) % statements.length);
+        setIsFading(false);
+
+        // Start sparkles for new line
+        setTimeout(() => {
+          startSparkles((activeLine + 1) % statements.length);
+        }, 100);
+      }, fadeDuration);
     }, lineDuration);
 
     return () => {
@@ -85,7 +81,7 @@ export default function StatsSection() {
     };
   }, [isVisible, activeLine]);
 
-  // Render text with sparkle dots
+  // Render text with inline sparkle effect
   const renderWithSparkles = (text: string, lineIndex: number) => {
     const isActive = activeLine === lineIndex;
 
@@ -95,14 +91,16 @@ export default function StatsSection() {
       const hasSparkle = sparkles.includes(i);
 
       return (
-        <span key={i} className="relative inline-block">
+        <span
+          key={i}
+          className="relative"
+          style={{
+            color: hasSparkle ? '#5fff9e' : 'inherit',
+            transition: 'color 0.3s ease',
+            textShadow: hasSparkle ? '0 0 8px rgba(95, 255, 158, 0.6)' : 'none'
+          }}
+        >
           {char === ' ' ? '\u00A0' : char}
-          {hasSparkle && (
-            <span
-              className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5fff9e] animate-ping"
-              style={{ animationDuration: '0.5s' }}
-            />
-          )}
         </span>
       );
     });
@@ -129,7 +127,9 @@ export default function StatsSection() {
                 <p
                   key={index}
                   className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                    } ${isActive ? "text-gray-900" : "text-gray-300"
+                    } ${isActive
+                      ? isFading ? "text-gray-500" : "text-gray-900"
+                      : "text-gray-300"
                     }`}
                   style={{
                     transitionDelay: isVisible ? `${index * 150}ms` : "0ms"
