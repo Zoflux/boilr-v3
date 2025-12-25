@@ -1,7 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { NavigationHeader } from "@/components/NavigationHeader";
 import { FAQSection, FAQItem } from "@/components/FAQSection";
-import { Check, Users, Compass, Award, DollarSign, Phone, Mail } from "lucide-react";
+import { Check, Users, Compass, Award, DollarSign, Phone, Mail, Radio, User, Target, TrendingUp } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const SolutionDiscovery = () => {
@@ -446,7 +446,7 @@ const SolutionDiscovery = () => {
                     <div className="mt-10 grid sm:grid-cols-2 gap-8">
                       <div className={`transition-all duration-500 ${scrollPhase === 1 ? 'opacity-50' : 'opacity-100'}`}>
                         <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4">
-                          <span className="text-xl">📡</span>
+                          <Radio className="w-5 h-5 text-gray-700 stroke-[1.5]" />
                         </div>
                         <h3 className="font-semibold text-gray-900 text-lg mb-2">10,000+ sources monitored</h3>
                         <p className="text-gray-600 leading-relaxed">
@@ -455,7 +455,7 @@ const SolutionDiscovery = () => {
                       </div>
                       <div className={`transition-all duration-500 ${scrollPhase === 0 ? 'opacity-50' : 'opacity-100 scale-105'}`}>
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-colors duration-500 ${scrollPhase === 1 ? 'bg-[#5fff9e]/30' : 'bg-gray-100'}`}>
-                          <span className="text-xl">👤</span>
+                          <User className="w-5 h-5 text-gray-700 stroke-[1.5]" />
                         </div>
                         <h3 className="font-semibold text-gray-900 text-lg mb-2">Find the hiring manager</h3>
                         <p className="text-gray-600 leading-relaxed">
@@ -536,7 +536,7 @@ const SolutionDiscovery = () => {
                 <div className="mt-10 grid sm:grid-cols-2 gap-8">
                   <div>
                     <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4">
-                      <span className="text-xl">🎯</span>
+                      <Target className="w-5 h-5 text-gray-700 stroke-[1.5]" />
                     </div>
                     <h3 className="font-semibold text-gray-900 text-lg mb-2">Smart filtering</h3>
                     <p className="text-gray-600 leading-relaxed">
@@ -545,7 +545,7 @@ const SolutionDiscovery = () => {
                   </div>
                   <div>
                     <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4">
-                      <span className="text-xl">📈</span>
+                      <TrendingUp className="w-5 h-5 text-gray-700 stroke-[1.5]" />
                     </div>
                     <h3 className="font-semibold text-gray-900 text-lg mb-2">Intent scoring</h3>
                     <p className="text-gray-600 leading-relaxed">
