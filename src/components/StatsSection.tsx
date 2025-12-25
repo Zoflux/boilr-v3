@@ -58,7 +58,7 @@ export default function StatsSection() {
                             return (
                                 <p
                                     key={index}
-                                    className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-[1500ms] ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                                    className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                                         }`}
                                     style={{
                                         transitionDelay: isVisible ? `${index * 200}ms` : "0ms",
@@ -67,7 +67,7 @@ export default function StatsSection() {
                                 >
                                     {/* Green gradient text for active line */}
                                     {isActive ? (
-                                        <span className="bg-gradient-to-r from-gray-900 via-[#10b981] to-gray-900 bg-clip-text text-transparent bg-[length:300%_100%] animate-shimmer">
+                                        <span className="bg-gradient-to-r from-gray-900 via-[#5fff9e] to-gray-900 bg-clip-text text-transparent bg-[length:300%_100%] animate-shimmer">
                                             {statement}
                                         </span>
                                     ) : (
