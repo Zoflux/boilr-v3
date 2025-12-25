@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { NavigationHeader } from "@/components/NavigationHeader";
 import { HeroSection } from "@/components/HeroSection";
 import LogoOutcomeSection from "@/components/LogoOutcomeSection";
+import StatsSection from "@/components/StatsSection";
 import ClientLogosSection from "@/components/ClientLogosSection";
 import { ProblemSection } from "@/components/ProblemSection";
 import { SolutionSection } from "@/components/SolutionSection";
@@ -19,13 +20,14 @@ import { FAQSection, shortFAQs } from "@/components/FAQSection";
  * Page Structure (redesigned for more substance):
  * 1. Hero (unchanged)
  * 2. Client Logos (social proof)
- * 3. Impact Stats (numbers that matter)
- * 4. Pain Points (problems we solve)
- * 5. Solution Section with Radar (how we solve them)
- * 6. Testimonials (real success stories)
- * 7. Before/After Comparison (transformation)
- * 8. FAQ
- * 9. Closing CTA
+ * 3. Feature Bento Grid (what boilr does)
+ * 4. Stats + ROI (numbers that matter)
+ * 5. Pain Points (problems we solve)
+ * 6. Solution Section with Radar (how we solve them)
+ * 7. Testimonials (real success stories)
+ * 8. Before/After Comparison (transformation)
+ * 9. FAQ
+ * 10. Closing CTA
  */
 const Index = () => {
   const [searchParams] = useSearchParams();
@@ -79,12 +81,17 @@ const Index = () => {
           <ClientLogosSection />
         </section>
 
-        {/* 3. IMPACT STATS - numbers that matter */}
-        <section id="stats" aria-label="Impact Statistics">
+        {/* 3. FEATURE BENTO - what boilr does */}
+        <section id="features" aria-label="Features">
           <LogoOutcomeSection />
         </section>
 
-        {/* 4. PAIN POINTS - problems we solve */}
+        {/* 4. STATS + ROI - numbers that matter */}
+        <section id="stats" aria-label="Statistics">
+          <StatsSection />
+        </section>
+
+        {/* 5. PAIN POINTS - problems we solve */}
         <section id="problem" aria-label="Problem">
           <ProblemSection />
         </section>
