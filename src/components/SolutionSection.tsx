@@ -183,8 +183,8 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                       <div
                         key={feature.number}
                         className={`rounded-xl border transition-all duration-500 overflow-hidden ${isActive
-                            ? 'bg-white/5 border-[#5fff9e]/30'
-                            : 'bg-transparent border-white/10 hover:border-white/20'
+                          ? 'bg-white/5 border-[#5fff9e]/30'
+                          : 'bg-transparent border-white/10 hover:border-white/20'
                           }`}
                       >
                         {/* Header - always visible */}
@@ -230,6 +230,33 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                     >
                       Book Demo →
                     </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Scroll Progress Indicator - fixed at bottom center */}
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+                {/* Progress dots */}
+                <div className="flex items-center gap-2">
+                  {[0, 1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${i === activeFeature
+                          ? 'bg-[#5fff9e] scale-125'
+                          : i < activeFeature
+                            ? 'bg-[#5fff9e]/50'
+                            : 'bg-white/20'
+                        }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Scroll hint - only visible on first item */}
+                <div className={`flex flex-col items-center gap-1 transition-opacity duration-500 ${activeFeature === 0 ? 'opacity-100' : 'opacity-0'
+                  }`}>
+                  <span className="text-white/40 text-xs">Scroll</span>
+                  <div className="w-5 h-8 rounded-full border-2 border-white/20 flex justify-center pt-1">
+                    <div className="w-1 h-2 bg-[#5fff9e] rounded-full animate-bounce" />
                   </div>
                 </div>
               </div>
