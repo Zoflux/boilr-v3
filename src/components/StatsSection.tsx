@@ -4,8 +4,6 @@ export default function StatsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [activeLine, setActiveLine] = useState(0);
-  const [sparkles, setSparkles] = useState<number[]>([]);
-  const [isFading, setIsFading] = useState(false);
 
   // Intersection observer
   useEffect(() => {
@@ -32,128 +30,75 @@ export default function StatsSection() {
     "Automatically."
   ];
 
-  // Sequential line animation with sparkles
+  // Sequential line rotation
   useEffect(() => {
     if (!isVisible) return;
 
-    const lineDuration = 2500;
-    const fadeDuration = 400;
-    const sparkleInterval = 120;
-    const sparkleCount = 6;
+    const interval = setInterval(() => {
+      setActiveLine((prev) => (prev + 1) % statements.length);
+    }, 3000);
 
-    let sparkleTimer: NodeJS.Timeout;
-    let currentSparkles: number[] = [];
-
-    const startSparkles = (lineIndex: number) => {
-      const textLength = statements[lineIndex]?.length || 30;
-      currentSparkles = [];
-
-      sparkleTimer = setInterval(() => {
-        const newSparkle = Math.floor(Math.random() * textLength);
-        currentSparkles = [...currentSparkles.slice(-sparkleCount + 1), newSparkle];
-        setSparkles([...currentSparkles]);
-      }, sparkleInterval);
-    };
-
-    startSparkles(activeLine);
-
-    const lineTimer = setInterval(() => {
-      // Start fade out
-      setIsFading(true);
-      clearInterval(sparkleTimer);
-
-      // After fade, switch line
-      setTimeout(() => {
-        setSparkles([]);
-        setActiveLine(prev => (prev + 1) % statements.length);
-        setIsFading(false);
-
-        // Start sparkles for new line
-        setTimeout(() => {
-          startSparkles((activeLine + 1) % statements.length);
-        }, 100);
-      }, fadeDuration);
-    }, lineDuration);
-
-    return () => {
-      clearInterval(sparkleTimer);
-      clearInterval(lineTimer);
-    };
-  }, [isVisible, activeLine]);
-
-  // Render text with inline sparkle effect
-  const renderWithSparkles = (text: string, lineIndex: number) => {
-    const isActive = activeLine === lineIndex;
-
-    if (!isActive) return text;
-
-    return text.split('').map((char, i) => {
-      const hasSparkle = sparkles.includes(i);
-
-      return (
-        <span
-          key={i}
-          className="relative"
-          style={{
-            color: hasSparkle ? '#5fff9e' : 'inherit',
-            transition: 'color 0.3s ease',
-            textShadow: hasSparkle ? '0 0 8px rgba(95, 255, 158, 0.6)' : 'none'
-          }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      );
-    });
-  };
+    return () => clearInterval(interval);
+  }, [isVisible]);
 
   return (
-    <section ref={sectionRef} className="py-16 sm:py-20 bg-[#f8f9fa]">
+    <section ref={sectionRef} className="py-16 sm:py-20 bg-[#f8f9fa] overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-        {/* Centered container with left-aligned text */}
         <div className="max-w-3xl mx-auto">
-
           {/* Subtitle */}
           <p className={`text-gray-800 text-base sm:text-lg font-medium mb-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             Turn your recruitment process into a machine that never stops working.
           </p>
 
-          {/* Animated Statements */}
-          <div className="space-y-1 mb-8">
+          {/* Statements with smooth gradient sweep */}
+          <div className="space-y-2 mb-10">
             {statements.map((statement, index) => {
               const isActive = activeLine === index;
 
               return (
                 <p
                   key={index}
-                  className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                    } ${isActive
-                      ? isFading ? "text-gray-500" : "text-gray-900"
-                      : "text-gray-300"
+                  className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                    } ${isActive ? "text-slate-900" : "text-slate-300"
                     }`}
                   style={{
                     transitionDelay: isVisible ? `${index * 150}ms` : "0ms"
                   }}
                 >
-                  {renderWithSparkles(statement, index)}
+                  <span className={`relative inline-block ${isActive ? "animate-shine text-transparent bg-clip-text bg-[linear-gradient(110deg,#000,45%,#5fff9e,55%,#000)] bg-[length:200%_100%]" : ""}`}>
+                    {statement}
+                  </span>
                 </p>
               );
             })}
           </div>
 
           {/* CTA Button */}
-          <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "600ms" }}>
+          <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "700ms" }}>
             <a
               href="/roi-calculator"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm text-black bg-[#5fff9e] hover:bg-[#4de88a] transition-all duration-200"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm text-black bg-[#5fff9e] hover:bg-[#4de88a] shadow-[0_2px_10px_rgba(95,255,158,0.2)] transition-all duration-200"
             >
               Calculate Your ROI
             </a>
           </div>
-
         </div>
-
       </div>
+
+      <style>{`
+        @keyframes shine {
+          0% {
+            background-position: 200% 0;
+          }
+          100% {
+            background-position: -200% 0;
+          }
+        }
+        .animate-shine {
+          animation: shine 4s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
