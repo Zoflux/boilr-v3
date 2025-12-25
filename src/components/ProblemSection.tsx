@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
-// Tool logos
+// Tool logos (9 logos for 3x3 grid)
 const toolLogos = [
     { name: "LinkedIn", src: "/assets/company-logos/linkeidn logo.svg" },
     { name: "Indeed", src: "/assets/company-logos/Indeed_logo (1).svg" },
@@ -8,6 +8,9 @@ const toolLogos = [
     { name: "Lusha", src: "/assets/company-logos/Lusha_idDCG_-t5d_0.svg" },
     { name: "Greenhouse", src: "/assets/company-logos/greenhouse logo.svg" },
     { name: "HubSpot", src: "/assets/company-logos/HubSpot_Logo.svg" },
+    { name: "Slack", src: "/assets/company-logos/Slack_Technologies_Logo.svg" },
+    { name: "Notion", src: "/assets/company-logos/Notion-logo.svg" },
+    { name: "Pipedrive", src: "/assets/company-logos/Pipedrive_idHo6Lfa2R_0.svg" },
 ];
 
 export function ProblemSection() {
@@ -109,22 +112,22 @@ export function ProblemSection() {
                             className="absolute inset-0 bg-[#fafafa]"
                             style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                         >
-                            <div className="p-6 h-full flex flex-col">
-                                {/* Logo Grid */}
-                                <div className="grid grid-cols-2 gap-3 flex-1 mt-10">
+                            <div className="p-5 pt-12 pb-16 h-full flex flex-col">
+                                {/* Logo Grid - 3x3 */}
+                                <div className="grid grid-cols-3 gap-2 flex-1">
                                     {toolLogos.map((tool, i) => (
                                         <div
                                             key={i}
-                                            className="flex items-center justify-center p-3 bg-white rounded-lg border border-gray-100"
+                                            className="flex items-center justify-center p-2 bg-white rounded-lg border border-gray-100"
                                             style={{
-                                                animation: `floatSubtle ${2.5 + (i * 0.3)}s ease-in-out infinite`,
-                                                animationDelay: `${i * 0.15}s`
+                                                animation: `floatSubtle ${2.5 + (i * 0.2)}s ease-in-out infinite`,
+                                                animationDelay: `${i * 0.1}s`
                                             }}
                                         >
                                             <img
                                                 src={tool.src}
                                                 alt={tool.name}
-                                                className="max-h-6 max-w-full object-contain grayscale opacity-50"
+                                                className="max-h-5 max-w-full object-contain grayscale opacity-50"
                                             />
                                         </div>
                                     ))}
