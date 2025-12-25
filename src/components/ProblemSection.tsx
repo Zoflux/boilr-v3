@@ -66,26 +66,12 @@ export function ProblemSection() {
                             actually talking to candidates and clients.
                         </p>
 
-                        {/* Stats highlight - More prominent */}
-                        <div className="mt-10 p-6 rounded-2xl bg-gray-50 border border-gray-100">
-                            <div className="flex items-center gap-6">
-                                <div className="text-center">
-                                    <div className="text-5xl font-bold text-gray-900">13h</div>
-                                    <div className="text-sm text-gray-500 mt-1">wasted weekly</div>
-                                </div>
-                                <div className="flex-shrink-0">
-                                    <div className="w-12 h-12 rounded-full bg-[#5fff9e] flex items-center justify-center">
-                                        <span className="text-black font-bold text-lg">→</span>
-                                    </div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-5xl font-bold text-[#10b981]">1h</div>
-                                    <div className="text-sm text-gray-500 mt-1">with boilr</div>
-                                </div>
-                            </div>
-                            <p className="mt-4 text-sm text-gray-500 text-center">
-                                That's <span className="font-semibold text-gray-900">12+ hours back</span> every single week.
-                            </p>
+                        {/* Stats highlight - Minimalist */}
+                        <div className="mt-10 flex items-center gap-4">
+                            <span className="text-3xl font-bold text-gray-900">13h</span>
+                            <span className="text-gray-400">→</span>
+                            <span className="text-3xl font-bold text-[#10b981]">1h</span>
+                            <span className="text-gray-500 text-sm">weekly</span>
                         </div>
                     </div>
 
@@ -115,7 +101,7 @@ export function ProblemSection() {
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 {!isActive && (
-                                                    <span className="text-xs font-medium text-red-500 bg-red-50 px-2 py-0.5 rounded-full">
+                                                    <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
                                                         {problem.stat}
                                                     </span>
                                                 )}
@@ -138,7 +124,7 @@ export function ProblemSection() {
                                                         {problem.description}
                                                     </p>
                                                 </div>
-                                                <span className="inline-block mt-3 ml-5 text-xs font-medium text-red-400 bg-red-500/10 px-2.5 py-1 rounded-full">
+                                                <span className="inline-block mt-3 ml-5 text-xs font-medium text-gray-400 bg-gray-800 px-2.5 py-1 rounded-full">
                                                     {problem.stat}
                                                 </span>
                                             </div>
