@@ -10,7 +10,7 @@ interface Testimonial {
     features?: string[];
 }
 
-// 4 categories with real testimonials from OurCustomers.tsx
+// 4 categories with real testimonials
 const testimonialsByCategory: Record<string, Testimonial> = {
     "Managing Director": {
         quote: "We went from having no real business development structure to signing our first client in less than a month. It's a simple, easy-to-use platform that instantly provided the critical structure we were missing.",
@@ -77,7 +77,7 @@ export default function TestimonialsSection() {
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
                 {/* Header */}
-                <header className={`text-center mb-14 sm:mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+                <header className={`text-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
                     <div className="flex items-center justify-center gap-1 mb-4">
                         {[...Array(5)].map((_, i) => (
                             <Star key={i} className="w-5 h-5 fill-[#5fff9e] text-[#5fff9e]" />
@@ -91,79 +91,76 @@ export default function TestimonialsSection() {
                     </p>
                 </header>
 
-                {/* Category Tabs */}
-                <div className={`flex flex-wrap justify-center gap-2 mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "100ms" }}>
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            onClick={() => setActiveCategory(category)}
-                            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                                    ? "bg-gray-900 text-white"
-                                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50"
-                                }`}
-                        >
-                            {category}
-                        </button>
-                    ))}
+                {/* Tab Bar - Container style */}
+                <div className={`flex justify-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "100ms" }}>
+                    <div className="inline-flex items-center bg-gray-100 rounded-full p-1.5">
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
+                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
+                                        ? "bg-white text-gray-900 shadow-sm"
+                                        : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Testimonial Display - Large format */}
+                {/* Testimonial Display - Compact format */}
                 <div
-                    className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                    className={`max-w-3xl mx-auto transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                     style={{ transitionDelay: "200ms" }}
                 >
-                    {/* Image */}
-                    <div className="relative">
-                        <div className="aspect-[4/5] max-w-sm mx-auto rounded-2xl overflow-hidden shadow-2xl">
-                            <img
-                                key={activeTestimonial.image}
-                                src={activeTestimonial.image}
-                                alt={activeTestimonial.name}
-                                className="w-full h-full object-cover transition-opacity duration-500"
-                            />
-                            {/* Name overlay */}
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
-                                <p className="text-white font-semibold text-lg">{activeTestimonial.name}</p>
-                                <p className="text-white/70 text-sm">{activeTestimonial.role} at {activeTestimonial.company}</p>
-                            </div>
+                    {/* Quote */}
+                    <blockquote className="text-lg sm:text-xl text-gray-700 leading-relaxed text-center mb-8">
+                        "{activeTestimonial.quote}"
+                    </blockquote>
+
+                    {/* Author - Circle photo with name beside */}
+                    <div className="flex items-center justify-center gap-4 mb-6">
+                        <img
+                            key={activeTestimonial.image}
+                            src={activeTestimonial.image}
+                            alt={activeTestimonial.name}
+                            className="w-14 h-14 rounded-full object-cover"
+                        />
+                        <div>
+                            <p className="font-semibold text-gray-900">{activeTestimonial.name}</p>
+                            <p className="text-gray-500 text-sm">{activeTestimonial.role} at {activeTestimonial.company}</p>
                         </div>
                     </div>
 
-                    {/* Quote and Info */}
-                    <div>
-                        <blockquote className="text-xl sm:text-2xl lg:text-3xl text-gray-900 font-medium leading-relaxed mb-8">
-                            "{activeTestimonial.quote}"
-                        </blockquote>
-
-                        {/* Features */}
-                        {activeTestimonial.features && (
-                            <div className="flex flex-wrap gap-2">
-                                <span className="text-sm text-gray-500">Features:</span>
-                                {activeTestimonial.features.map((feature, i) => (
-                                    <span key={i} className="text-sm text-[#10b981]">
-                                        {feature}{i < activeTestimonial.features!.length - 1 ? "," : ""}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                    {/* Features */}
+                    {activeTestimonial.features && (
+                        <div className="flex flex-wrap justify-center gap-2">
+                            <span className="text-sm text-gray-400">Features:</span>
+                            {activeTestimonial.features.map((feature, i) => (
+                                <span key={i} className="text-sm text-[#10b981]">
+                                    {feature}{i < activeTestimonial.features!.length - 1 ? "," : ""}
+                                </span>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
-                {/* G2 Rating */}
+                {/* G2 Rating - Simple, no border */}
                 <div className={`mt-14 flex justify-center transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "400ms" }}>
                     <a
                         href="https://www.g2.com/products/boilr/reviews"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-gray-200 hover:border-[#5fff9e]/50 transition-colors"
+                        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                     >
-                        <img src="/g2-logo.png" alt="G2" className="h-6" />
-                        <div className="flex items-center gap-1">
+                        <img src="/g2-logo.png" alt="G2" className="h-7" />
+                        <span className="text-lg font-bold text-gray-700">4.8</span>
+                        <div className="flex items-center gap-0.5">
                             {[...Array(5)].map((_, i) => (
                                 <Star key={i} className="w-4 h-4 fill-orange-400 text-orange-400" />
                             ))}
                         </div>
-                        <span className="text-sm text-gray-600">5.0/5 on G2</span>
                     </a>
                 </div>
 
