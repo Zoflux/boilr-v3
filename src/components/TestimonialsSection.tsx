@@ -76,17 +76,12 @@ export default function TestimonialsSection() {
         <section ref={sectionRef} className="py-20 sm:py-28 bg-[#fafafa]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-                {/* Header */}
-                <header className={`text-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-                    <div className="flex items-center justify-center gap-1 mb-4">
-                        {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-5 h-5 fill-[#5fff9e] text-[#5fff9e]" />
-                        ))}
-                    </div>
+                {/* Header - Left aligned */}
+                <header className={`mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
                         Trusted by 100+ recruitment companies
                     </h2>
-                    <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+                    <p className="mt-4 text-lg text-gray-500">
                         Here's what they say about working smarter, not harder.
                     </p>
                 </header>
