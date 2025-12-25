@@ -109,18 +109,18 @@ export default function TestimonialsSection() {
                     </div>
                 </div>
 
-                {/* Testimonial Display - Two column layout */}
+                {/* Testimonial Display - Two column layout, full width */}
                 <div
-                    className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center max-w-4xl mx-auto transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                    className={`grid md:grid-cols-2 gap-8 lg:gap-16 items-start transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                     style={{ transitionDelay: "200ms" }}
                 >
-                    {/* Image - Larger with rounded corners */}
-                    <div className="flex justify-center md:justify-end">
+                    {/* Image - Left aligned */}
+                    <div className="flex justify-center md:justify-start">
                         <img
                             key={activeTestimonial.image}
                             src={activeTestimonial.image}
                             alt={activeTestimonial.name}
-                            className="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl object-cover shadow-lg"
+                            className="w-48 h-48 sm:w-64 sm:h-64 rounded-3xl object-cover shadow-lg"
                         />
                     </div>
 
