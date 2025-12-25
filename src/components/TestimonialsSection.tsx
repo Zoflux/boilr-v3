@@ -99,8 +99,8 @@ export default function TestimonialsSection() {
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
                                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                                        ? "bg-white text-gray-900 shadow-sm"
-                                        : "text-gray-600 hover:text-gray-900"
+                                    ? "bg-white text-gray-900 shadow-sm"
+                                    : "text-gray-600 hover:text-gray-900"
                                     }`}
                             >
                                 {category}
@@ -109,41 +109,47 @@ export default function TestimonialsSection() {
                     </div>
                 </div>
 
-                {/* Testimonial Display - Compact format */}
+                {/* Testimonial Display - Two column layout */}
                 <div
-                    className={`max-w-3xl mx-auto transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                    className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center max-w-4xl mx-auto transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                     style={{ transitionDelay: "200ms" }}
                 >
-                    {/* Quote */}
-                    <blockquote className="text-lg sm:text-xl text-gray-700 leading-relaxed text-center mb-8">
-                        "{activeTestimonial.quote}"
-                    </blockquote>
-
-                    {/* Author - Circle photo with name beside */}
-                    <div className="flex items-center justify-center gap-4 mb-6">
+                    {/* Image - Larger with rounded corners */}
+                    <div className="flex justify-center md:justify-end">
                         <img
                             key={activeTestimonial.image}
                             src={activeTestimonial.image}
                             alt={activeTestimonial.name}
-                            className="w-14 h-14 rounded-full object-cover"
+                            className="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl object-cover shadow-lg"
                         />
-                        <div>
-                            <p className="font-semibold text-gray-900">{activeTestimonial.name}</p>
-                            <p className="text-gray-500 text-sm">{activeTestimonial.role} at {activeTestimonial.company}</p>
-                        </div>
                     </div>
 
-                    {/* Features */}
-                    {activeTestimonial.features && (
-                        <div className="flex flex-wrap justify-center gap-2">
-                            <span className="text-sm text-gray-400">Features:</span>
-                            {activeTestimonial.features.map((feature, i) => (
-                                <span key={i} className="text-sm text-[#10b981]">
-                                    {feature}{i < activeTestimonial.features!.length - 1 ? "," : ""}
-                                </span>
-                            ))}
+                    {/* Quote and Author on right */}
+                    <div>
+                        <blockquote className="text-lg sm:text-xl text-gray-700 leading-relaxed mb-6">
+                            "{activeTestimonial.quote}"
+                        </blockquote>
+
+                        {/* Author - Below quote */}
+                        <div className="flex items-center gap-3 mb-4">
+                            <div>
+                                <p className="font-semibold text-gray-900">{activeTestimonial.name}</p>
+                                <p className="text-gray-500 text-sm">{activeTestimonial.role} at {activeTestimonial.company}</p>
+                            </div>
                         </div>
-                    )}
+
+                        {/* Features */}
+                        {activeTestimonial.features && (
+                            <div className="flex flex-wrap gap-2">
+                                <span className="text-sm text-gray-400">Features:</span>
+                                {activeTestimonial.features.map((feature, i) => (
+                                    <span key={i} className="text-sm text-[#10b981]">
+                                        {feature}{i < activeTestimonial.features!.length - 1 ? "," : ""}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* G2 Rating - Simple, no border */}
