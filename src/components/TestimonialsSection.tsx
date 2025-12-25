@@ -74,7 +74,7 @@ export default function TestimonialsSection() {
 
     return (
         <section ref={sectionRef} className="py-20 sm:py-28 bg-[#fafafa]">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mx-auto max-w-4xl px-4 sm:px-6">
 
                 {/* Header */}
                 <header className={`text-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
