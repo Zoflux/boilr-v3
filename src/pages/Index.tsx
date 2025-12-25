@@ -7,7 +7,6 @@ import StatsSection from "@/components/StatsSection";
 import ClientLogosSection from "@/components/ClientLogosSection";
 import { ProblemSection } from "@/components/ProblemSection";
 import { SolutionSection } from "@/components/SolutionSection";
-import { ConsolidationSection } from "@/components/ConsolidationSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import { Footer } from "@/components/Footer";
 import ClosingSection from "@/components/ClosingSection";
@@ -22,12 +21,11 @@ import { FAQSection, shortFAQs } from "@/components/FAQSection";
  * 2. Client Logos (social proof)
  * 3. Feature Bento Grid (what boilr does)
  * 4. Stats + ROI (numbers that matter)
- * 5. Pain Points (problems we solve)
+ * 5. From Chaos to Clarity (before/after)
  * 6. Solution Section with Radar (how we solve them)
  * 7. Testimonials (real success stories)
- * 8. Before/After Comparison (transformation)
- * 9. FAQ
- * 10. Closing CTA
+ * 8. FAQ
+ * 9. Closing CTA
  */
 const Index = () => {
   const [searchParams] = useSearchParams();
@@ -106,12 +104,7 @@ const Index = () => {
           <TestimonialsSection />
         </section>
 
-        {/* 7. BEFORE/AFTER - the transformation */}
-        <section id="transformation" aria-label="Before and After">
-          <ConsolidationSection mode={activeMode} />
-        </section>
-
-        {/* 8. FAQ */}
+        {/* 7. FAQ */}
         <section aria-label="FAQ">
           <FAQSection faqs={shortFAQs} />
         </section>
