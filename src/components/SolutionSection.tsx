@@ -151,7 +151,7 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
             <div className="max-w-6xl mx-auto">
 
               {/* Section Header */}
-              <div className="text-center mb-12 sm:mb-16">
+              <div className="text-center mb-10 sm:mb-14">
                 <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-[0.12em] text-white/70 mb-4">
                   {current.pill}
                 </div>
@@ -173,54 +173,63 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                   </div>
                 </div>
 
-                {/* Right: Content */}
-                <div className="text-center lg:text-left">
-                  {/* Animated content - single feature at a time */}
-                  <div className="relative min-h-[220px] sm:min-h-[200px]">
-                    {current.features.map((feature, index) => (
+                {/* Right: All features visible, one expanded at a time */}
+                <div className="space-y-4">
+                  {current.features.map((feature, index) => {
+                    const isActive = index === activeFeature;
+                    const Icon = feature.icon;
+
+                    return (
                       <div
                         key={feature.number}
-                        className={`absolute inset-0 transition-all duration-500 ease-out ${index === activeFeature
-                            ? 'opacity-100 translate-y-0'
-                            : index < activeFeature
-                              ? 'opacity-0 -translate-y-8'
-                              : 'opacity-0 translate-y-8'
+                        className={`rounded-xl border transition-all duration-500 overflow-hidden ${isActive
+                            ? 'bg-white/5 border-[#5fff9e]/30'
+                            : 'bg-transparent border-white/10 hover:border-white/20'
                           }`}
                       >
-                        {/* Number */}
-                        <span className="text-[#5fff9e] text-sm font-bold tracking-wider mb-3 block">
-                          {feature.number}
-                        </span>
+                        {/* Header - always visible */}
+                        <div className={`flex items-center gap-4 p-4 sm:p-5 transition-colors duration-300 ${isActive ? '' : 'opacity-50'
+                          }`}>
+                          {/* Number */}
+                          <span className={`text-sm font-bold transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
+                            }`}>
+                            {feature.number}
+                          </span>
 
-                        {/* Title */}
-                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
-                          {feature.title}
-                        </h3>
+                          {/* Title */}
+                          <h3 className={`text-lg sm:text-xl font-semibold transition-colors duration-300 flex-1 ${isActive ? 'text-white' : 'text-white/50'
+                            }`}>
+                            {feature.title}
+                          </h3>
 
-                        {/* Description */}
-                        <p className="text-base sm:text-lg text-white/70 leading-relaxed mb-6 max-w-lg mx-auto lg:mx-0">
-                          {feature.description}
-                        </p>
+                          {/* Icon */}
+                          <Icon className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-[#5fff9e]' : 'text-white/30'
+                            }`} />
+                        </div>
 
-                        {/* CTA Button */}
-                        <a
-                          href={demoLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-black bg-[#48ee8d] hover:bg-[#5fff9e] shadow-[0_4px_20px_rgba(72,238,141,0.35)] transition-all duration-200"
-                        >
-                          Book Demo →
-                        </a>
+                        {/* Expandable content */}
+                        <div className={`overflow-hidden transition-all duration-500 ease-out ${isActive ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                          }`}>
+                          <div className="px-4 sm:px-5 pb-5">
+                            <p className="text-white/70 text-sm sm:text-base leading-relaxed pl-8">
+                              {feature.description}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
 
-                  {/* Scroll hint - only show on first feature */}
-                  <div className={`mt-8 flex items-center justify-center lg:justify-start gap-2 text-white/40 text-sm transition-opacity duration-300 ${activeFeature === 0 ? 'opacity-100' : 'opacity-0'}`}>
-                    <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                    <span>Scroll to explore</span>
+                  {/* CTA Button */}
+                  <div className="pt-4">
+                    <a
+                      href={demoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-black bg-[#48ee8d] hover:bg-[#5fff9e] shadow-[0_4px_20px_rgba(72,238,141,0.35)] transition-all duration-200"
+                    >
+                      Book Demo →
+                    </a>
                   </div>
                 </div>
               </div>
