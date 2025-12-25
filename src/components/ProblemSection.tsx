@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
-// Tool logos for the "before" side
+// Tool logos for the "before" side (12 logos)
 const toolLogos = [
     { name: "LinkedIn", src: "/assets/company-logos/linkeidn logo.svg" },
     { name: "Indeed", src: "/assets/company-logos/Indeed_logo (1).svg" },
     { name: "Apollo", src: "/assets/company-logos/Apollo.io_idY1K1QZB-_1.svg" },
-    { name: "Hunter", src: "/assets/company-logos/Lusha_idDCG_-t5d_0.svg" },
+    { name: "Lusha", src: "/assets/company-logos/Lusha_idDCG_-t5d_0.svg" },
     { name: "Greenhouse", src: "/assets/company-logos/greenhouse logo.svg" },
     { name: "HubSpot", src: "/assets/company-logos/HubSpot_Logo.svg" },
+    { name: "Slack", src: "/assets/company-logos/Slack_Technologies_Logo.svg" },
+    { name: "Notion", src: "/assets/company-logos/Notion-logo.svg" },
+    { name: "Pipedrive", src: "/assets/company-logos/Pipedrive_idHo6Lfa2R_0.svg" },
+    { name: "Glassdoor", src: "/assets/company-logos/Glassdoor_Logo_2023.svg" },
+    { name: "Bullhorn", src: "/assets/company-logos/Bullhorn_idcftBMeek_1.svg" },
+    { name: "Calendly", src: "/assets/company-logos/Calendly_idA4lPSDzF_0.svg" },
 ];
 
 export function ProblemSection() {
@@ -69,7 +75,7 @@ export function ProblemSection() {
                         <h3 className="text-xl font-bold text-gray-900 mb-8">Juggling between tools</h3>
 
                         {/* Logo Grid with subtle floating animation */}
-                        <div className="grid grid-cols-3 gap-4 mb-8">
+                        <div className="grid grid-cols-4 gap-3 mb-8">
                             {toolLogos.map((tool, i) => (
                                 <div
                                     key={i}
@@ -115,12 +121,12 @@ export function ProblemSection() {
 
                         <h3 className="text-xl font-bold text-gray-900 mb-8">Everything in one place</h3>
 
-                        {/* boilr Logo centered - bigger */}
-                        <div className="flex items-center justify-center p-10 bg-white rounded-xl border border-[#5fff9e]/20 mb-8">
+                        {/* boilr Logo centered - no border, much bigger */}
+                        <div className="flex items-center justify-center py-12 mb-8">
                             <img
                                 src="/boilr-logo-black.png"
                                 alt="boilr"
-                                className="h-16 object-contain"
+                                className="h-24 object-contain"
                             />
                         </div>
 
