@@ -7,6 +7,7 @@ import ClientLogosSection from "@/components/ClientLogosSection";
 import { ProblemSection } from "@/components/ProblemSection";
 import { SolutionSection } from "@/components/SolutionSection";
 import { ConsolidationSection } from "@/components/ConsolidationSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import { Footer } from "@/components/Footer";
 import ClosingSection from "@/components/ClosingSection";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
@@ -15,9 +16,16 @@ import { FAQSection, shortFAQs } from "@/components/FAQSection";
 /**
  * Main Index page component
  *
- * This component manages the main landing page with dual modes (sales/recruitment).
- * It handles URL parameters to support deep linking and navigation from legal pages.
- * The page ensures proper scroll behavior and mode synchronization.
+ * Page Structure (redesigned for more substance):
+ * 1. Hero (unchanged)
+ * 2. Client Logos (social proof)
+ * 3. Impact Stats (numbers that matter)
+ * 4. Pain Points (problems we solve)
+ * 5. Solution Section with Radar (how we solve them)
+ * 6. Testimonials (real success stories)
+ * 7. Before/After Comparison (transformation)
+ * 8. FAQ
+ * 9. Closing CTA
  */
 const Index = () => {
   const [searchParams] = useSearchParams();
@@ -61,34 +69,47 @@ const Index = () => {
       <NavigationHeader mode={activeMode} onModeChange={handleModeChange} />
 
       <main role="main" className="[&>section]:scroll-mt-20 [&>section]:pt-0 [&>section]:pb-0">
+        {/* 1. HERO - unchanged */}
         <section aria-label="Hero section" className="-mt-20 sm:-mt-24 md:-mt-28 pb-8 sm:pb-10 md:pb-12">
           <HeroSection mode={activeMode} />
         </section>
 
+        {/* 2. CLIENT LOGOS - social proof */}
         <section aria-label="Client logos" className="pb-0">
           <ClientLogosSection />
         </section>
 
-        <section id="logos-outcomes" aria-label="Logos and Outcomes" className="pb-10 sm:pb-12 md:pb-14">
+        {/* 3. IMPACT STATS - numbers that matter */}
+        <section id="stats" aria-label="Impact Statistics">
           <LogoOutcomeSection />
         </section>
 
-        <section id="problem" aria-label="Problem" className="py-0">
+        {/* 4. PAIN POINTS - problems we solve */}
+        <section id="problem" aria-label="Problem">
           <ProblemSection />
         </section>
 
-        <section id="solution" aria-label="Solution" className="py-6 sm:py-8 md:py-12">
+        {/* 5. SOLUTION - how boilr works (with Radar) */}
+        <section id="solution" aria-label="Solution">
           <SolutionSection mode={activeMode} />
         </section>
 
-        <section id="consolidation" aria-label="Consolidation" className="py-0">
+        {/* 6. TESTIMONIALS - real success stories */}
+        <section id="testimonials" aria-label="Testimonials">
+          <TestimonialsSection />
+        </section>
+
+        {/* 7. BEFORE/AFTER - the transformation */}
+        <section id="transformation" aria-label="Before and After">
           <ConsolidationSection mode={activeMode} />
         </section>
 
+        {/* 8. FAQ */}
         <section aria-label="FAQ">
           <FAQSection faqs={shortFAQs} />
         </section>
 
+        {/* 9. CLOSING CTA */}
         <section aria-label="Closing" className="pt-0">
           <ClosingSection />
         </section>
