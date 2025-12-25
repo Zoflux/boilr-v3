@@ -76,12 +76,12 @@ export default function TestimonialsSection() {
         <section ref={sectionRef} className="py-20 sm:py-28 bg-[#fafafa]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-                {/* Header - Left aligned */}
-                <header className={`mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+                {/* Header */}
+                <header className={`text-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
                         Trusted by 100+ recruitment companies
                     </h2>
-                    <p className="mt-4 text-lg text-gray-500">
+                    <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
                         Here's what they say about working smarter, not harder.
                     </p>
                 </header>
@@ -106,16 +106,16 @@ export default function TestimonialsSection() {
 
                 {/* Testimonial Display - Two column layout, full width */}
                 <div
-                    className={`grid md:grid-cols-2 gap-8 lg:gap-16 items-start transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                    className={`grid md:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                     style={{ transitionDelay: "200ms" }}
                 >
                     {/* Image - Left aligned */}
-                    <div className="flex justify-center md:justify-start">
+                    <div>
                         <img
                             key={activeTestimonial.image}
                             src={activeTestimonial.image}
                             alt={activeTestimonial.name}
-                            className="w-48 h-48 sm:w-64 sm:h-64 rounded-3xl object-cover shadow-lg"
+                            className="w-52 h-52 sm:w-60 sm:h-60 rounded-3xl object-cover shadow-lg"
                         />
                     </div>
 
