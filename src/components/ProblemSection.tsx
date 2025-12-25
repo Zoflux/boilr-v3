@@ -119,15 +119,35 @@ export function ProblemSection() {
                             With boilr
                         </span>
 
-                        <h3 className="text-xl font-bold text-gray-900 mb-8">Everything in one place</h3>
+                        <h3 className="text-xl font-bold text-gray-900 mb-6">Everything in one place</h3>
 
-                        {/* boilr Logo centered - no border, much bigger */}
-                        <div className="flex items-center justify-center py-12 mb-8">
+                        {/* boilr Logo with glow effect */}
+                        <div className="relative flex items-center justify-center py-8 mb-6">
+                            {/* Glow background */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-40 h-40 bg-[#5fff9e]/20 rounded-full blur-3xl"></div>
+                            </div>
                             <img
                                 src="/boilr-logo-black.png"
                                 alt="boilr"
-                                className="h-24 object-contain"
+                                className="h-20 object-contain relative z-10"
                             />
+                        </div>
+
+                        {/* Benefit chips */}
+                        <div className="flex flex-wrap gap-2 justify-center mb-6">
+                            <span className="text-xs bg-white border border-[#5fff9e]/30 text-gray-600 px-3 py-1.5 rounded-full">
+                                ✓ Signal Detection
+                            </span>
+                            <span className="text-xs bg-white border border-[#5fff9e]/30 text-gray-600 px-3 py-1.5 rounded-full">
+                                ✓ Lead Enrichment
+                            </span>
+                            <span className="text-xs bg-white border border-[#5fff9e]/30 text-gray-600 px-3 py-1.5 rounded-full">
+                                ✓ AI Scoring
+                            </span>
+                            <span className="text-xs bg-white border border-[#5fff9e]/30 text-gray-600 px-3 py-1.5 rounded-full">
+                                ✓ CRM Sync
+                            </span>
                         </div>
 
                         {/* Stats */}
