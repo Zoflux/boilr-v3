@@ -6,40 +6,52 @@ interface Testimonial {
     name: string;
     role: string;
     company: string;
-    image?: string;
-    highlight: string;
+    image: string;
+    features?: string[];
 }
 
-const testimonials: Testimonial[] = [
-    {
-        quote: "We went from no structured business development to signing a new client in month one. boilr lets us focus on the human side, not the research.",
+// 4 categories with real testimonials from OurCustomers.tsx
+const testimonialsByCategory: Record<string, Testimonial> = {
+    "Managing Director": {
+        quote: "We went from having no real business development structure to signing our first client in less than a month. It's a simple, easy-to-use platform that instantly provided the critical structure we were missing.",
         name: "Helen Wright",
         role: "Managing Director",
-        company: "923-jobs",
+        company: "923 Jobs",
         image: "/testimonials/helen-wright.jpg",
-        highlight: "New client in month one"
+        features: ["Signal Detection", "Lead Enrichment", "Quick Setup"]
     },
-    {
-        quote: "The time savings alone justified the investment. We're now calling hiring managers before they've even posted the role publicly.",
-        name: "Sam Wason",
-        role: "Co-Founder",
-        company: "Digital Gurus",
-        image: "/testimonials/sam-wason.jpg",
-        highlight: "48h head start on every opportunity"
-    },
-    {
-        quote: "boilr changed how we think about sourcing. It's not about working harder — it's about knowing where to look before anyone else.",
+    "Founder": {
+        quote: "We operate in a very niche market, but Boilr is helping me discover new companies I've never seen before. I use it to track job openings not posted on job boards, giving me a real strategic advantage.",
         name: "Andrew Chubb",
-        role: "Head of Talent",
-        company: "Ventrica",
-        image: "/testimonials/andrew-chubb.jpg",
-        highlight: "Changed our entire approach"
+        role: "Managing Director",
+        company: "KRG Group Ltd",
+        image: "/testimonials/andrew-chubb.png",
+        features: ["Niche Markets", "Hidden Signals", "Competitive Edge"]
+    },
+    "Head of BD": {
+        quote: "Already during the 5-day trial, our business development team managed to save three hours of research per day. We discovered 25 new companies we had never targeted before and we've been in business for 15 years!",
+        name: "Ben Sayer",
+        role: "Head of Business Development",
+        company: "Altitude Select",
+        image: "/testimonials/ben-sayer.png",
+        features: ["Time Savings", "New Opportunities", "Market Mapping"]
+    },
+    "Team Lead": {
+        quote: "Boilr helps us map new markets and uncover companies we'd never found before, especially smaller companies with under 200 people that are usually hard to find but perfect for outbound. Within the first week, we saw our first wins.",
+        name: "Sam Wason",
+        role: "Managing Director",
+        company: "Cathcart Technology",
+        image: "/testimonials/sam-wason.png",
+        features: ["SMB Targeting", "Market Discovery", "Fast ROI"]
     }
-];
+};
+
+const categories = Object.keys(testimonialsByCategory);
 
 export default function TestimonialsSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const [isVisible, setIsVisible] = useState(false);
+    const [activeCategory, setActiveCategory] = useState(categories[0]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -58,6 +70,8 @@ export default function TestimonialsSection() {
         return () => observer.disconnect();
     }, []);
 
+    const activeTestimonial = testimonialsByCategory[activeCategory];
+
     return (
         <section ref={sectionRef} className="py-20 sm:py-28 bg-[#fafafa]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -70,70 +84,86 @@ export default function TestimonialsSection() {
                         ))}
                     </div>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
-                        Trusted by 50+ recruitment teams
+                        Trusted by 100+ recruitment companies
                     </h2>
                     <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
                         Here's what they say about working smarter, not harder.
                     </p>
                 </header>
 
-                {/* Testimonials Grid */}
-                <div className="grid md:grid-cols-3 gap-6">
-                    {testimonials.map((testimonial, index) => (
-                        <div
-                            key={index}
-                            className={`bg-white rounded-2xl border border-gray-100 p-6 sm:p-8 
-                hover:shadow-xl hover:shadow-gray-100/50 hover:border-[#5fff9e]/20
-                transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                            style={{ transitionDelay: `${150 + index * 100}ms` }}
+                {/* Category Tabs */}
+                <div className={`flex flex-wrap justify-center gap-2 mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "100ms" }}>
+                    {categories.map((category) => (
+                        <button
+                            key={category}
+                            onClick={() => setActiveCategory(category)}
+                            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
+                                    ? "bg-gray-900 text-white"
+                                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50"
+                                }`}
                         >
-                            {/* Highlight Badge */}
-                            <div className="inline-flex items-center rounded-full bg-[#5fff9e]/10 px-3 py-1 text-xs font-medium text-[#10b981] mb-4">
-                                {testimonial.highlight}
-                            </div>
-
-                            {/* Quote */}
-                            <blockquote className="text-gray-700 leading-relaxed mb-6">
-                                "{testimonial.quote}"
-                            </blockquote>
-
-                            {/* Author */}
-                            <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                                {testimonial.image ? (
-                                    <img
-                                        src={testimonial.image}
-                                        alt={testimonial.name}
-                                        className="w-10 h-10 rounded-full object-cover"
-                                    />
-                                ) : (
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#5fff9e] to-[#10b981] flex items-center justify-center text-black font-semibold text-sm">
-                                        {testimonial.name.split(' ').map(n => n[0]).join('')}
-                                    </div>
-                                )}
-                                <div>
-                                    <div className="font-semibold text-gray-900 text-sm">{testimonial.name}</div>
-                                    <div className="text-gray-500 text-xs">{testimonial.role} @ {testimonial.company}</div>
-                                </div>
-                            </div>
-                        </div>
+                            {category}
+                        </button>
                     ))}
                 </div>
 
+                {/* Testimonial Display - Large format */}
+                <div
+                    className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                    style={{ transitionDelay: "200ms" }}
+                >
+                    {/* Image */}
+                    <div className="relative">
+                        <div className="aspect-[4/5] max-w-sm mx-auto rounded-2xl overflow-hidden shadow-2xl">
+                            <img
+                                key={activeTestimonial.image}
+                                src={activeTestimonial.image}
+                                alt={activeTestimonial.name}
+                                className="w-full h-full object-cover transition-opacity duration-500"
+                            />
+                            {/* Name overlay */}
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                                <p className="text-white font-semibold text-lg">{activeTestimonial.name}</p>
+                                <p className="text-white/70 text-sm">{activeTestimonial.role} at {activeTestimonial.company}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Quote and Info */}
+                    <div>
+                        <blockquote className="text-xl sm:text-2xl lg:text-3xl text-gray-900 font-medium leading-relaxed mb-8">
+                            "{activeTestimonial.quote}"
+                        </blockquote>
+
+                        {/* Features */}
+                        {activeTestimonial.features && (
+                            <div className="flex flex-wrap gap-2">
+                                <span className="text-sm text-gray-500">Features:</span>
+                                {activeTestimonial.features.map((feature, i) => (
+                                    <span key={i} className="text-sm text-[#10b981]">
+                                        {feature}{i < activeTestimonial.features!.length - 1 ? "," : ""}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+
                 {/* G2 Rating */}
-                <div className={`mt-10 flex justify-center transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "500ms" }}>
+                <div className={`mt-14 flex justify-center transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "400ms" }}>
                     <a
                         href="https://www.g2.com/products/boilr/reviews"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-gray-200 hover:border-[#5fff9e]/50 transition-colors"
                     >
-                        <img src="/g2-logo.svg" alt="G2" className="h-6" />
+                        <img src="/g2-logo.png" alt="G2" className="h-6" />
                         <div className="flex items-center gap-1">
                             {[...Array(5)].map((_, i) => (
                                 <Star key={i} className="w-4 h-4 fill-orange-400 text-orange-400" />
                             ))}
                         </div>
-                        <span className="text-sm text-gray-600">4.8/5 on G2</span>
+                        <span className="text-sm text-gray-600">5.0/5 on G2</span>
                     </a>
                 </div>
 
