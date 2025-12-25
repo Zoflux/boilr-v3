@@ -68,12 +68,16 @@ export function ProblemSection() {
 
                         <h3 className="text-xl font-bold text-gray-900 mb-8">Juggling between tools</h3>
 
-                        {/* Logo Grid */}
+                        {/* Logo Grid with subtle floating animation */}
                         <div className="grid grid-cols-3 gap-4 mb-8">
                             {toolLogos.map((tool, i) => (
                                 <div
                                     key={i}
                                     className="flex items-center justify-center p-4 bg-white rounded-xl border border-gray-100 h-16"
+                                    style={{
+                                        animation: `floatSubtle ${3 + (i * 0.5)}s ease-in-out infinite`,
+                                        animationDelay: `${i * 0.3}s`
+                                    }}
                                 >
                                     <img
                                         src={tool.src}
@@ -83,6 +87,14 @@ export function ProblemSection() {
                                 </div>
                             ))}
                         </div>
+
+                        {/* Animation keyframes */}
+                        <style>{`
+                          @keyframes floatSubtle {
+                            0%, 100% { transform: translateY(0px); }
+                            50% { transform: translateY(-4px); }
+                          }
+                        `}</style>
 
                         {/* Stats */}
                         <div className="pt-6 border-t border-gray-200">
@@ -103,12 +115,12 @@ export function ProblemSection() {
 
                         <h3 className="text-xl font-bold text-gray-900 mb-8">Everything in one place</h3>
 
-                        {/* boilr Logo centered */}
-                        <div className="flex items-center justify-center p-8 bg-white rounded-xl border border-[#5fff9e]/20 mb-8">
+                        {/* boilr Logo centered - bigger */}
+                        <div className="flex items-center justify-center p-10 bg-white rounded-xl border border-[#5fff9e]/20 mb-8">
                             <img
                                 src="/boilr-logo-black.png"
                                 alt="boilr"
-                                className="h-10 object-contain"
+                                className="h-16 object-contain"
                             />
                         </div>
 
