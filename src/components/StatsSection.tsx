@@ -44,7 +44,8 @@ export default function StatsSection() {
         <section ref={sectionRef} className="py-16 sm:py-20 bg-[#f8f9fa]">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-                <div className="max-w-3xl mx-auto">
+                {/* Full width container matching cards above */}
+                <div>
                     {/* Subtitle */}
                     <p className={`text-gray-800 text-base sm:text-lg font-medium mb-6 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
                         Turn your recruitment process into a machine that never stops working.
@@ -58,7 +59,7 @@ export default function StatsSection() {
                             return (
                                 <p
                                     key={index}
-                                    className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                                    className={`text-3xl sm:text-4xl md:text-5xl font-bold leading-tight transition-all duration-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                                         }`}
                                     style={{
                                         transitionDelay: isVisible ? `${index * 200}ms` : "0ms",
