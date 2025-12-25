@@ -41,7 +41,6 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
       const scrolledIntoSection = Math.max(0, -sectionTop);
       const progress = Math.max(0, Math.min(1, scrolledIntoSection / scrollableDistance));
 
-      // Map progress to feature index (0, 1, 2)
       let newActiveFeature = 0;
       if (progress < 0.33) {
         newActiveFeature = 0;
@@ -141,22 +140,34 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
 
   const current = content[resolvedMode];
   const demoLink = "https://calendly.com/felix-boilr/demo";
-  const activeContent = current.features[activeFeature];
 
   return (
     <section ref={sectionRef} data-dark-section="true" className="bg-black relative">
-      {/* Scroll container - 250vh for smooth scroll through 3 features */}
+      {/* Scroll container */}
       <div className="relative" style={{ height: '250vh' }}>
         {/* Sticky centered container */}
         <div className="sticky top-0 h-screen flex items-center justify-center">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
 
+              {/* Section Header */}
+              <div className="text-center mb-12 sm:mb-16">
+                <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-[0.12em] text-white/70 mb-4">
+                  {current.pill}
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
+                  {current.title}
+                </h2>
+                <p className="text-base sm:text-lg text-white/60 mt-3 max-w-2xl mx-auto">
+                  {current.subtitle}
+                </p>
+              </div>
+
               <div className="lg:grid lg:grid-cols-2 lg:gap-16 xl:gap-20 items-center">
                 {/* Left: Radar Preview */}
                 <div className="mb-8 lg:mb-0">
                   <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#0b0f14] border border-white/10">
-                    <div className="w-full h-[20rem] sm:h-[24rem] lg:h-[28rem]">
+                    <div className="w-full h-[18rem] sm:h-[22rem] lg:h-[24rem]">
                       <RadarGridPreviewV2 />
                     </div>
                   </div>
@@ -164,23 +175,8 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
 
                 {/* Right: Content */}
                 <div className="text-center lg:text-left">
-                  {/* Step indicator */}
-                  <div className="flex items-center justify-center lg:justify-start gap-2 mb-6">
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        className={`h-1 rounded-full transition-all duration-500 ${i === activeFeature
-                            ? 'w-8 bg-[#5fff9e]'
-                            : i < activeFeature
-                              ? 'w-4 bg-[#5fff9e]/50'
-                              : 'w-4 bg-white/20'
-                          }`}
-                      />
-                    ))}
-                  </div>
-
                   {/* Animated content - single feature at a time */}
-                  <div className="relative min-h-[280px] sm:min-h-[260px]">
+                  <div className="relative min-h-[220px] sm:min-h-[200px]">
                     {current.features.map((feature, index) => (
                       <div
                         key={feature.number}
@@ -191,13 +187,10 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                               : 'opacity-0 translate-y-8'
                           }`}
                       >
-                        {/* Number badge */}
-                        <div className="inline-flex items-center gap-3 mb-4">
-                          <span className="text-[#5fff9e] text-sm font-bold tracking-wider">
-                            {feature.number}
-                          </span>
-                          <div className="h-px w-8 bg-[#5fff9e]/50" />
-                        </div>
+                        {/* Number */}
+                        <span className="text-[#5fff9e] text-sm font-bold tracking-wider mb-3 block">
+                          {feature.number}
+                        </span>
 
                         {/* Title */}
                         <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
@@ -205,7 +198,7 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                         </h3>
 
                         {/* Description */}
-                        <p className="text-base sm:text-lg text-white/70 leading-relaxed mb-8 max-w-lg">
+                        <p className="text-base sm:text-lg text-white/70 leading-relaxed mb-6 max-w-lg mx-auto lg:mx-0">
                           {feature.description}
                         </p>
 
@@ -222,8 +215,8 @@ export function SolutionSection({ mode }: SolutionSectionProps) {
                     ))}
                   </div>
 
-                  {/* Scroll hint */}
-                  <div className="mt-8 flex items-center justify-center lg:justify-start gap-2 text-white/40 text-sm">
+                  {/* Scroll hint - only show on first feature */}
+                  <div className={`mt-8 flex items-center justify-center lg:justify-start gap-2 text-white/40 text-sm transition-opacity duration-300 ${activeFeature === 0 ? 'opacity-100' : 'opacity-0'}`}>
                     <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
