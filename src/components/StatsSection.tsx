@@ -4,9 +4,9 @@ export default function StatsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [activeLine, setActiveLine] = useState(0);
-  const [charOffset, setCharOffset] = useState(0);
+  const [sparkles, setSparkles] = useState<number[]>([]);
 
-  // Intersection observer for when section comes into view
+  // Intersection observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -24,29 +24,6 @@ export default function StatsSection() {
     return () => observer.disconnect();
   }, []);
 
-  // Animated line + character highlighting
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const totalLines = 4;
-
-    // Character sweep animation
-    const charInterval = setInterval(() => {
-      setCharOffset(prev => (prev + 1) % 30);
-    }, 80);
-
-    // Line change animation
-    const lineInterval = setInterval(() => {
-      setActiveLine(prev => (prev + 1) % totalLines);
-      setCharOffset(0);
-    }, 2500);
-
-    return () => {
-      clearInterval(charInterval);
-      clearInterval(lineInterval);
-    };
-  }, [isVisible]);
-
   const statements = [
     "Finding opportunities before anyone else.",
     "Enriching leads with verified contact data.",
@@ -54,24 +31,78 @@ export default function StatsSection() {
     "Automatically."
   ];
 
-  // Render text with gradient sweep effect
-  const renderWithGradient = (text: string, isActive: boolean) => {
+  // Sequential line animation with sparkles
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const lineDuration = 2000; // How long each line is active
+    const sparkleInterval = 150; // How often sparkles appear
+    const sparkleCount = 5; // How many sparkles visible at once
+
+    let sparkleTimer: NodeJS.Timeout;
+    let lineTimer: NodeJS.Timeout;
+    let currentSparkles: number[] = [];
+
+    const animateLine = () => {
+      // Clear sparkles from previous line
+      setSparkles([]);
+      currentSparkles = [];
+
+      // Generate random sparkle positions for this line
+      const textLength = statements[activeLine]?.length || 30;
+
+      sparkleTimer = setInterval(() => {
+        // Add new random sparkle position
+        const newSparkle = Math.floor(Math.random() * textLength);
+        currentSparkles = [...currentSparkles.slice(-sparkleCount + 1), newSparkle];
+        setSparkles([...currentSparkles]);
+      }, sparkleInterval);
+    };
+
+    animateLine();
+
+    // Move to next line
+    lineTimer = setInterval(() => {
+      setActiveLine(prev => (prev + 1) % statements.length);
+      clearInterval(sparkleTimer);
+      setSparkles([]);
+      currentSparkles = [];
+
+      // Start sparkles for new line after small delay
+      setTimeout(() => {
+        const textLength = statements[(activeLine + 1) % statements.length]?.length || 30;
+        sparkleTimer = setInterval(() => {
+          const newSparkle = Math.floor(Math.random() * textLength);
+          currentSparkles = [...currentSparkles.slice(-sparkleCount + 1), newSparkle];
+          setSparkles([...currentSparkles]);
+        }, sparkleInterval);
+      }, 100);
+    }, lineDuration);
+
+    return () => {
+      clearInterval(sparkleTimer);
+      clearInterval(lineTimer);
+    };
+  }, [isVisible, activeLine]);
+
+  // Render text with sparkle dots
+  const renderWithSparkles = (text: string, lineIndex: number) => {
+    const isActive = activeLine === lineIndex;
+
     if (!isActive) return text;
 
     return text.split('').map((char, i) => {
-      const distance = Math.abs(i - charOffset);
-      const isHighlighted = distance < 4;
-      const opacity = isHighlighted ? 1 - (distance * 0.25) : 0;
+      const hasSparkle = sparkles.includes(i);
 
       return (
-        <span
-          key={i}
-          style={{
-            color: isHighlighted ? `rgba(95, 255, 158, ${opacity})` : 'inherit',
-            transition: 'color 0.15s ease'
-          }}
-        >
-          {char}
+        <span key={i} className="relative inline-block">
+          {char === ' ' ? '\u00A0' : char}
+          {hasSparkle && (
+            <span
+              className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5fff9e] animate-ping"
+              style={{ animationDuration: '0.5s' }}
+            />
+          )}
         </span>
       );
     });
@@ -93,19 +124,18 @@ export default function StatsSection() {
           <div className="space-y-1 mb-8">
             {statements.map((statement, index) => {
               const isActive = activeLine === index;
-              const hasAppeared = isVisible;
 
               return (
                 <p
                   key={index}
-                  className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-700 ${hasAppeared ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                  className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                     } ${isActive ? "text-gray-900" : "text-gray-300"
                     }`}
                   style={{
-                    transitionDelay: hasAppeared ? `${index * 150}ms` : "0ms"
+                    transitionDelay: isVisible ? `${index * 150}ms` : "0ms"
                   }}
                 >
-                  {renderWithGradient(statement, isActive)}
+                  {renderWithSparkles(statement, index)}
                 </p>
               );
             })}
