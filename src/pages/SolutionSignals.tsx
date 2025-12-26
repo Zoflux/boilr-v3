@@ -728,14 +728,14 @@ const SolutionSignals = () => {
                 <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
                   <div className="text-[#10b981] font-medium text-sm mb-6">boilr.</div>
                   <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-6">
-                    I check my signals before my coffee.
+                    20 years in business, we found new companies with boilr.
                   </blockquote>
                   <p className="text-gray-600 leading-relaxed mb-8">
-                    "Every morning I wake up to a curated list of hiring signals. Last week I reached out to a CTO the day after their funding announcement — they hadn't even posted the role yet. That's the timing advantage boilr gives us."
+                    "Already during the 5-day trial, our business development team managed to save three hours of research per day finding temporary positions. We even discovered 25 new companies we had never targeted before and we’ve been in business for 15 years!"
                   </p>
                   <div>
-                    <div className="font-semibold text-gray-900">Marcus Chen</div>
-                    <div className="text-gray-500 text-sm">Founder @ Apex Talent Partners</div>
+                    <div className="font-semibold text-gray-900">Ben Sayer</div>
+                    <div className="text-gray-500 text-sm">Head of Business Development @ Altitude Select</div>
                   </div>
                 </div>
               </div>

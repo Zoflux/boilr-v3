@@ -471,7 +471,7 @@ export default function OurCustomers() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                                     </svg>
                                 </div>
-                                <h3 className="font-semibold text-white mb-2">Rated 5.0 on G2</h3>
+                                <h3 className="font-semibold text-white mb-2">Rated 4.8 on G2</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed">
                                     Rated as a top performer with excellent reviews from verified users.
                                 </p>
@@ -481,10 +481,6 @@ export default function OurCustomers() {
 
                     {/* CTA Part */}
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center mt-16 sm:mt-20">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/70 text-sm font-medium mb-6">
-                            <Users className="h-4 w-4" />
-                            Join the community
-                        </div>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
                             Ready to transform your recruitment?
                         </h2>
