@@ -38,21 +38,6 @@ export function ProblemSection() {
         return () => observer.disconnect();
     }, []);
 
-    // Hint animation: nudge slider left-right when visible
-    useEffect(() => {
-        if (!isVisible || hasInteracted) return;
-
-        const hintAnimation = async () => {
-            await new Promise(resolve => setTimeout(resolve, 800)); // Wait for entrance animation
-            setSliderPosition(40);
-            await new Promise(resolve => setTimeout(resolve, 400));
-            setSliderPosition(60);
-            await new Promise(resolve => setTimeout(resolve, 400));
-            setSliderPosition(50);
-        };
-
-        hintAnimation();
-    }, [isVisible, hasInteracted]);
 
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         if (!containerRef.current) return;
@@ -199,15 +184,44 @@ export function ProblemSection() {
                             <div className="text-xs text-gray-400">weekly</div>
                         </div>
 
-                        {/* Slider Handle */}
+                        {/* Slider Handle with animated arrows */}
                         <div
                             className="absolute top-0 bottom-0 w-0.5 bg-white/80 z-20 pointer-events-none"
                             style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
                         >
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center">
-                                <span className="text-gray-500 text-xs">⟷</span>
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-1">
+                                {/* Left arrow */}
+                                <span
+                                    className="text-gray-400 text-sm animate-pulse"
+                                    style={{ animation: 'arrowLeft 1.5s ease-in-out infinite' }}
+                                >
+                                    ‹
+                                </span>
+                                {/* Center circle */}
+                                <div className="w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center">
+                                    <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+                                </div>
+                                {/* Right arrow */}
+                                <span
+                                    className="text-gray-400 text-sm animate-pulse"
+                                    style={{ animation: 'arrowRight 1.5s ease-in-out infinite' }}
+                                >
+                                    ›
+                                </span>
                             </div>
                         </div>
+
+                        {/* Arrow animation keyframes */}
+                        <style>{`
+                          @keyframes arrowLeft {
+                            0%, 100% { transform: translateX(0); opacity: 0.4; }
+                            50% { transform: translateX(-4px); opacity: 1; }
+                          }
+                          @keyframes arrowRight {
+                            0%, 100% { transform: translateX(0); opacity: 0.4; }
+                            50% { transform: translateX(4px); opacity: 1; }
+                          }
+                        `}</style>
 
                         {/* Set height */}
                         <div className="h-[320px]"></div>
