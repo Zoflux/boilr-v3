@@ -61,7 +61,7 @@ export default function BusinessDevelopment() {
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 
-            <main className="pt-24 sm:pt-28 md:pt-32">
+            <main>
 
                 {/* Hero Section */}
                 <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-gray-50 to-white">
@@ -154,7 +154,7 @@ export default function BusinessDevelopment() {
                 </section>
 
                 {/* How boilr helps */}
-                <section className="py-16 sm:py-20 bg-gray-900 text-white">
+                <section className="py-16 sm:py-20 bg-black text-white">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6">
                         <div className="text-center mb-12">
                             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
