@@ -785,31 +785,26 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* Limitations Notice */}
-                <section className="py-8 bg-[#5fff9e]/10 border-b border-[#5fff9e]/20">
-                    <div className="mx-auto max-w-4xl px-4 sm:px-6">
-                        <div className="flex flex-col sm:flex-row items-start gap-4">
-                            <div className="h-10 w-10 rounded-lg bg-[#5fff9e]/20 flex items-center justify-center flex-shrink-0">
-                                <AlertTriangle className="h-5 w-5 text-[#10b981]" />
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-gray-900 mb-2">What ChatGPT Can't Do for Recruiters</h3>
-                                <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-600">
-                                    <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
-                                        <span><strong>No real-time data:</strong> Can't browse LinkedIn or check current market</span>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
-                                        <span><strong>No automation:</strong> Every prompt requires manual copy-paste</span>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
-                                        <span><strong>No verification:</strong> Can't validate claims or check references</span>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
-                                        <span><strong>No memory:</strong> Doesn't remember your pipeline or preferences</span>
-                                    </div>
+                <section className="py-6 bg-gray-100">
+                    <div className="mx-auto max-w-5xl px-4 sm:px-6">
+                        <div className="bg-white rounded-xl border border-gray-200 p-6">
+                            <p className="text-sm font-medium text-gray-500 mb-4 text-center">Keep in mind</p>
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div className="text-center p-3">
+                                    <p className="text-sm font-medium text-gray-900 mb-1">No real-time data</p>
+                                    <p className="text-xs text-gray-500">Can't browse LinkedIn or check current market</p>
+                                </div>
+                                <div className="text-center p-3">
+                                    <p className="text-sm font-medium text-gray-900 mb-1">No automation</p>
+                                    <p className="text-xs text-gray-500">Every prompt requires manual copy and paste</p>
+                                </div>
+                                <div className="text-center p-3">
+                                    <p className="text-sm font-medium text-gray-900 mb-1">No verification</p>
+                                    <p className="text-xs text-gray-500">Can't validate claims or check references</p>
+                                </div>
+                                <div className="text-center p-3">
+                                    <p className="text-sm font-medium text-gray-900 mb-1">No memory</p>
+                                    <p className="text-xs text-gray-500">Doesn't remember your pipeline or preferences</p>
                                 </div>
                             </div>
                         </div>
