@@ -334,7 +334,7 @@ export default function OurCustomers() {
                         <div className="text-center mb-16">
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                                 How Recruitment Leaders Built{" "}
-                                <span className="text-[#10b981]">Speed, Scale & Success</span>
+                                <span className="text-[#5fff9e]">Speed, Scale & Success</span>
                                 {" "}with boilr
                             </h2>
                         </div>
