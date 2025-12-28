@@ -497,7 +497,210 @@ I'd love to stay connected – we're expanding next quarter and your B2C experie
 
 Wishing you the best,
 [Your name]`,
-        limitation: "A good rejection requires genuine knowledge of the interview – something only you have."
+        limitation: "A good rejection requires genuine knowledge of the interview, something only you have."
+    },
+    {
+        id: 11,
+        category: "Candidate Assessment",
+        icon: Users,
+        title: "Candidate Comparison Matrix",
+        description: "Compare multiple candidates objectively for a role",
+        prompt: `Act as an objective hiring consultant.
+
+<CANDIDATES>
+Candidate 1: [NAME, KEY STRENGTHS, CONCERNS]
+Candidate 2: [NAME, KEY STRENGTHS, CONCERNS]
+Candidate 3: [NAME, KEY STRENGTHS, CONCERNS]
+</CANDIDATES>
+
+<ROLE_REQUIREMENTS>
+- Must have: [LIST]
+- Nice to have: [LIST]
+- Team culture: [DESCRIPTION]
+</ROLE_REQUIREMENTS>
+
+<OUTPUT>
+Create a comparison matrix with:
+1. Score each candidate on each requirement (1-5)
+2. Overall fit assessment
+3. Risk factors for each
+4. Final recommendation with reasoning
+</OUTPUT>`,
+        exampleResponse: `**Candidate Comparison Matrix**
+
+| Criteria | Anna (4.2) | Ben (3.8) | Clara (4.0) |
+|----------|------------|-----------|-------------|
+| Technical Skills | 5 | 4 | 4 |
+| Leadership | 4 | 3 | 5 |
+| Culture Fit | 4 | 5 | 3 |
+
+**Recommendation:** Anna for technical depth, Clara for leadership track.`,
+        limitation: "Scores are based on your input. The AI cannot evaluate candidates independently."
+    },
+    {
+        id: 12,
+        category: "Outreach",
+        icon: Mail,
+        title: "LinkedIn Bio Writer",
+        description: "Create a compelling recruiter bio that attracts candidates",
+        prompt: `Act as a personal branding expert for recruiters.
+
+<MY_BACKGROUND>
+- Name: [NAME]
+- Company: [COMPANY]
+- Specialization: [INDUSTRY/ROLES]
+- Years experience: [NUMBER]
+- Unique value: [WHAT SETS YOU APART]
+</MY_BACKGROUND>
+
+<REQUIREMENTS>
+- Professional but approachable
+- Highlight candidate focus
+- Include call to action
+- Maximum 300 characters for headline
+- Maximum 2000 characters for about section
+</REQUIREMENTS>`,
+        exampleResponse: `**Headline:**
+Helping Engineers Find Their Next Challenge | Tech Recruiter at Acme | Former Developer
+
+**About:**
+I spent 5 years as a software engineer before switching to recruitment. That means I actually understand what you do and what you are looking for.
+
+I specialize in connecting senior engineers with startups that value technical excellence over corporate politics.
+
+If you are exploring new opportunities (or just curious about the market), my DMs are always open.`,
+        limitation: "You will need to refine the tone based on your personal voice and brand."
+    },
+    {
+        id: 13,
+        category: "Interview",
+        icon: MessageSquare,
+        title: "Salary Negotiation Script",
+        description: "Prepare talking points for salary discussions",
+        prompt: `Act as a compensation negotiation coach.
+
+<SITUATION>
+- Role: [JOB TITLE]
+- Candidate expectation: [AMOUNT]
+- Budget maximum: [AMOUNT]
+- Gap: [AMOUNT]
+- Other compensation: [BENEFITS, EQUITY, ETC]
+</SITUATION>
+
+<CANDIDATE_VALUE>
+- Key strengths: [LIST]
+- Market demand: [HIGH/MEDIUM/LOW]
+- Alternative offers: [IF KNOWN]
+</CANDIDATE_VALUE>
+
+<OUTPUT>
+Provide a negotiation script with:
+1. Opening framing
+2. Key value points to emphasize
+3. Alternative compensation options
+4. Closing approach
+</OUTPUT>`,
+        exampleResponse: `**Opening:**
+"I want to make sure we find an offer that works for both sides. Let me walk you through the full package..."
+
+**Value Points:**
+- Emphasize equity growth potential
+- Highlight signing bonus flexibility
+- Mention accelerated review cycle
+
+**Alternatives if base is fixed:**
+- Additional PTO days
+- Remote work flexibility
+- Professional development budget
+
+**Close:**
+"What matters most to you beyond base salary?"`,
+        limitation: "Every negotiation is different. Adjust based on the candidate's priorities."
+    },
+    {
+        id: 14,
+        category: "Interview",
+        icon: MessageSquare,
+        title: "Reference Check Questions",
+        description: "Generate targeted questions for reference calls",
+        prompt: `Act as a thorough reference checker.
+
+<CANDIDATE_INFO>
+- Name: [NAME]
+- Role applied for: [ROLE]
+- Previous role: [TITLE AT REFERENCE COMPANY]
+- Key competencies to verify: [LIST]
+- Concerns from interview: [IF ANY]
+</CANDIDATE_INFO>
+
+<OUTPUT>
+Generate 10 questions that:
+1. Verify stated accomplishments
+2. Probe potential weaknesses
+3. Assess cultural fit
+4. Uncover working style
+Include follow-up probes for each.
+</OUTPUT>`,
+        exampleResponse: `**Verification Questions:**
+1. "Can you describe the project where [NAME] led the migration?"
+   - Follow-up: "What was their specific contribution vs the team's?"
+
+**Weakness Probes:**
+2. "How did [NAME] handle situations with tight deadlines?"
+   - Follow-up: "Can you give me a specific example?"
+
+**Culture Fit:**
+3. "How would you describe their collaboration style?"
+   - Follow-up: "How did they handle disagreements?"`,
+        limitation: "References are typically positive. Read between the lines and note hesitations."
+    },
+    {
+        id: 15,
+        category: "Communication",
+        icon: BookOpen,
+        title: "Pipeline Status Update",
+        description: "Create clear hiring updates for stakeholders",
+        prompt: `Act as a recruitment operations specialist.
+
+<PIPELINE_DATA>
+- Role: [JOB TITLE]
+- Days open: [NUMBER]
+- Candidates sourced: [NUMBER]
+- In screening: [NUMBER]
+- In interviews: [NUMBER]
+- Offers extended: [NUMBER]
+- Blockers: [IF ANY]
+</PIPELINE_DATA>
+
+<OUTPUT>
+Create a stakeholder update that:
+1. Summarizes progress clearly
+2. Highlights wins and concerns
+3. Provides timeline estimate
+4. Lists action items needed
+Keep it under 200 words.
+</OUTPUT>`,
+        exampleResponse: `**Senior Product Manager: Week 3 Update**
+
+**Pipeline Health:** On Track
+
+We have reviewed 45 candidates and have 3 in final rounds. One strong candidate is expected to receive an offer this week.
+
+**Highlights:**
+- Response rate 28% (above benchmark)
+- 2 candidates from employee referrals
+
+**Concerns:**
+- Salary expectations trending 10% above budget
+- Need faster feedback from hiring manager
+
+**Next Steps:**
+1. Schedule final panel for Friday
+2. Prepare offer package by Monday
+3. Align on compensation flexibility
+
+**ETA to hire:** 2 weeks`,
+        limitation: "You will need to input accurate pipeline data to get useful outputs."
     }
 ];
 
@@ -587,7 +790,7 @@ export default function PromptsForRecruiters() {
                                 <div className="h-8 w-8 rounded-lg bg-[#5fff9e]/20 flex items-center justify-center">
                                     <Target className="h-4 w-4 text-[#10b981]" />
                                 </div>
-                                <span className="text-gray-600">10 ready templates</span>
+                                <span className="text-gray-600">15 ready templates</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="h-8 w-8 rounded-lg bg-[#5fff9e]/20 flex items-center justify-center">
