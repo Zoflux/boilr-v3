@@ -554,46 +554,46 @@ export default function PromptsForRecruiters() {
     };
 
     return (
-        <div className="min-h-screen bg-black">
+        <div className="min-h-screen bg-gray-100">
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 
             <main>
                 {/* Hero Section */}
-                <section className="py-16 sm:py-20 bg-black text-white">
+                <section className="py-16 sm:py-20 bg-gray-100">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#5fff9e] text-sm font-medium mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#10b981] text-sm font-medium mb-6">
                             <Sparkles className="h-4 w-4" />
                             Free Prompting Guide
                         </div>
 
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
-                            ChatGPT Prompts for <span className="text-[#5fff9e]">Recruiters</span>
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
+                            ChatGPT Prompts for <span className="text-[#10b981]">Recruiters</span>
                         </h1>
 
-                        <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-8">
+                        <p className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-8">
                             Learn to write effective prompts step-by-step. Build your prompt interactively, then copy our ready-made templates.
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-sm sm:text-base">
                             <div className="flex items-center gap-2">
                                 <div className="h-8 w-8 rounded-lg bg-[#5fff9e]/20 flex items-center justify-center">
-                                    <Zap className="h-4 w-4 text-[#5fff9e]" />
+                                    <Zap className="h-4 w-4 text-[#10b981]" />
                                 </div>
-                                <span className="text-white/80">Interactive builder</span>
+                                <span className="text-gray-600">Interactive builder</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="h-8 w-8 rounded-lg bg-[#5fff9e]/20 flex items-center justify-center">
-                                    <Target className="h-4 w-4 text-[#5fff9e]" />
+                                    <Target className="h-4 w-4 text-[#10b981]" />
                                 </div>
-                                <span className="text-white/80">10 ready templates</span>
+                                <span className="text-gray-600">10 ready templates</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="h-8 w-8 rounded-lg bg-[#5fff9e]/20 flex items-center justify-center">
-                                    <Copy className="h-4 w-4 text-[#5fff9e]" />
+                                    <Copy className="h-4 w-4 text-[#10b981]" />
                                 </div>
-                                <span className="text-white/80">One-click copy</span>
+                                <span className="text-gray-600">One-click copy</span>
                             </div>
                         </div>
 
