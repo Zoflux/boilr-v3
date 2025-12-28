@@ -103,7 +103,7 @@ export default function ToolkitPage() {
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 
-            <main className="pt-24 sm:pt-28 md:pt-32">
+            <main>
 
                 {/* Hero Section */}
                 <section className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -225,7 +225,7 @@ export default function ToolkitPage() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-16 sm:py-20 bg-gray-900 text-white">
+                <section className="py-16 sm:py-20 bg-black text-white">
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center">
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4">
                             Put this knowledge into action
