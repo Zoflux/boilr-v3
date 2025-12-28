@@ -1,5 +1,6 @@
 import { Zap, Twitter, Linkedin, Github } from "lucide-react";
 import greenRoundLogo from "@/assets/green-round-logo.svg";
+import { getCalendlyUrl } from "@/hooks/useCalendlyUrl";
 
 export function Footer() {
   const navigation = {
@@ -14,7 +15,8 @@ export function Footer() {
       href: "/solutions/signals"
     }, {
       name: "Hire boilr",
-      href: "https://calendly.com/felix-boilr/demo"
+      href: getCalendlyUrl("/footer", { content: "footer-hire" }),
+      external: true
     }],
     legal: [{
       name: "Imprint",

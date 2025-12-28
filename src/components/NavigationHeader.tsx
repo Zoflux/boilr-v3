@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import blackLogo from "@/assets/black-logo.svg";
 import { ChevronDown, Menu, Radar, Bell } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
+import { CalendlyButton } from "@/components/CalendlyButton";
+import { getCalendlyUrl } from "@/hooks/useCalendlyUrl";
 
 interface NavigationHeaderProps {
   mode?: "sales" | "recruitment";
@@ -54,8 +56,11 @@ export function NavigationHeader({ mode = "recruitment", onModeChange }: Navigat
     { label: "FAQ", path: "/faq" },
   ];
 
+  const location = useLocation();
+
   const handleScheduleDemo = () => {
-    window.open("https://calendly.com/felix-boilr/demo", "_blank");
+    const calendlyUrl = getCalendlyUrl(location.pathname, { content: "header-cta" });
+    window.open(calendlyUrl, "_blank");
   };
 
   const handleNavClick = (path: string) => {
@@ -168,12 +173,12 @@ export function NavigationHeader({ mode = "recruitment", onModeChange }: Navigat
                     Log In
                   </a>
 
-                  <button
-                    onClick={handleScheduleDemo}
+                  <CalendlyButton
+                    content="header-cta"
                     className="px-4 py-1.5 rounded-lg font-medium text-sm bg-[#48ee8d] hover:bg-[#3dd97a] text-black transition-colors duration-150"
                   >
                     Book Demo →
-                  </button>
+                  </CalendlyButton>
                 </div>
 
                 {/* Mobile Menu Button */}

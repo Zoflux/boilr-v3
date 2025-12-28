@@ -1,10 +1,12 @@
-import { useEffect, useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef, useMemo } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Footer } from "@/components/Footer";
 import { NavigationHeader } from "@/components/NavigationHeader";
 import { getPostBySlug, getRelatedPosts, BlogPost as BlogPostType, urlFor } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import { ArrowLeft, Linkedin, Twitter, Link2, BookOpen } from "lucide-react";
+import { getCalendlyUrl } from "@/hooks/useCalendlyUrl";
+import { CalendlyButton } from "@/components/CalendlyButton";
 
 // Demo post content for when Sanity is not configured
 const demoPostContent = {
@@ -153,7 +155,10 @@ const portableTextComponents = {
             };
 
             const template = templates[value.template] || templates.template1;
-            const calendlyUrl = "https://calendly.com/felix-boilr/demo";
+            // Note: CTA cards in content use window.location for UTM since they don't have direct access to author
+            const calendlyUrl = typeof window !== "undefined"
+                ? getCalendlyUrl(window.location.pathname, { content: "inline-cta" })
+                : "https://calendly.com/felix-boilr/demo";
 
             return (
                 <div className="my-8 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 bg-[#dcfce7]">
@@ -335,7 +340,8 @@ const BlogPost = () => {
         return () => observer.disconnect();
     }, [post]);
 
-    const handleDemo = () => window.open("https://calendly.com/felix-boilr/demo", "_blank");
+    // Get author slug for UTM tracking (revenue attribution)
+    const authorSlug = post?.author?.name?.toLowerCase().replace(/\s+/g, "-") || undefined;
 
     const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 
@@ -560,12 +566,13 @@ const BlogPost = () => {
                                     <p className="text-gray-500 mb-6">
                                         See how boilr monitors 10,000+ sources to deliver qualified opportunities before they hit job boards.
                                     </p>
-                                    <button
-                                        onClick={handleDemo}
-                                        className="px-6 py-3 rounded-full font-semibold text-black bg-[#48ee8d] hover:bg-[#3dd97a] transition-all"
+                                    <CalendlyButton
+                                        author={authorSlug}
+                                        content="article-bottom-cta"
+                                        className="inline-block px-6 py-3 rounded-full font-semibold text-black bg-[#48ee8d] hover:bg-[#3dd97a] transition-all"
                                     >
                                         Book a Demo →
-                                    </button>
+                                    </CalendlyButton>
                                 </div>
                             </div>
                         </div>
@@ -644,12 +651,13 @@ const BlogPost = () => {
                         <p className="text-gray-500 text-lg mb-8 max-w-xl mx-auto">
                             Book a demo and see how boilr delivers hiring signals 48-72 hours before job boards.
                         </p>
-                        <button
-                            onClick={handleDemo}
-                            className="px-8 py-4 rounded-full font-semibold text-black bg-[#48ee8d] hover:bg-[#3dd97a] transition-all duration-200"
+                        <CalendlyButton
+                            author={authorSlug}
+                            content="article-footer-cta"
+                            className="inline-block px-8 py-4 rounded-full font-semibold text-black bg-[#48ee8d] hover:bg-[#3dd97a] transition-all duration-200"
                         >
                             Book a Demo →
-                        </button>
+                        </CalendlyButton>
                     </div>
                 </section>
             </main>

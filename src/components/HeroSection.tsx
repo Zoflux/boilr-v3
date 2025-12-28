@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CalendlyLink } from "@/components/CalendlyButton";
 
 interface HeroSectionProps {
   mode: "sales" | "recruitment";
@@ -64,13 +65,12 @@ export function HeroSection({ mode }: HeroSectionProps) {
               >
                 See How It Works
               </a>
-              <a
-                href="https://calendly.com/felix-boilr/demo"
-                target="_blank" rel="noopener noreferrer"
+              <CalendlyLink
+                content="hero-demo-cta"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 sm:py-3 text-sm font-medium text-white/90 backdrop-blur transition hover:bg-white/10 w-full sm:w-auto"
               >
                 Watch 5-Min Demo
-              </a>
+              </CalendlyLink>
             </div>
           </div>
 
