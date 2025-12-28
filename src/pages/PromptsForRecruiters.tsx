@@ -554,7 +554,7 @@ export default function PromptsForRecruiters() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-black">
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 

@@ -51,7 +51,7 @@ export default function RecruitmentPlaybook() {
     const demoLink = "https://calendly.com/felix-boilr/demo";
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-gray-100">
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 
