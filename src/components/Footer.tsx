@@ -25,16 +25,6 @@ export function Footer() {
       name: "Privacy Policy",
       href: "/privacy-policy"
     }],
-    other: [{
-      name: "Boilr vs Vente.ai",
-      href: "/comparison-boilr-vs-vente-ai"
-    }, {
-      name: "Boilr vs Sourcebreaker",
-      href: "/comparison-boilr-vs-sourcebreaker"
-    }, {
-      name: "Boilr vs Paiger",
-      href: "/comparison-boilr-vs-paiger"
-    }],
     moreForYou: [{
       name: "A-Z Toolkit for Recruiters",
       href: "/toolkit"
@@ -142,21 +132,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
-            <h3 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Other</h3>
-            <ul className="space-y-2">
-              {navigation.other.map(item => (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className="text-white/70 hover:text-white transition-colors duration-200 text-sm block py-0.5"
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+
         </div>
 
         {/* Bottom Section - Mobile Optimized */}
