@@ -54,7 +54,7 @@ export function HeroSection({ mode }: HeroSectionProps) {
               Before Everyone Else?
             </h1>
             <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-lg text-gray-400 leading-relaxed">
-              boilr AI tracks 10,000+ sources around the clock — so when your competitors are still checking for job openings on LinkedIn,
+              boilr AI tracks 10,000+ sources around the clock, so when your competitors are still checking for job openings on LinkedIn,
               you're already talking to the hiring manager.
             </p>
             {/* CTAs - Stack on mobile, row on desktop */}
@@ -69,7 +69,7 @@ export function HeroSection({ mode }: HeroSectionProps) {
                 content="hero-demo-cta"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 sm:py-3 text-sm font-medium text-white/90 backdrop-blur transition hover:bg-white/10 w-full sm:w-auto"
               >
-                Watch 5-Min Demo
+                Book 10-Min Demo
               </CalendlyLink>
             </div>
           </div>
