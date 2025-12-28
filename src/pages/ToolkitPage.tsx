@@ -1,7 +1,7 @@
 import { NavigationHeader } from "@/components/NavigationHeader";
 import { Footer } from "@/components/Footer";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
-import { ArrowRight, Search, BookOpen, Lightbulb, Wrench } from "lucide-react";
+import { ArrowRight, Search, BookOpen } from "lucide-react";
 import { useState } from "react";
 
 // Placeholder toolkit items - to be filled with real content
@@ -106,7 +106,7 @@ export default function ToolkitPage() {
             <main>
 
                 {/* Hero Section */}
-                <section className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
+                <section className="py-16 sm:py-20 bg-gray-100">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#10b981] text-sm font-medium mb-6">
@@ -119,7 +119,7 @@ export default function ToolkitPage() {
                         </h1>
 
                         <p className="text-lg sm:text-xl text-gray-500 mb-10 max-w-2xl mx-auto">
-                            Everything you need to know about modern recruiting — from sourcing strategies to signal detection. Your go-to glossary for recruitment intelligence.
+                            Everything you need to know about modern recruiting. Your go-to glossary for recruitment intelligence, from sourcing strategies to signal detection.
                         </p>
 
                         {/* Search Bar */}
@@ -137,87 +137,36 @@ export default function ToolkitPage() {
                     </div>
                 </section>
 
-                {/* Quick Stats */}
-                <section className="py-8 border-b border-gray-100">
-                    <div className="mx-auto max-w-4xl px-4 sm:px-6">
-                        <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
-                            <div className="flex items-center gap-3">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
-                                    <Wrench className="h-5 w-5 text-gray-600" />
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-gray-900">25+ Terms</p>
-                                    <p className="text-sm text-gray-500">Key concepts</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
-                                    <Lightbulb className="h-5 w-5 text-gray-600" />
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-gray-900">Pro Tips</p>
-                                    <p className="text-sm text-gray-500">Actionable insights</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Alphabet Navigation */}
-                <section className="py-6 border-b border-gray-100 sticky top-16 bg-white/95 backdrop-blur-sm z-10">
-                    <div className="mx-auto max-w-4xl px-4 sm:px-6">
-                        <div className="flex flex-wrap justify-center gap-2">
-                            {toolkitItems.map(section => (
-                                <a
-                                    key={section.letter}
-                                    href={`#letter-${section.letter}`}
-                                    className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold text-gray-600 hover:bg-[#5fff9e]/10 hover:text-[#10b981] transition-colors"
-                                >
-                                    {section.letter}
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Toolkit Content */}
-                <section className="py-12 sm:py-16">
-                    <div className="mx-auto max-w-4xl px-4 sm:px-6">
+                {/* Toolkit Content - 3 Column Grid */}
+                <section className="py-12 sm:py-16 bg-gray-100">
+                    <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
                         {filteredItems.length === 0 ? (
                             <div className="text-center py-12">
                                 <p className="text-gray-500">No terms found matching "{searchTerm}"</p>
                             </div>
                         ) : (
-                            <div className="space-y-12">
-                                {filteredItems.map(section => (
-                                    <div key={section.letter} id={`letter-${section.letter}`} className="scroll-mt-32">
-                                        {/* Letter Header */}
-                                        <div className="flex items-center gap-4 mb-6">
-                                            <span className="text-4xl sm:text-5xl font-bold text-[#5fff9e]">
-                                                {section.letter}
-                                            </span>
-                                            <div className="flex-1 h-px bg-gray-200" />
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {filteredItems.flatMap(section =>
+                                    section.items.map(item => (
+                                        <div
+                                            key={item.term}
+                                            className="group p-5 sm:p-6 rounded-xl border border-gray-200 bg-white hover:border-[#5fff9e]/30 hover:shadow-lg transition-all"
+                                        >
+                                            <div className="flex items-start gap-3 mb-3">
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#5fff9e]/20 text-[#10b981] font-bold text-sm flex-shrink-0">
+                                                    {item.term.charAt(0)}
+                                                </span>
+                                                <h3 className="font-semibold text-gray-900 group-hover:text-[#10b981] transition-colors">
+                                                    {item.term}
+                                                </h3>
+                                            </div>
+                                            <p className="text-gray-600 text-sm leading-relaxed">
+                                                {item.description}
+                                            </p>
                                         </div>
-
-                                        {/* Items */}
-                                        <div className="space-y-4">
-                                            {section.items.map(item => (
-                                                <div
-                                                    key={item.term}
-                                                    className="group p-5 sm:p-6 rounded-xl border border-gray-200 bg-gray-50/50 hover:border-[#5fff9e]/30 hover:bg-[#5fff9e]/5 transition-all"
-                                                >
-                                                    <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-[#10b981] transition-colors">
-                                                        {item.term}
-                                                    </h3>
-                                                    <p className="text-gray-600 leading-relaxed">
-                                                        {item.description}
-                                                    </p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))
+                                )}
                             </div>
                         )}
 
