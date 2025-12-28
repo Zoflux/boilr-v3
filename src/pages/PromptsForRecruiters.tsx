@@ -1,7 +1,7 @@
 import { NavigationHeader } from "@/components/NavigationHeader";
 import { Footer } from "@/components/Footer";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
-import { ArrowRight, Copy, Check, Sparkles, MessageSquare, Lightbulb, Target, Users, Search, Mail, FileText, TrendingUp, Zap, BookOpen, AlertTriangle, Clock, Plus, ChevronRight } from "lucide-react";
+import { ArrowRight, Copy, Check, Sparkles, MessageSquare, Lightbulb, Target, Users, Search, Mail, FileText, TrendingUp, Zap, BookOpen, AlertTriangle, Clock, Plus, ChevronRight, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 // Interactive Prompt Builder Steps
@@ -719,7 +719,7 @@ const categories = [
 
 export default function PromptsForRecruiters() {
     const [activeCategory, setActiveCategory] = useState("all");
-    const [expandedPrompt, setExpandedPrompt] = useState<number | null>(null);
+    const [selectedPrompt, setSelectedPrompt] = useState<typeof prompts[0] | null>(null);
     const [copiedId, setCopiedId] = useState<number | null>(null);
 
     // Interactive builder state
@@ -1045,91 +1045,35 @@ export default function PromptsForRecruiters() {
                         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {filteredPrompts.map((item) => {
                                 const Icon = item.icon;
-                                const isExpanded = expandedPrompt === item.id;
 
                                 return (
-                                    <div
+                                    <button
                                         key={item.id}
-                                        className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                                        onClick={() => setSelectedPrompt(item)}
+                                        className="group bg-white rounded-2xl border border-gray-200 p-5 overflow-hidden shadow-sm hover:shadow-md hover:border-[#5fff9e]/30 transition-all text-left cursor-pointer"
                                     >
-                                        {/* Prompt header */}
-                                        <div
-                                            className="p-5 cursor-pointer"
-                                            onClick={() => setExpandedPrompt(isExpanded ? null : item.id)}
-                                        >
-                                            <div className="flex items-center gap-4">
-                                                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#5fff9e]/10 text-[#10b981] flex-shrink-0">
-                                                    <Icon className="h-5 w-5" />
+                                        <div className="flex items-center gap-4">
+                                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#5fff9e]/10 text-[#10b981] flex-shrink-0">
+                                                <Icon className="h-5 w-5" />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center gap-2 mb-0.5">
+                                                    <span className="text-xs font-medium text-[#10b981] bg-[#5fff9e]/10 px-2 py-0.5 rounded-full">
+                                                        {item.category}
+                                                    </span>
                                                 </div>
-                                                <div className="flex-1 min-w-0">
-                                                    <div className="flex items-center gap-2 mb-0.5">
-                                                        <span className="text-xs font-medium text-[#10b981] bg-[#5fff9e]/10 px-2 py-0.5 rounded-full">
-                                                            {item.category}
-                                                        </span>
-                                                    </div>
-                                                    <h3 className="font-semibold text-gray-900">
-                                                        {item.title}
-                                                    </h3>
-                                                </div>
-                                                <ChevronRight className={`h-5 w-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                                                <h3 className="font-semibold text-gray-900 group-hover:text-[#10b981] transition-colors">
+                                                    {item.title}
+                                                </h3>
+                                                <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                                                    {item.description}
+                                                </p>
                                             </div>
                                         </div>
-
-                                        {/* Expanded content */}
-                                        {isExpanded && (
-                                            <div className="border-t border-gray-200 bg-gray-50">
-                                                {/* Prompt */}
-                                                <div className="p-5">
-                                                    <div className="flex items-center justify-between mb-3">
-                                                        <span className="text-sm font-medium text-gray-900">Prompt Template</span>
-                                                        <button
-                                                            onClick={() => copyToClipboard(item.prompt, item.id)}
-                                                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-900 text-white hover:bg-gray-800 transition-colors"
-                                                        >
-                                                            {copiedId === item.id ? (
-                                                                <>
-                                                                    <Check className="h-3.5 w-3.5" />
-                                                                    Copied!
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <Copy className="h-3.5 w-3.5" />
-                                                                    Copy
-                                                                </>
-                                                            )}
-                                                        </button>
-                                                    </div>
-                                                    <div className="bg-white rounded-xl p-4 border border-gray-200">
-                                                        <pre className="text-sm text-gray-700 whitespace-pre-wrap font-mono leading-relaxed">
-                                                            {item.prompt}
-                                                        </pre>
-                                                    </div>
-                                                </div>
-
-                                                {/* Example Response */}
-                                                <div className="px-5 pb-5">
-                                                    <span className="text-sm font-medium text-gray-900 mb-3 block">
-                                                        Example Response
-                                                    </span>
-                                                    <div className="bg-gradient-to-br from-[#f0fdf4] to-[#ecfdf5] rounded-xl p-4 border border-[#5fff9e]/20">
-                                                        <pre className="text-sm text-gray-700 whitespace-pre-wrap font-sans leading-relaxed">
-                                                            {item.exampleResponse}
-                                                        </pre>
-                                                    </div>
-                                                </div>
-
-                                                {/* Limitation */}
-                                                {item.limitation && (
-                                                    <div className="px-5 pb-5">
-                                                        <div className="flex gap-3 p-3 bg-[#5fff9e]/10 rounded-xl border border-[#5fff9e]/20">
-                                                            <AlertTriangle className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
-                                                            <p className="text-sm text-gray-600">{item.limitation}</p>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
+                                        <p className="text-[#10b981] text-xs mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            Click to view prompt →
+                                        </p>
+                                    </button>
                                 );
                             })}
                         </div>
@@ -1162,6 +1106,96 @@ export default function PromptsForRecruiters() {
                 </section>
 
             </main>
+
+            {/* Prompt Detail Modal */}
+            {selectedPrompt && (
+                <div
+                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                    onClick={() => setSelectedPrompt(null)}
+                >
+                    <div
+                        className="bg-white rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Modal Header */}
+                        <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-start justify-between">
+                            <div className="flex items-center gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#5fff9e]/10 text-[#10b981] flex-shrink-0">
+                                    <selectedPrompt.icon className="h-6 w-6" />
+                                </div>
+                                <div>
+                                    <span className="text-xs font-medium text-[#10b981] bg-[#5fff9e]/10 px-2 py-0.5 rounded-full">
+                                        {selectedPrompt.category}
+                                    </span>
+                                    <h2 className="text-xl font-bold text-gray-900 mt-1">
+                                        {selectedPrompt.title}
+                                    </h2>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => setSelectedPrompt(null)}
+                                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                            >
+                                <X className="h-5 w-5 text-gray-500" />
+                            </button>
+                        </div>
+
+                        {/* Modal Content */}
+                        <div className="p-6 space-y-6">
+                            {/* Prompt Template */}
+                            <div>
+                                <div className="flex items-center justify-between mb-3">
+                                    <span className="text-sm font-medium text-gray-900">Prompt Template</span>
+                                    <button
+                                        onClick={() => copyToClipboard(selectedPrompt.prompt, selectedPrompt.id)}
+                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-900 text-white hover:bg-gray-800 transition-colors"
+                                    >
+                                        {copiedId === selectedPrompt.id ? (
+                                            <>
+                                                <Check className="h-3.5 w-3.5" />
+                                                Copied!
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Copy className="h-3.5 w-3.5" />
+                                                Copy Prompt
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                                <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                                    <pre className="text-sm text-gray-700 whitespace-pre-wrap font-mono leading-relaxed">
+                                        {selectedPrompt.prompt}
+                                    </pre>
+                                </div>
+                            </div>
+
+                            {/* Example Response */}
+                            <div>
+                                <span className="text-sm font-medium text-gray-900 mb-3 block">
+                                    Example Response
+                                </span>
+                                <div className="bg-gradient-to-br from-[#f0fdf4] to-[#ecfdf5] rounded-xl p-4 border border-[#5fff9e]/20">
+                                    <pre className="text-sm text-gray-700 whitespace-pre-wrap font-sans leading-relaxed">
+                                        {selectedPrompt.exampleResponse}
+                                    </pre>
+                                </div>
+                            </div>
+
+                            {/* Limitation */}
+                            {selectedPrompt.limitation && (
+                                <div className="flex gap-3 p-4 bg-[#5fff9e]/10 rounded-xl border border-[#5fff9e]/20">
+                                    <AlertTriangle className="h-5 w-5 text-[#10b981] flex-shrink-0 mt-0.5" />
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-900 mb-1">Limitation</p>
+                                        <p className="text-sm text-gray-600">{selectedPrompt.limitation}</p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <Footer />
         </div>
