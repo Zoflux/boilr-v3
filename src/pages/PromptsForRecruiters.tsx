@@ -560,7 +560,7 @@ export default function PromptsForRecruiters() {
 
             <main>
                 {/* Hero Section */}
-                <section className="pb-12 sm:pb-16 bg-black text-white">
+                <section className="py-16 sm:py-20 bg-black text-white">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#5fff9e] text-sm font-medium mb-6">

@@ -64,7 +64,7 @@ export default function BusinessDevelopment() {
             <main>
 
                 {/* Hero Section */}
-                <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+                <section className="py-16 sm:py-20 bg-gray-100">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#10b981] text-sm font-medium mb-6">
