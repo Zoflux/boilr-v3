@@ -560,7 +560,7 @@ export default function PromptsForRecruiters() {
 
             <main>
                 {/* Hero Section */}
-                <section className="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+                <section className="pb-12 sm:pb-16 bg-black text-white">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#5fff9e] text-sm font-medium mb-6">
@@ -785,29 +785,29 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* Limitations Notice */}
-                <section className="py-8 bg-amber-50 border-b border-amber-200">
+                <section className="py-8 bg-[#5fff9e]/10 border-b border-[#5fff9e]/20">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6">
                         <div className="flex flex-col sm:flex-row items-start gap-4">
-                            <div className="h-10 w-10 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
-                                <AlertTriangle className="h-5 w-5 text-amber-600" />
+                            <div className="h-10 w-10 rounded-lg bg-[#5fff9e]/20 flex items-center justify-center flex-shrink-0">
+                                <AlertTriangle className="h-5 w-5 text-[#10b981]" />
                             </div>
                             <div>
                                 <h3 className="font-semibold text-gray-900 mb-2">What ChatGPT Can't Do for Recruiters</h3>
                                 <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-600">
                                     <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
                                         <span><strong>No real-time data:</strong> Can't browse LinkedIn or check current market</span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
                                         <span><strong>No automation:</strong> Every prompt requires manual copy-paste</span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
                                         <span><strong>No verification:</strong> Can't validate claims or check references</span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <Clock className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                                        <Clock className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
                                         <span><strong>No memory:</strong> Doesn't remember your pipeline or preferences</span>
                                     </div>
                                 </div>
@@ -841,10 +841,10 @@ export default function PromptsForRecruiters() {
                     </div>
                 </section>
 
-                {/* Prompts list */}
+                {/* Prompts grid */}
                 <section className="py-12 sm:py-16 bg-gray-50">
-                    <div className="mx-auto max-w-4xl px-4 sm:px-6">
-                        <div className="space-y-4">
+                    <div className="mx-auto max-w-6xl px-4 sm:px-6">
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {filteredPrompts.map((item) => {
                                 const Icon = item.icon;
                                 const isExpanded = expandedPrompt === item.id;
@@ -923,9 +923,9 @@ export default function PromptsForRecruiters() {
                                                 {/* Limitation */}
                                                 {item.limitation && (
                                                     <div className="px-5 pb-5">
-                                                        <div className="flex gap-3 p-3 bg-amber-50 rounded-xl border border-amber-200">
-                                                            <AlertTriangle className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                                                            <p className="text-sm text-amber-700">{item.limitation}</p>
+                                                        <div className="flex gap-3 p-3 bg-[#5fff9e]/10 rounded-xl border border-[#5fff9e]/20">
+                                                            <AlertTriangle className="h-4 w-4 text-[#10b981] flex-shrink-0 mt-0.5" />
+                                                            <p className="text-sm text-gray-600">{item.limitation}</p>
                                                         </div>
                                                     </div>
                                                 )}
@@ -941,7 +941,7 @@ export default function PromptsForRecruiters() {
                 {/* CTA Section */}
                 <section className="py-16 sm:py-20 bg-white">
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-amber-800 text-sm font-medium mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/20 text-[#10b981] text-sm font-medium mb-6">
                             <Clock className="h-4 w-4" />
                             Tired of manual copy-paste for every candidate?
                         </div>
