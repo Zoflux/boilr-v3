@@ -804,7 +804,7 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* Interactive Prompt Builder Section */}
-                <section className="py-12 sm:py-16 bg-white border-b border-gray-200">
+                <section className="py-12 sm:py-16 bg-gray-100">
                     <div className="mx-auto max-w-6xl px-4 sm:px-6">
                         <div className="text-center mb-10">
                             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
@@ -1015,7 +1015,7 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* Category filter */}
-                <section className="py-6 bg-white border-b border-gray-200">
+                <section className="py-6 bg-gray-100">
                     <div className="mx-auto max-w-6xl px-4 sm:px-6">
                         <h3 className="text-sm font-medium text-gray-500 mb-3">Ready-to-use prompt templates:</h3>
                         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
@@ -1137,17 +1137,17 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-16 sm:py-20 bg-white">
+                <section className="py-16 sm:py-20 bg-black">
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/20 text-[#10b981] text-sm font-medium mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/20 text-[#5fff9e] text-sm font-medium mb-6">
                             <Clock className="h-4 w-4" />
                             Tired of manual copy-paste for every candidate?
                         </div>
-                        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 mb-4">
+                        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-4">
                             Automate the entire workflow
                         </h2>
-                        <p className="text-gray-500 mb-8 max-w-xl mx-auto">
-                            boilr automatically researches leads, enriches data, and personalizes outreach at scale – no manual prompting required.
+                        <p className="text-white/70 mb-8 max-w-xl mx-auto">
+                            boilr automatically researches leads, enriches data, and personalizes outreach at scale. No manual prompting required.
                         </p>
                         <a
                             href="https://calendly.com/felix-boilr/demo"
