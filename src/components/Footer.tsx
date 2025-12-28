@@ -33,7 +33,7 @@ export function Footer() {
       href: "/playbook"
     }, {
       name: "Our Customers",
-      href: "/customers"
+      href: "/reviews"
     }, {
       name: "ROI Calculator",
       href: "/roi-calculator"

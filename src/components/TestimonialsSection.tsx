@@ -150,7 +150,7 @@ export default function TestimonialsSection() {
                 {/* G2 Rating - Simple, no border */}
                 <div className={`mt-14 flex justify-center transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "400ms" }}>
                     <a
-                        href="https://www.g2.com/products/boilr/reviews"
+                        href="https://www.g2.com/products/boilr-ai/reviews"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 hover:opacity-80 transition-opacity"

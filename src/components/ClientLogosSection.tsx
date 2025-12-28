@@ -85,7 +85,7 @@ export default function ClientLogosSection() {
           >
             <img src="/g2-logo.png" alt="G2" className="h-7 w-auto" />
             <div className="flex items-center gap-1">
-              <span className="text-lg font-bold text-gray-700">5.0</span>
+              <span className="text-lg font-bold text-gray-700">4.8</span>
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-3 h-3 text-orange-400 fill-orange-400" />
