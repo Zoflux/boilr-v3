@@ -99,7 +99,7 @@ export default function ToolkitPage() {
     })).filter(section => section.items.length > 0);
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-gray-100">
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 
