@@ -757,13 +757,13 @@ export default function PromptsForRecruiters() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-[#fafafa]">
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 
             <main>
                 {/* Hero Section */}
-                <section className="py-16 sm:py-20 bg-gray-100">
+                <section className="py-16 sm:py-20 bg-[#fafafa]">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#10b981] text-sm font-medium mb-6">
@@ -804,7 +804,7 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* Interactive Prompt Builder Section */}
-                <section className="py-12 sm:py-16 bg-gray-100">
+                <section className="py-12 sm:py-16 bg-[#fafafa]">
                     <div className="mx-auto max-w-6xl px-4 sm:px-6">
                         <div className="text-center mb-10">
                             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
@@ -960,7 +960,7 @@ export default function PromptsForRecruiters() {
                                 </div>
 
                                 {/* Prompt strength indicator */}
-                                <div className="mt-4 bg-gray-100 rounded-xl p-4">
+                                <div className="mt-4 bg-[#fafafa] rounded-xl p-4">
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm font-medium text-gray-700">Prompt Strength</span>
                                         <span className="text-sm text-gray-500">{activeSteps.length}/5 components</span>
@@ -988,7 +988,7 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* Limitations Notice */}
-                <section className="py-6 bg-gray-100">
+                <section className="py-6 bg-[#fafafa]">
                     <div className="mx-auto max-w-5xl px-4 sm:px-6">
                         <div className="bg-white rounded-xl border border-gray-200 p-6">
                             <p className="text-sm font-medium text-gray-500 mb-4 text-center">Keep in mind</p>
@@ -1015,7 +1015,7 @@ export default function PromptsForRecruiters() {
                 </section>
 
                 {/* Category filter */}
-                <section className="py-6 bg-gray-100">
+                <section className="py-6 bg-[#fafafa]">
                     <div className="mx-auto max-w-6xl px-4 sm:px-6">
                         <h3 className="text-sm font-medium text-gray-500 mb-3">Ready-to-use prompt templates:</h3>
                         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">

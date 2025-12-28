@@ -99,14 +99,14 @@ export default function ToolkitPage() {
     })).filter(section => section.items.length > 0);
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-[#fafafa]">
             <CursorSpotlight size={180} />
             <NavigationHeader mode="recruitment" onModeChange={() => { }} />
 
             <main>
 
                 {/* Hero Section */}
-                <section className="py-16 sm:py-20 bg-gray-100">
+                <section className="py-16 sm:py-20 bg-[#fafafa]">
                     <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5fff9e]/10 border border-[#5fff9e]/20 text-[#10b981] text-sm font-medium mb-6">
@@ -138,7 +138,7 @@ export default function ToolkitPage() {
                 </section>
 
                 {/* Toolkit Content - 3 Column Grid */}
-                <section className="py-12 sm:py-16 bg-gray-100">
+                <section className="py-12 sm:py-16 bg-[#fafafa]">
                     <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
                         {filteredItems.length === 0 ? (
