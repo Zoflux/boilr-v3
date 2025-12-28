@@ -682,45 +682,22 @@ const SolutionSignals = () => {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
               <div className="grid md:grid-cols-2">
-                {/* Visual side - Signal notification stack */}
-                <div className="bg-gradient-to-br from-[#10b981]/10 to-[#5fff9e]/20 p-8 sm:p-12 flex items-center justify-center">
-                  <div className="relative w-full max-w-xs">
-                    {/* Stacked notifications visual */}
-                    <div className="space-y-3 transform rotate-[-2deg]">
-                      <div className="bg-white rounded-xl p-3 shadow-lg border-l-4 border-[#5fff9e] transform translate-x-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-[#5fff9e] flex items-center justify-center">
-                            <TrendingUp className="w-4 h-4 text-black" />
-                          </div>
-                          <div>
-                            <div className="font-medium text-sm text-gray-900">Funding Alert</div>
-                            <div className="text-xs text-gray-500">2 min ago</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-white rounded-xl p-3 shadow-lg border-l-4 border-[#4ade80] transform -translate-x-1">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-[#4ade80] flex items-center justify-center">
-                            <Briefcase className="w-4 h-4 text-black" />
-                          </div>
-                          <div>
-                            <div className="font-medium text-sm text-gray-900">New Roles Posted</div>
-                            <div className="text-xs text-gray-500">15 min ago</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-white rounded-xl p-3 shadow-lg border-l-4 border-[#10b981] transform translate-x-3">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-[#10b981] flex items-center justify-center">
-                            <Users className="w-4 h-4 text-white" />
-                          </div>
-                          <div>
-                            <div className="font-medium text-sm text-gray-900">Leadership Change</div>
-                            <div className="text-xs text-gray-500">1 hour ago</div>
-                          </div>
-                        </div>
+                {/* Photo with circular frame */}
+                <div className="aspect-square md:aspect-auto bg-gradient-to-br from-[#5fff9e]/20 to-[#10b981]/20 flex items-center justify-center p-12">
+                  <div className="relative">
+                    {/* Outer circle container */}
+                    <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full bg-gradient-to-br from-[#5fff9e]/20 to-[#10b981]/20 p-4 flex items-center justify-center">
+                      {/* Inner circle with image */}
+                      <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
+                        <img
+                          src="/testimonials/ben-sayer.png"
+                          alt="Ben Sayer - Head of Business Development at Altitude Select"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     </div>
+                    {/* Decorative ring */}
+                    <div className="absolute inset-0 rounded-full border-2 border-[#5fff9e]/30 scale-110"></div>
                   </div>
                 </div>
 
