@@ -31,9 +31,9 @@ export default function LogoOutcomeSection() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
             Your <span className="text-[#5fff9e]">opportunities</span> used to hide everywhere.
             <br className="hidden sm:block" />
-            <span className="text-gray-400">Now they come to you.</span>
+            <span className="text-gray-900">Now they come to you.</span>
           </h2>
-          <p className="mt-5 text-lg text-gray-500 max-w-2xl mx-auto">
+          <p className="mt-5 text-lg text-gray-700 max-w-2xl mx-auto">
             boilr scans, enriches, and delivers qualified leads — so you focus on conversations, not research.
           </p>
         </header>
