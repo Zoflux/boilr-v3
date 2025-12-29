@@ -92,10 +92,11 @@ const customerQuotes = [
         image: "/testimonials/julien-hofer.png",
     },
     {
-        quote: "The signal scoring saves us from chasing dead ends. Every lead is qualified.",
-        author: "David Mueller",
-        role: "Business Development",
-        company: "Scale Recruiters",
+        quote: "As our business grew, manual research was eating up two hours a day per person. In today’s market, inbound alone isn’t reliable, so we needed to scale outbound. With Boilr, we now spend just 10 minutes getting hiring signals, hiring managers, and contact info, and two hours actually reaching out.",
+        author: "Mario Kimpton-Clark",
+        role: "Commercial Director",
+        company: "Absolute Applications",
+        image: "/testimonials/mario-kimpton-clark.png",
     },
 ];
 
