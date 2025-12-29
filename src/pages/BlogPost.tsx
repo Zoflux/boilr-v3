@@ -235,6 +235,64 @@ const portableTextComponents = {
                 </div>
             );
         },
+        videoEmbed: ({ value }: any) => {
+            if (!value?.url) return null;
+
+            // Extract video ID and determine platform
+            let embedUrl = '';
+            const url = value.url;
+
+            // YouTube URLs
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                let videoId = '';
+                if (url.includes('youtube.com/watch')) {
+                    const urlParams = new URLSearchParams(url.split('?')[1]);
+                    videoId = urlParams.get('v') || '';
+                } else if (url.includes('youtu.be/')) {
+                    videoId = url.split('youtu.be/')[1]?.split('?')[0] || '';
+                } else if (url.includes('youtube.com/embed/')) {
+                    videoId = url.split('youtube.com/embed/')[1]?.split('?')[0] || '';
+                }
+                if (videoId) {
+                    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                }
+            }
+            // Vimeo URLs
+            else if (url.includes('vimeo.com')) {
+                const vimeoId = url.split('vimeo.com/')[1]?.split('?')[0]?.split('/')[0] || '';
+                if (vimeoId) {
+                    embedUrl = `https://player.vimeo.com/video/${vimeoId}`;
+                }
+            }
+
+            if (!embedUrl) {
+                return (
+                    <div className="my-8 p-4 bg-gray-100 rounded-xl text-center text-gray-500 text-sm">
+                        Invalid video URL
+                    </div>
+                );
+            }
+
+            return (
+                <figure className="my-8">
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-900">
+                        <iframe
+                            src={embedUrl}
+                            className="absolute inset-0 w-full h-full"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-in-picture"
+                            allowFullScreen
+                            title="Embedded video"
+                        />
+                    </div>
+                    {value.caption && (
+                        <figcaption className="text-center text-sm text-gray-500 mt-3">
+                            {value.caption}
+                        </figcaption>
+                    )}
+                </figure>
+            );
+        },
     },
     block: {
         h1: ({ children, value }: any) => (

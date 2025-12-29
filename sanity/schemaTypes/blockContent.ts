@@ -83,5 +83,9 @@ export default defineType({
             type: 'table',
             title: 'Table',
         }),
+        defineArrayMember({
+            type: 'videoEmbed',
+            title: 'Video Embed',
+        }),
     ],
 })
